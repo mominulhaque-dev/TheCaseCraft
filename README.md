@@ -1,4 +1,4 @@
-# TheCaseCraft
+
 # TheCaseCraft — Complete Social Media Post Pack
 ## Ready to copy-paste. All platforms covered.
 
