@@ -1,0 +1,2900 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TheCaseCraft — 90-Day Content Calendar</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+      :root {
+        --bg: #09090b;
+        --s1: #111113;
+        --s2: #18181b;
+        --s3: #1f1f23;
+        --bd: #27272a;
+        --bd2: #3f3f46;
+        --tx: #fafafa;
+        --tx2: #a1a1aa;
+        --tx3: #71717a;
+        --gold: #d4a843;
+        --gold2: #f5d48a;
+        --green: #22c55e;
+        --blue: #3b82f6;
+        --red: #ef4444;
+        --purple: #a855f7;
+        --orange: #f97316;
+        --teal: #14b8a6;
+        --pink: #ec4899;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--bg);
+        color: var(--tx);
+        font-size: 12px;
+        line-height: 1.5;
+      }
+      .topbar {
+        background: var(--s1);
+        border-bottom: 1px solid var(--bd);
+        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+      .topbar h1 {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--tx);
+      }
+      .topbar p {
+        font-size: 11px;
+        color: var(--tx3);
+      }
+      .tb-r {
+        display: flex;
+        gap: 6px;
+      }
+      .tb-tag {
+        font-size: 10px;
+        padding: 2px 8px;
+        border-radius: 20px;
+        border: 1px solid rgba(212, 168, 67, 0.4);
+        color: var(--gold);
+        background: rgba(212, 168, 67, 0.07);
+      }
+      .filters {
+        padding: 10px 20px;
+        background: var(--s1);
+        border-bottom: 1px solid var(--bd);
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .fil-label {
+        font-size: 10px;
+        color: var(--tx3);
+        margin-right: 4px;
+      }
+      .fil {
+        padding: 4px 10px;
+        border-radius: 20px;
+        border: 1px solid var(--bd2);
+        font-size: 11px;
+        cursor: pointer;
+        background: transparent;
+        color: var(--tx3);
+        font-family: "Inter", sans-serif;
+        transition: all 0.12s;
+      }
+      .fil:hover {
+        color: var(--tx);
+        border-color: var(--bd);
+      }
+      .fil.on {
+        background: var(--s2);
+        color: var(--tx);
+        border-color: var(--bd);
+      }
+      .legend {
+        padding: 8px 20px;
+        background: var(--s1);
+        border-bottom: 1px solid var(--bd);
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .leg-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 10px;
+        color: var(--tx3);
+      }
+      .leg-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 2px;
+        flex-shrink: 0;
+      }
+      .wrap {
+        padding: 16px 20px;
+        overflow-x: auto;
+      }
+      .cal-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 1200px;
+      }
+      .week-header {
+        display: grid;
+        grid-template-columns: 80px 80px 1fr 1fr 1fr 1fr 1fr;
+        gap: 2px;
+        margin-bottom: 2px;
+      }
+      .wh-cell {
+        font-size: 9px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--tx3);
+        padding: 6px 8px;
+        background: var(--s3);
+        border-radius: 4px;
+      }
+      .cal-row {
+        display: grid;
+        grid-template-columns: 80px 80px 1fr 1fr 1fr 1fr 1fr;
+        gap: 2px;
+        margin-bottom: 2px;
+      }
+      .cal-row.hidden {
+        display: none;
+      }
+      .day-info {
+        background: var(--s2);
+        border-radius: 4px;
+        padding: 8px;
+        border: 1px solid var(--bd);
+      }
+      .day-num {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--tx);
+        line-height: 1;
+      }
+      .day-label {
+        font-size: 9px;
+        color: var(--tx3);
+        margin-top: 2px;
+      }
+      .week-badge {
+        font-size: 9px;
+        padding: 2px 6px;
+        border-radius: 3px;
+        margin-top: 4px;
+        display: inline-block;
+      }
+      .phase-cell {
+        background: var(--s2);
+        border-radius: 4px;
+        padding: 8px;
+        border: 1px solid var(--bd);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .phase-text {
+        font-size: 9px;
+        font-weight: 600;
+        text-align: center;
+        letter-spacing: 0.06em;
+      }
+      .content-cell {
+        background: var(--s2);
+        border: 1px solid var(--bd);
+        border-radius: 4px;
+        padding: 8px;
+        cursor: pointer;
+        transition: border-color 0.12s;
+      }
+      .content-cell:hover {
+        border-color: var(--bd2);
+      }
+      .platform-tag {
+        display: inline-flex;
+        align-items: center;
+        font-size: 9px;
+        padding: 1px 5px;
+        border-radius: 3px;
+        margin-bottom: 3px;
+        font-weight: 500;
+      }
+      .content-text {
+        font-size: 10px;
+        color: var(--tx2);
+        line-height: 1.45;
+        margin-top: 3px;
+      }
+      .content-type {
+        font-size: 9px;
+        color: var(--tx3);
+        margin-top: 4px;
+        font-style: italic;
+      }
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 100;
+        display: none;
+        align-items: center;
+        justify-content: center;
+      }
+      .modal-overlay.on {
+        display: flex;
+      }
+      .modal {
+        background: var(--s1);
+        border: 1px solid var(--bd2);
+        border-radius: 10px;
+        padding: 20px;
+        max-width: 500px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+      }
+      .modal h3 {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--tx);
+        margin-bottom: 4px;
+      }
+      .modal-day {
+        font-size: 11px;
+        color: var(--tx3);
+        margin-bottom: 14px;
+      }
+      .modal-section {
+        margin-bottom: 12px;
+      }
+      .modal-platform {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+      .modal-content {
+        font-size: 12px;
+        color: var(--tx2);
+        line-height: 1.65;
+        background: var(--s2);
+        border-radius: 6px;
+        padding: 10px 12px;
+      }
+      .modal-close {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        background: var(--s2);
+        border: 1px solid var(--bd);
+        border-radius: 4px;
+        color: var(--tx3);
+        padding: 4px 8px;
+        cursor: pointer;
+        font-size: 11px;
+        font-family: "Inter", sans-serif;
+      }
+      .stats-bar {
+        display: flex;
+        gap: 10px;
+        padding: 10px 20px;
+        background: var(--s2);
+        border-bottom: 1px solid var(--bd);
+      }
+      .stat {
+        text-align: center;
+      }
+      .stat-val {
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--tx);
+      }
+      .stat-lbl {
+        font-size: 9px;
+        color: var(--tx3);
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+      }
+      ::-webkit-scrollbar {
+        width: 3px;
+        height: 3px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--bd2);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="topbar">
+      <div>
+        <h1>TheCaseCraft — 90-Day Content Calendar</h1>
+        <p>All 5 platforms · Every day · Spreadsheet-ready</p>
+      </div>
+      <div class="tb-r">
+        <a href="/thecasecraft_90day_plan.html" target="_blank"
+          ><span class="tb-tag">90 Days - Plan</span>
+        </a>
+        <a href="/thecasecraft_blog_articles.html" target="_blank">
+          <span class="tb-tag">Blog Articles</span>
+        </a>
+
+        <a href="/thecasecraft_complete_index.html" target="_blank">
+          <span class="tb-tag">Complete index</span>
+        </a>
+        <a href="/thecasecraft_master_kit_s1_s4.html" target="_blank">
+          <span class="tb-tag">master kit s1-s4</span>
+        </a>
+        <a href="/thecasecraft_master_kit_s5_s10.html" target="_blank">
+          <span class="tb-tag">master kit s5-s10</span>
+        </a>
+        <a href="/thecasecraft_website_guide.html" target="_blank">
+          <span class="tb-tag">Website guide</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stat">
+        <div class="stat-val">90</div>
+        <div class="stat-lbl">Total Days</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">450</div>
+        <div class="stat-lbl">Content Pieces</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">90</div>
+        <div class="stat-lbl">TikTok Posts</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">90</div>
+        <div class="stat-lbl">Instagram</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">90</div>
+        <div class="stat-lbl">Facebook</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">90</div>
+        <div class="stat-lbl">Pinterest</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">90</div>
+        <div class="stat-lbl">YouTube Shorts</div>
+      </div>
+    </div>
+
+    <div class="filters">
+      <span class="fil-label">Filter by phase:</span>
+      <button class="fil on" onclick="filterPhase('all', this)">
+        All 90 Days
+      </button>
+      <button class="fil" onclick="filterPhase('1', this)">
+        Phase 1 (Wk 1–4)
+      </button>
+      <button class="fil" onclick="filterPhase('2', this)">
+        Phase 2 (Wk 5–8)
+      </button>
+      <button class="fil" onclick="filterPhase('3', this)">
+        Phase 3 (Wk 9–12)
+      </button>
+    </div>
+
+    <div class="legend">
+      <div class="leg-item">
+        <div class="leg-dot" style="background: #3b82f6"></div>
+        Instagram
+      </div>
+      <div class="leg-item">
+        <div class="leg-dot" style="background: #1877f2"></div>
+        Facebook
+      </div>
+      <div class="leg-item">
+        <div
+          class="leg-dot"
+          style="background: #000; border: 1px solid #555"
+        ></div>
+        TikTok
+      </div>
+      <div class="leg-item">
+        <div class="leg-dot" style="background: #e60023"></div>
+        Pinterest
+      </div>
+      <div class="leg-item">
+        <div class="leg-dot" style="background: #ff0000"></div>
+        YouTube
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="cal-grid" id="calGrid">
+        <div class="week-header">
+          <div class="wh-cell">Day</div>
+          <div class="wh-cell">Phase/Week</div>
+          <div class="wh-cell" style="color: #3b82f6">Instagram</div>
+          <div class="wh-cell" style="color: #1877f2">Facebook</div>
+          <div class="wh-cell">TikTok</div>
+          <div class="wh-cell" style="color: #e60023">Pinterest</div>
+          <div class="wh-cell" style="color: #ff0000">YouTube Shorts</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="modal" onclick="closeModal(event)">
+      <div class="modal" style="position: relative">
+        <button
+          class="modal-close"
+          onclick="document.getElementById('modal').classList.remove('on')"
+        >
+          ✕ Close
+        </button>
+        <h3 id="m-title"></h3>
+        <div class="modal-day" id="m-day"></div>
+        <div id="m-body"></div>
+      </div>
+    </div>
+
+    <script>
+      const calData = [
+        // PHASE 1 — FOUNDATION (Weeks 1–4)
+        {
+          day: 1,
+          week: "Wk 1",
+          phase: "1",
+          dayName: "Mon",
+          ig: {
+            type: "Reel",
+            text: "MagSafe ASMR snap — close-up magnetic click. Caption: 'Your phone deserves this snap every day.' #phonecase #magsafe",
+          },
+          fb: {
+            type: "Intro Post",
+            text: "Welcome to TheCaseCraft! We make premium MagSafe cases from $6.53 — no brand markup, just quality. Free shipping on $35+. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "V01: MagSafe snap ASMR — extreme close-up, no audio, pure magnetic click satisfaction. No text overlay.",
+          },
+          pt: {
+            type: "Product Pin",
+            text: "P01: Titanium Matte MagSafe Case. 'Premium protection from $6.53 · Free Shipping' on dark marble bg → iPhone Cases collection",
+          },
+          yt: {
+            type: "Short",
+            text: "Upload TikTok V01 (MagSafe snap) — same video, remove watermark via SnapTik. Title: 'MagSafe case that actually snaps right'",
+          },
+        },
+        {
+          day: 2,
+          week: "Wk 1",
+          phase: "1",
+          dayName: "Tue",
+          ig: {
+            type: "Story",
+            text: "Poll: Frosted Clear 🤍 or Matte Black 🖤? Product tag both options. Follow with 'vote results tomorrow' story.",
+          },
+          fb: {
+            type: "Education",
+            text: "Why your MagSafe car mount feels loose: It's your case, not the mount. Misaligned rings cause weak grip. Our cases fix this. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "R02: 'Apple charges $59 for this case. We charge $6.53.' Hold up Apple box → cross it out → reveal TheCaseCraft case → MagSafe snap",
+          },
+          pt: {
+            type: "Lifestyle Pin",
+            text: "P07: 'Minimal Desk Setup 2026' — iPhone in frosted case on desk with MagSafe stand, MacBook → Homepage",
+          },
+          yt: {
+            type: "Short",
+            text: "Upload R02 (price comparison) — Title: 'Why I stopped buying Apple cases #iphonecase #magsafe'",
+          },
+        },
+        {
+          day: 3,
+          week: "Wk 1",
+          phase: "1",
+          dayName: "Wed",
+          ig: {
+            type: "Carousel",
+            text: "C03: '$6.53 vs $59 iPhone Case' — 7 slides comparing drop protection, MagSafe alignment, material feel. Save-worthy content.",
+          },
+          fb: {
+            type: "Value Post",
+            text: "What $6.53 gets you: MagSafe precision ✓ Drop protection ✓ Raised camera edges ✓ Matte finish ✓ Free shipping ✓ What Apple's $59 case gets you: the same + their logo. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "R07: 'Why your MagSafe car mount keeps falling off (it's not the mount)' — educational talking head, alignment diagram",
+          },
+          pt: {
+            type: "Info Pin",
+            text: "P02: 'MagSafe case that actually works — $6.53 (not $59)' infographic comparison → Product page",
+          },
+          yt: {
+            type: "Short",
+            text: "R07 educational video repurposed — 'MagSafe alignment explained in 60 seconds'",
+          },
+        },
+        {
+          day: 4,
+          week: "Wk 1",
+          phase: "1",
+          dayName: "Thu",
+          ig: {
+            type: "Reel",
+            text: "Price reveal reel: Hand holds case → price tag revealed '$6.53' → MagSafe snap demonstration → CTA 'link in bio'. Trending sound.",
+          },
+          fb: {
+            type: "Trust Post",
+            text: "30-day returns. No questions. No restocking fees. Email us → get instructions → refund in 3 business days. That's it. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "V03: Unboxing POV — first person, opening mailer, tissue paper reveal, case reveal, install on phone, MagSafe snap",
+          },
+          pt: {
+            type: "Product Pin",
+            text: "P05: 'MagSafe Car Mount 15W — Never Lose Your Mount Again' on car interior bg → Car mount product",
+          },
+          yt: {
+            type: "Short",
+            text: "V03 unboxing POV — 'Unboxing my new $6.53 iPhone case' — authentic feel",
+          },
+        },
+        {
+          day: 5,
+          week: "Wk 1",
+          phase: "1",
+          dayName: "Fri",
+          ig: {
+            type: "Story",
+            text: "BTS: Packing orders today. Show process, tissue paper, box sealing. End with 'Your order ships like this 📦'",
+          },
+          fb: {
+            type: "Engagement",
+            text: "Quick poll: What's most important in a phone case? A) Drop protection B) MagSafe compatibility C) Slim design D) Price Comment your vote! We'll share results Monday.",
+          },
+          tt: {
+            type: "Video",
+            text: "R06: Founder story — 'I started TheCaseCraft because I was tired of paying $60 for a phone case logo.' 30-second talking head, authentic.",
+          },
+          pt: {
+            type: "Lifestyle Pin",
+            text: "P08: 'Complete iPhone MagSafe Setup Under $115 — 2026 Guide' → Blog post B01",
+          },
+          yt: {
+            type: "Short",
+            text: "R06 founder story condensed to 60s — 'Why I started a phone case brand'",
+          },
+        },
+        {
+          day: 6,
+          week: "Wk 1",
+          phase: "1",
+          dayName: "Sat",
+          ig: {
+            type: "Static Post",
+            text: "Flat lay: 3 cases on marble — frosted, matte black, navy. Clean editorial. Caption: 'Three finishes. One standard. $6.53. Link in bio.'",
+          },
+          fb: {
+            type: "Product Feature",
+            text: "Samsung users — Galaxy S25 Ultra case with MagSafe ring. Slim, borderless, drop-tested from 6 feet. Unlock the MagSafe ecosystem on Android. $11.39. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "R08: Car setup transformation — before (tangled cables, unstable mount) vs after (clean MagSafe mount, auto-charging). Trending audio.",
+          },
+          pt: {
+            type: "Product Pin",
+            text: "P04: 'Samsung Galaxy S25 Ultra Case — Ultra Slim Borderless Design' → Samsung collection",
+          },
+          yt: {
+            type: "Short",
+            text: "R08 car setup transformation — 'My car setup upgrade (it changed everything)'",
+          },
+        },
+        {
+          day: 7,
+          week: "Wk 1",
+          phase: "1",
+          dayName: "Sun",
+          ig: {
+            type: "Story",
+            text: "Q&A box: 'Ask us anything about MagSafe!' Answer top 5 questions in stories tomorrow. Drives engagement and content ideas.",
+          },
+          fb: {
+            type: "Education",
+            text: "5W vs 15W MagSafe charging: The difference is your case. A misaligned ring causes 5W fallback mode. Check yours: does your charger say 'Fast charging'? thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "V02: Drop test — '6-foot concrete drop in our $6.53 case. Did it survive?' Dramatic slow-motion style. Reveal: phone intact.",
+          },
+          pt: {
+            type: "Info Pin",
+            text: "P09: 'Drop Test Result: $6.53 Case vs 6-Foot Concrete Drop' → Blog post B08",
+          },
+          yt: {
+            type: "Short",
+            text: "Drop test video — '100 drops test results (you'll be surprised)'",
+          },
+        },
+
+        {
+          day: 8,
+          week: "Wk 2",
+          phase: "1",
+          dayName: "Mon",
+          ig: {
+            type: "Reel",
+            text: "R05: Kickstand reveal — 'This case has a hidden feature most people miss' — finger pushes kickstand, phone stands at 65°, satisfying click",
+          },
+          fb: {
+            type: "Product Feature",
+            text: "The kickstand case that changed how I use my phone. Built-in metal kickstand, 65° viewing angle, full MagSafe charging at 15W. $14.58 at thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "R05: Kickstand case reveal — 'Hidden feature in this $14 case' — slow reveal, satisfying pop, hands-free viewing mode",
+          },
+          pt: {
+            type: "Product Pin",
+            text: "P03: 'Frosted Kickstand MagSafe Case — Built-in Stand' → Kickstand product page",
+          },
+          yt: {
+            type: "Short",
+            text: "Kickstand case reveal — 'The phone case feature nobody talks about'",
+          },
+        },
+        {
+          day: 9,
+          week: "Wk 2",
+          phase: "1",
+          dayName: "Tue",
+          ig: {
+            type: "Carousel",
+            text: "C02: 'Why Your MagSafe Car Mount Keeps Falling Off' — 7 slides: problem, root cause, alignment science, bad demo, good demo, solution, CTA",
+          },
+          fb: {
+            type: "Education",
+            text: "How to check if your MagSafe case is actually aligned: 1) Snap phone on charger 2) Check notification — 'Fast Charging' = good, 'Not Optimized' = case alignment is off. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "R09: Speed test — 'Your phone might be charging at 5W. Here's how to check.' Show notification, switch cases, show 15W notification.",
+          },
+          pt: {
+            type: "Info Pin",
+            text: "P11: 'MagSafe Car Mount 15W — Complete Buyer's Guide 2026' → Blog B06",
+          },
+          yt: {
+            type: "Short",
+            text: "'Why your iPhone charges slow with a case on (the real reason)'",
+          },
+        },
+        {
+          day: 10,
+          week: "Wk 2",
+          phase: "1",
+          dayName: "Wed",
+          ig: {
+            type: "Story",
+            text: "Repost first customer photo with tag. 'Thank you [name] 🙏' — real UGC, authentic gratitude, community building.",
+          },
+          fb: {
+            type: "Review",
+            text: "⭐⭐⭐⭐⭐ 'Better than cases I've paid 5x more for. MagSafe snaps perfectly and the matte finish still looks brand new.' — Jessica M., Dallas TX. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "R10: 'Samsung doesn't have MagSafe. Until you get this case.' — Galaxy with our case, snap on MagSafe mount, charge at 15W. Mind-blow moment.",
+          },
+          pt: {
+            type: "Product Pin",
+            text: "P06: 'MagSafe Power Bank 5000mAh — Wireless Charging While Walking' → Power bank product",
+          },
+          yt: {
+            type: "Short",
+            text: "'I added MagSafe to my Samsung Galaxy (here's how)'",
+          },
+        },
+        {
+          day: 11,
+          week: "Wk 2",
+          phase: "1",
+          dayName: "Thu",
+          ig: {
+            type: "Reel",
+            text: "Power bank snap: slim bank attaches magnetically to phone back, LED indicator shows, phone charging indicator appears. ASMR aesthetic. No music.",
+          },
+          fb: {
+            type: "Value",
+            text: "The complete MagSafe setup: Case ($6.53) + Car Mount ($37.81) + Power Bank ($60.79) = $105.13 total. Apple's equivalent: $197. You save $92. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "R11: Desk setup tour — 'My minimal desk setup with MagSafe everything. No cable chaos.' Slow pan of setup, each item named with price.",
+          },
+          pt: {
+            type: "Lifestyle Pin",
+            text: "P12: 'Slim MagSafe Power Bank + iPhone — Perfect Travel Combo' → Power bank page",
+          },
+          yt: {
+            type: "Short",
+            text: "'My cable-free desk setup (full MagSafe everything)'",
+          },
+        },
+        {
+          day: 12,
+          week: "Wk 2",
+          phase: "1",
+          dayName: "Fri",
+          ig: {
+            type: "Carousel",
+            text: "C04: 'The Complete MagSafe Setup Under $115' — each product on its own slide with price, final slide shows total vs Apple pricing",
+          },
+          fb: {
+            type: "Product Bundle",
+            text: "Build your MagSafe setup: Start with the $6.53 case. Add the car mount ($37.81). Complete with the power bank ($60.79). Full wireless life for $105. Free shipping on $35+. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "R14: 'Frosted vs clear case — which hides fingerprints better?' Side-by-side touch test, fingerprints shown, frosted wins clearly.",
+          },
+          pt: {
+            type: "Info Pin",
+            text: "P13: 'Minimal Desk Setup Ideas 2026 — iPhone MagSafe Edition' → Homepage",
+          },
+          yt: {
+            type: "Short",
+            text: "'Frosted vs clear phone case — honest comparison'",
+          },
+        },
+        {
+          day: 13,
+          week: "Wk 2",
+          phase: "1",
+          dayName: "Sat",
+          ig: {
+            type: "Static Post",
+            text: "Samsung Galaxy lineup: S22 to S26 Ultra in our cases. Clean editorial grid. Caption: 'Every Galaxy model covered. From $11.39. Link in bio.'",
+          },
+          fb: {
+            type: "Samsung",
+            text: "Galaxy S25 Ultra owners: your phone is too good for a bad case. 5mm slim, borderless design, S-Pen access, MagSafe-ready. $11.39 at thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "R13: 'First 10 orders — here's what packing looks like.' Packing montage, small business BTS feel, real and authentic.",
+          },
+          pt: {
+            type: "Product Pin",
+            text: "P14: 'Travel Phone Accessories 2026 — MagSafe Power Bank Essential' → Travel blog",
+          },
+          yt: {
+            type: "Short",
+            text: "'Packing my first 10 orders (small business reality)'",
+          },
+        },
+        {
+          day: 14,
+          week: "Wk 2",
+          phase: "1",
+          dayName: "Sun",
+          ig: {
+            type: "Story",
+            text: "'Which Samsung model do you have?' Q&A box — reply to each with case recommendation. Personal touchpoint with audience.",
+          },
+          fb: {
+            type: "Engagement",
+            text: "Tell us your phone model in the comments and we'll recommend the perfect case! Every model from iPhone 11 to 17 Pro Max and Galaxy S22–S26 Ultra covered. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "R12: 'Here's why our case costs $6.53 — honest breakdown.' Manufacturing cost transparency, no brand tax explanation.",
+          },
+          pt: {
+            type: "Lifestyle Pin",
+            text: "P15: 'iPhone Desk Setup Guide 2026' → Blog post or homepage",
+          },
+          yt: {
+            type: "Short",
+            text: "'The honest reason phone cases cost $60 (and why ours don't)'",
+          },
+        },
+
+        {
+          day: 15,
+          week: "Wk 3",
+          phase: "1",
+          dayName: "Mon",
+          ig: {
+            type: "Reel",
+            text: "R03: 'This is why MagSafe matters.' Educational reel — show charging speed difference 5W vs 15W in real time with timer.",
+          },
+          fb: {
+            type: "Blog Share",
+            text: "📖 New on the blog: 'Best MagSafe Cases for iPhone 16 in 2026 — Tested and Ranked.' Read the full comparison at thecasecraft.com/blog",
+          },
+          tt: {
+            type: "Video",
+            text: "Education: 'MagSafe explained in 30 seconds' — simple visual diagram, plain English, no jargon. Voice-over.",
+          },
+          pt: {
+            type: "Blog Pin",
+            text: "'Best MagSafe iPhone 16 Cases 2026' → Blog B01 with editorial image",
+          },
+          yt: {
+            type: "Short",
+            text: "'MagSafe in 60 seconds — everything you need to know'",
+          },
+        },
+        {
+          day: 16,
+          week: "Wk 3",
+          phase: "1",
+          dayName: "Tue",
+          ig: {
+            type: "Story",
+            text: "'Behind the design' — show case material close-up, explain frosted finish, matte feel. Educational story series.",
+          },
+          fb: {
+            type: "Trust",
+            text: "We answer every email within 24 hours, Monday–Friday. Not a bot. Real answers about your order, your case, your MagSafe setup. support@thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "V05: Kickstand case detail — 65° angle, hands-free Netflix, MagSafe charging simultaneously. 'The case that multitasks for you.'",
+          },
+          pt: {
+            type: "Info Pin",
+            text: "'MagSafe vs Regular Case — Complete Comparison Guide 2026' → Blog B03",
+          },
+          yt: {
+            type: "Short",
+            text: "'Kickstand case review after 30 days (honest)'",
+          },
+        },
+        {
+          day: 17,
+          week: "Wk 3",
+          phase: "1",
+          dayName: "Wed",
+          ig: {
+            type: "Carousel",
+            text: "C05: 'Samsung Galaxy S25 Ultra — 5 Things to Know Before Buying a Case' — S-Pen, camera array, MagSafe, edge protection, our pick",
+          },
+          fb: {
+            type: "Education",
+            text: "Does a phone case slow MagSafe charging? We tested 12 cases. 3 of 5 'MagSafe' budget cases charged at 5W instead of 15W. Alignment matters. thecasecraft.com charges at 15W. Guaranteed.",
+          },
+          tt: {
+            type: "Video",
+            text: "Samsung Galaxy MagSafe: 'Galaxy doesn't support MagSafe... until you use this case.' Demonstration on real S25 Ultra.",
+          },
+          pt: {
+            type: "Product Pin",
+            text: "Samsung Galaxy case product pin with dark charcoal aesthetic → Samsung collection",
+          },
+          yt: {
+            type: "Short",
+            text: "'Samsung MagSafe hack (it actually works)'",
+          },
+        },
+        {
+          day: 18,
+          week: "Wk 3",
+          phase: "1",
+          dayName: "Thu",
+          ig: {
+            type: "Reel",
+            text: "Satisfying: 3-case color comparison reveal. Slow motion. Each case slides into frame. Perfect minimalist aesthetic. Trending lo-fi audio.",
+          },
+          fb: {
+            type: "Blog Share",
+            text: "📖 'Best Phone Cases Under $15 in 2026 That Actually Protect Your Phone' — honest testing, real data. Read at thecasecraft.com/blog",
+          },
+          tt: {
+            type: "Video",
+            text: "R15: '1 month using the $6.53 case — honest review.' Use vs tear check, MagSafe test, finish condition. Real, not scripted.",
+          },
+          pt: {
+            type: "Blog Pin",
+            text: "'Best Phone Cases Under $15 2026 — Real Drop Test Results' → Blog B02",
+          },
+          yt: {
+            type: "Short",
+            text: "'1 month honest review of a $6 phone case'",
+          },
+        },
+        {
+          day: 19,
+          week: "Wk 3",
+          phase: "1",
+          dayName: "Fri",
+          ig: {
+            type: "Story",
+            text: "Friday deal reminder: 'Free shipping on $35+. No code needed. Always.' Product sticker link to store.",
+          },
+          fb: {
+            type: "Review",
+            text: "⭐⭐⭐⭐⭐ 'The MagSafe car mount is a game changer. Holds solid through Chicago potholes and charges at 15W the whole commute.' — Marcus R., Chicago IL",
+          },
+          tt: {
+            type: "Video",
+            text: "Car mount in action — 'I never touch my phone while driving anymore.' Car interior, MagSafe snap on, navigation, charging indicator.",
+          },
+          pt: {
+            type: "Product Pin",
+            text: "'MagSafe Car Mount in Action — 15W Charging While Driving' → Car mount product",
+          },
+          yt: {
+            type: "Short",
+            text: "'The car mount that changed how I drive'",
+          },
+        },
+        {
+          day: 20,
+          week: "Wk 3",
+          phase: "1",
+          dayName: "Sat",
+          ig: {
+            type: "Static Post",
+            text: "Quote post: '\"Better than cases I've paid 5x more for.\" — Jessica M. ⭐⭐⭐⭐⭐' with product image. Simple, high-trust.",
+          },
+          fb: {
+            type: "Value",
+            text: "The math: A cracked iPhone 16 Pro Max screen costs $279 to repair. Our case costs $6.53. That's 2.3% of the repair cost for 100% prevention. Simple math. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "Trending audio product reveal — use that week's #1 trending sound with case reveal at beat drop. Adapt weekly.",
+          },
+          pt: {
+            type: "Lifestyle Pin",
+            text: "'Coffee Shop Morning Setup — iPhone MagSafe Case & Frosted Aesthetic' → Lifestyle board",
+          },
+          yt: {
+            type: "Short",
+            text: "Trending audio case reveal — same as TikTok",
+          },
+        },
+        {
+          day: 21,
+          week: "Wk 3",
+          phase: "1",
+          dayName: "Sun",
+          ig: {
+            type: "Story",
+            text: "'What should our next product be?' Poll: A) MagSafe wallet B) Color: Forest Green C) Ring stand D) Clear case with ring. Community product development.",
+          },
+          fb: {
+            type: "Engagement",
+            text: "Unpopular opinion: Most people don't need to spend more than $15 on a phone case. Agree or disagree? Comment below — we want to hear your experience!",
+          },
+          tt: {
+            type: "Video",
+            text: "'Month 1 update — here's how TheCaseCraft is doing.' Honest founder update, real numbers (if comfortable sharing), lessons learned.",
+          },
+          pt: {
+            type: "Blog Pin",
+            text: "'MagSafe vs Regular Case 2026 — The Honest Comparison' → Blog B03",
+          },
+          yt: {
+            type: "Short",
+            text: "'Month 1 of my Shopify store — honest results'",
+          },
+        },
+
+        {
+          day: 22,
+          week: "Wk 4",
+          phase: "1",
+          dayName: "Mon",
+          ig: {
+            type: "Reel",
+            text: "Giveaway announcement: 'Giving away 3 TheCaseCraft MagSafe sets. To enter: Follow + like + tag a friend who needs a new case.' 72-hour window.",
+          },
+          fb: {
+            type: "Giveaway",
+            text: "🎁 GIVEAWAY: 3 winners each get a TheCaseCraft MagSafe Case + Car Mount combo (value $44.34). To enter: 1) Like this post 2) Follow our page 3) Comment your phone model. Ends Wednesday!",
+          },
+          tt: {
+            type: "Video",
+            text: "Giveaway: 'Giving away 3 free MagSafe case sets. Comment your phone model to enter.' Simple, clear, trackable.",
+          },
+          pt: {
+            type: "Info Pin",
+            text: "'Samsung Galaxy Case Buying Guide 2026 — Complete Rankings' → Blog B04",
+          },
+          yt: {
+            type: "Short",
+            text: "'Giveaway! 3 free MagSafe case sets — enter now'",
+          },
+        },
+        {
+          day: 23,
+          week: "Wk 4",
+          phase: "1",
+          dayName: "Tue",
+          ig: {
+            type: "Carousel",
+            text: "C07: 'How to Choose a Phone Case in 60 Seconds' — 6 slides: model, material, MagSafe, protection, budget, TheCaseCraft. High save rate.",
+          },
+          fb: {
+            type: "Blog Share",
+            text: "📖 New blog: 'MagSafe vs Regular Case: The Honest Comparison' — charging speeds tested, car mount grip compared, verdict revealed. thecasecraft.com/blog",
+          },
+          tt: {
+            type: "Video",
+            text: "Education: 'What makes a phone case actually good? (4 things to check)' List format, each point with visual demonstration.",
+          },
+          pt: {
+            type: "Lifestyle Pin",
+            text: "'Travel Essentials 2026 — MagSafe Power Bank Must-Have' → Power bank product",
+          },
+          yt: {
+            type: "Short",
+            text: "'4 things to check before buying any phone case'",
+          },
+        },
+        {
+          day: 24,
+          week: "Wk 4",
+          phase: "1",
+          dayName: "Wed",
+          ig: {
+            type: "Story",
+            text: "Giveaway winner announcement! Tag winners. 'Congratulations [names]! DM us your address and model.' Screenshot and share.",
+          },
+          fb: {
+            type: "Giveaway Winner",
+            text: "🎉 GIVEAWAY WINNERS: [Name 1] [Name 2] [Name 3] — congratulations! Please DM us your shipping address. Everyone else: use code THANKS10 for 10% off your order this week only.",
+          },
+          tt: {
+            type: "Video",
+            text: "'Giveaway winners announced!' Reaction video, announce names, show what they're getting, hype the community.",
+          },
+          pt: {
+            type: "Product Pin",
+            text: "'Best MagSafe Accessories 2026 — Complete Guide' → Blog or accessories collection",
+          },
+          yt: {
+            type: "Short",
+            text: "'Announcing giveaway winners + thank you for 3 weeks of support'",
+          },
+        },
+        {
+          day: 25,
+          week: "Wk 4",
+          phase: "1",
+          dayName: "Thu",
+          ig: {
+            type: "Reel",
+            text: "Power bank and case together: 'No cable. No outlet. Just snap and go.' Film outside, walking, bank attached to phone back, charging while walking.",
+          },
+          fb: {
+            type: "Blog Share",
+            text: "📖 'Samsung Galaxy S25 Ultra Case Guide 2026' — complete buying guide for Galaxy owners, including how to add MagSafe compatibility. thecasecraft.com/blog",
+          },
+          tt: {
+            type: "Video",
+            text: "'Does this $60 power bank actually work wirelessly? 1-week test.' Authentic use-case test, travel day, coffee shop, etc.",
+          },
+          pt: {
+            type: "Blog Pin",
+            text: "'Why Clear Phone Cases Turn Yellow (The Science)' → Blog B12",
+          },
+          yt: {
+            type: "Short",
+            text: "'MagSafe power bank 1-week test — worth it?'",
+          },
+        },
+        {
+          day: 26,
+          week: "Wk 4",
+          phase: "1",
+          dayName: "Fri",
+          ig: {
+            type: "Carousel",
+            text: "C06: '10 Signs You Need a New Phone Case Right Now' — camera scratches, weak MagSafe, yellowing, etc. Very saveable.",
+          },
+          fb: {
+            type: "Education",
+            text: "Why phone case corners matter more than thickness: When you drop your phone, energy needs somewhere to go. Thin flexible corners = absorbed. Thick rigid = transferred to screen. Our corners compress. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "Education: '5 phone case mistakes you're probably making' — list format, quick transitions, relatable examples.",
+          },
+          pt: {
+            type: "Info Pin",
+            text: "'10 Signs You Need a New Phone Case Right Now' → Blog B07",
+          },
+          yt: {
+            type: "Short",
+            text: "'5 phone case mistakes (I made all of them)'",
+          },
+        },
+        {
+          day: 27,
+          week: "Wk 4",
+          phase: "1",
+          dayName: "Sat",
+          ig: {
+            type: "Static Post",
+            text: "Month 1 wrap-up graphic: 'Month 1: [X] orders shipped. [X] ⭐ reviews. [X] customers protected.' Honest, celebratory, humanizing.",
+          },
+          fb: {
+            type: "Milestone",
+            text: "One month of TheCaseCraft! [X] orders shipped to USA customers. Every single one packed with care. Thank you for trusting a new brand. Your support means more than you know. 🙏",
+          },
+          tt: {
+            type: "Video",
+            text: "'Month 1 of my Shopify store — real numbers, real lessons.' If comfortable, share traffic/orders/revenue. Transparency builds massive trust.",
+          },
+          pt: {
+            type: "Product Pin",
+            text: "'MagSafe Wireless Car Mount — Complete Buyer's Guide' → Blog B06",
+          },
+          yt: {
+            type: "Short",
+            text: "'Month 1 Shopify results (honest numbers)'",
+          },
+        },
+        {
+          day: 28,
+          week: "Wk 4",
+          phase: "1",
+          dayName: "Sun",
+          ig: {
+            type: "Story",
+            text: "Analytics check: 'Which content performed best this month?' Show top reel views, best carousel saves. This transparency builds credibility.",
+          },
+          fb: {
+            type: "Week Review",
+            text: "Week 4 review: Here's what we're reading — [Blog post title]. What we're working on — [upcoming product or content]. What's your biggest phone frustration? Tell us in comments.",
+          },
+          tt: {
+            type: "Video",
+            text: "'What I learned from my first month of content creation for my business.' Founder reflection, content lessons, what worked.",
+          },
+          pt: {
+            type: "Info Pin",
+            text: "'How Drop Protection Actually Works — Phone Case Science' → Blog content",
+          },
+          yt: {
+            type: "Short",
+            text: "'Content creation lessons from my first month (small business)'",
+          },
+        },
+
+        // PHASE 2 — MOMENTUM (Weeks 5–8)
+        {
+          day: 29,
+          week: "Wk 5",
+          phase: "2",
+          dayName: "Mon",
+          ig: {
+            type: "Reel",
+            text: "'Testing 5 iPhone cases for MagSafe alignment' — educational comparison, TheCaseCraft wins. Lab-style aesthetic.",
+          },
+          fb: {
+            type: "Blog Share",
+            text: "📖 'Does a Phone Case Slow Down MagSafe Charging?' — we tested 12 cases, results might surprise you. thecasecraft.com/blog",
+          },
+          tt: {
+            type: "Video",
+            text: "MagSafe education series: 'The magnetic ring explained.' Simple diagram video, 45 seconds, very shareable.",
+          },
+          pt: {
+            type: "Blog Pin",
+            text: "'Does Case Affect MagSafe Charging Speed? 12 Cases Tested' → Blog B05",
+          },
+          yt: {
+            type: "Short",
+            text: "'We tested MagSafe charging through 12 cases (results)'",
+          },
+        },
+        {
+          day: 30,
+          week: "Wk 5",
+          phase: "2",
+          dayName: "Tue",
+          ig: {
+            type: "Carousel",
+            text: "C10: '5 MagSafe Myths — Busted' — common misconceptions corrected with evidence. Very shareable education content.",
+          },
+          fb: {
+            type: "Education",
+            text: "MagSafe myth: 'All MagSafe cases are the same.' Reality: The magnetic ring position varies. 2–3mm misalignment = 5W charging and loose car mount. Our cases verified at ±0.1mm. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "'5 MagSafe myths people believe (and the truth)' — bust each myth with 10-second clips. Fast-paced, educational.",
+          },
+          pt: {
+            type: "Info Pin",
+            text: "'MagSafe Beginner Guide 2026 — Everything You Need to Know' → Blog B09",
+          },
+          yt: {
+            type: "Short",
+            text: "'MagSafe myths busted (the internet gets this wrong)'",
+          },
+        },
+        {
+          day: 31,
+          week: "Wk 5",
+          phase: "2",
+          dayName: "Wed",
+          ig: {
+            type: "Reel",
+            text: "Samsung Galaxy + MagSafe ecosystem showcase. 'Galaxy doesn't have MagSafe. This case changes that.' Full setup demo.",
+          },
+          fb: {
+            type: "Samsung",
+            text: "Samsung Galaxy users: you're missing out on MagSafe. Our Galaxy cases include a precision-aligned magnetic ring. Your Galaxy now works with every MagSafe accessory. $11.39. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "'I gave my Galaxy S25 Ultra MagSafe compatibility — here's what changed.' Real demo, real accessories, honest reaction.",
+          },
+          pt: {
+            type: "Product Pin",
+            text: "'Samsung Galaxy MagSafe Case — Unlock the Ecosystem' → Samsung product",
+          },
+          yt: {
+            type: "Short",
+            text: "'Adding MagSafe to Samsung Galaxy (full tutorial)'",
+          },
+        },
+        {
+          day: 32,
+          week: "Wk 5",
+          phase: "2",
+          dayName: "Thu",
+          ig: {
+            type: "Story",
+            text: "DM influencer feature: 'We sent [creator name] a free case and here's their honest review.' Screenshot and share (with permission).",
+          },
+          fb: {
+            type: "Blog Share",
+            text: "📖 'Best MagSafe Car Mounts 2026 — Tested on Real Road Trips' — 3,000 miles of driving, 8 mounts tested. thecasecraft.com/blog",
+          },
+          tt: {
+            type: "Video",
+            text: "'Road trip with MagSafe setup' — vlog style, mount in use, charging while driving, authentic lifestyle content.",
+          },
+          pt: {
+            type: "Blog Pin",
+            text: "'Best MagSafe Car Mounts 2026 — Road Trip Tested' → Blog B06",
+          },
+          yt: {
+            type: "Short",
+            text: "'Road trip with full MagSafe setup — review'",
+          },
+        },
+        {
+          day: 33,
+          week: "Wk 5",
+          phase: "2",
+          dayName: "Fri",
+          ig: {
+            type: "Carousel",
+            text: "C09: 'Before and After: Upgrading My Phone Setup' — cables vs MagSafe, visual transformation, product by product",
+          },
+          fb: {
+            type: "Lifestyle",
+            text: "Before: 3 cables, suction cup mount that fell off twice, dead phone by 2pm. After: one case, snap-on mount, magnetic power bank. Same day. Different life. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "'Before and after my phone setup (MagSafe changed everything)' — dramatic before clip, transformation, clean after reveal.",
+          },
+          pt: {
+            type: "Lifestyle Pin",
+            text: "'Before and After iPhone Setup Upgrade — MagSafe Edition' → Homepage or blog",
+          },
+          yt: {
+            type: "Short",
+            text: "'Phone setup transformation (before vs after MagSafe)'",
+          },
+        },
+        {
+          day: 34,
+          week: "Wk 5",
+          phase: "2",
+          dayName: "Sat",
+          ig: {
+            type: "Static Post",
+            text: "Feature spotlight: 2.2mm raised camera edges. Macro photo of edge height. Caption: 'Your camera never touches a table again. Detail matters.' ",
+          },
+          fb: {
+            type: "Product Detail",
+            text: "Detail that protects your most valuable phone component: 2.2mm raised camera edges. Every TheCaseCraft case. Every model. Lens never contacts a surface. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "Macro close-up: camera edge detail. 'This is the detail that prevents $279 camera repairs.' Educational, premium production quality.",
+          },
+          pt: {
+            type: "Info Pin",
+            text: "'Camera Protection Guide — Why Raised Edges Matter More Than Thickness'",
+          },
+          yt: {
+            type: "Short",
+            text: "'The phone case detail nobody talks about (#1 cause of camera damage)'",
+          },
+        },
+        {
+          day: 35,
+          week: "Wk 5",
+          phase: "2",
+          dayName: "Sun",
+          ig: {
+            type: "Story",
+            text: "'Swipe up for this week's blog post' — Blog B06 car mount guide. Story with car mount image, key stat, link.",
+          },
+          fb: {
+            type: "Week Review",
+            text: "Week 5: We sent out [X] orders, published 2 blog posts, and learned that our MagSafe education content is performing 3x better than product content. Data-driven brand update.",
+          },
+          tt: {
+            type: "Video",
+            text: "'Week 5 of my small business — what's working, what's not.' Honest update, content performance data if comfortable.",
+          },
+          pt: {
+            type: "Lifestyle Pin",
+            text: "'Car Tech Setup 2026 — MagSafe Everything' → Car mount product or blog",
+          },
+          yt: {
+            type: "Short",
+            text: "'Small business week 5 — honest update'",
+          },
+        },
+
+        {
+          day: 36,
+          week: "Wk 6",
+          phase: "2",
+          dayName: "Mon",
+          ig: {
+            type: "Reel",
+            text: "Influencer collab reel: Feature first creator review. 'This creator tested our case for 2 weeks...' with their clip (with permission).",
+          },
+          fb: {
+            type: "Influencer Feature",
+            text: "[Creator name] tested our $6.53 MagSafe case for 2 weeks. Their verdict: [quote from review]. See the full review: [link]. Shop: thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "'An honest review of TheCaseCraft from a creator with [X] followers.' Feature their video or create a response/reaction.",
+          },
+          pt: {
+            type: "Product Pin",
+            text: "'TheCaseCraft MagSafe Case — Creator Tested & Reviewed' → Product page",
+          },
+          yt: {
+            type: "Short",
+            text: "Creator review feature — 'What [creator name] said about our case'",
+          },
+        },
+        {
+          day: 37,
+          week: "Wk 6",
+          phase: "2",
+          dayName: "Tue",
+          ig: {
+            type: "Carousel",
+            text: "C12: 'The True Cost of a Cracked iPhone Screen' — screen repair costs by model, vs our case cost, ROI calculation. Very shareable.",
+          },
+          fb: {
+            type: "Blog Share",
+            text: "📖 New blog: '5 Signs You Need a New Phone Case Right Now' — most people don't know their case has failed. Check your case today. thecasecraft.com/blog",
+          },
+          tt: {
+            type: "Video",
+            text: "'iPhone screen repair cost vs our case cost.' Calculator visual: $279 screen repair ÷ $6.53 case = 42 replacements for same price. Math hits hard.",
+          },
+          pt: {
+            type: "Info Pin",
+            text: "'How Much Does iPhone Screen Repair Cost? ($279 vs $6.53 case)' → Blog",
+          },
+          yt: {
+            type: "Short",
+            text: "'iPhone screen repair vs phone case — the math that changed my mind'",
+          },
+        },
+        {
+          day: 38,
+          week: "Wk 6",
+          phase: "2",
+          dayName: "Wed",
+          ig: {
+            type: "Reel",
+            text: "Clear vs frosted fingerprint test. Side-by-side, both touched repeatedly, frosted wins clearly. Satisfying result reveal.",
+          },
+          fb: {
+            type: "Education",
+            text: "Why clear cases turn yellow: UV light breaks down standard TPU polymer chains over 2–3 months. Our frosted cases use UV-stabilized TPU — tested to maintain appearance for 18+ months. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "'Why your clear case is turning yellow (the science)' — chemistry explained simply, solution revealed (frosted UV-stabilized).",
+          },
+          pt: {
+            type: "Blog Pin",
+            text: "'Why Clear Phone Cases Turn Yellow — The Real Reason + Fix' → Blog B12",
+          },
+          yt: {
+            type: "Short",
+            text: "'The science behind yellowing phone cases (and how to stop it)'",
+          },
+        },
+        {
+          day: 39,
+          week: "Wk 6",
+          phase: "2",
+          dayName: "Thu",
+          ig: {
+            type: "Story",
+            text: "'New review just came in.' Screenshot review (with info blocked), stars shown, tease quote. Link to review section of site.",
+          },
+          fb: {
+            type: "Review",
+            text: "⭐⭐⭐⭐⭐ 'Galaxy S25 Ultra case is exactly what I wanted — thin, clean edges, full camera access, and MagSafe accessories now work with my Samsung.' — Daniel K., Austin TX",
+          },
+          tt: {
+            type: "Video",
+            text: "Reading customer reviews live: 'Our customers left these reviews and I'm reading them for the first time.' Authentic, emotional.",
+          },
+          pt: {
+            type: "Lifestyle Pin",
+            text: "'WFH Phone Setup — MagSafe Desk Edition 2026' → Blog B28",
+          },
+          yt: {
+            type: "Short",
+            text: "'Reading our first customer reviews (emotional)'",
+          },
+        },
+        {
+          day: 40,
+          week: "Wk 6",
+          phase: "2",
+          dayName: "Fri",
+          ig: {
+            type: "Carousel",
+            text: "C14: 'Best Phone Cases for Every Lifestyle' — gym, office, travel, outdoors, creator. High save rate, personal relevance.",
+          },
+          fb: {
+            type: "Lifestyle",
+            text: "Which type are you? 🏋️ Gym → slim + grippy 💼 Office → premium matte 🌍 Traveler → kickstand + power bank 🌲 Outdoors → reinforced corners Comment your lifestyle for a personalized recommendation!",
+          },
+          tt: {
+            type: "Video",
+            text: "'The right case for YOUR lifestyle' — rapid-fire lifestyle matching. Gym, office, travel, creator. 'Comment yours in 3 words.'",
+          },
+          pt: {
+            type: "Lifestyle Pin",
+            text: "'Best Phone Case for Your Lifestyle — Gym Office Travel' → Blog B14",
+          },
+          yt: {
+            type: "Short",
+            text: "'What phone case should YOU buy? (lifestyle guide)'",
+          },
+        },
+        {
+          day: 41,
+          week: "Wk 6",
+          phase: "2",
+          dayName: "Sat",
+          ig: {
+            type: "Static Post",
+            text: "Product month 2 feature: Power bank product isolated on clean background. Stats: 5000mAh · 20W · 6mm · $60.79. Minimal infographic.",
+          },
+          fb: {
+            type: "Product Feature",
+            text: "The MagSafe power bank that changed long travel days: 5000mAh (1.5 full charges), 20W wireless, snaps to phone magnetically, 6mm slim. No cable. $60.79 + free shipping on $35+. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "Travel day vlog: 'Using MagSafe power bank for 12 hours straight.' Airport, hotel, city walking. Honest capacity test.",
+          },
+          pt: {
+            type: "Product Pin",
+            text: "'5000mAh MagSafe Power Bank — Travel Essential 2026' → Power bank",
+          },
+          yt: {
+            type: "Short",
+            text: "'12-hour MagSafe power bank travel test (real results)'",
+          },
+        },
+        {
+          day: 42,
+          week: "Wk 6",
+          phase: "2",
+          dayName: "Sun",
+          ig: {
+            type: "Story",
+            text: "'Which content type do you want more of?' Poll: A) Case reviews B) MagSafe education C) Setup tours D) Founder updates. Data for content strategy.",
+          },
+          fb: {
+            type: "Community",
+            text: "Question for our community: What's the one phone accessory you couldn't live without? Drop it in the comments. We're building our product roadmap based on what matters to you.",
+          },
+          tt: {
+            type: "Video",
+            text: "'I asked 1000 people what phone accessory they use most. The results:' — survey-style content, engaging, shareable.",
+          },
+          pt: {
+            type: "Info Pin",
+            text: "'Complete MagSafe Ecosystem Guide — Setup Under $115' → Blog B15",
+          },
+          yt: {
+            type: "Short",
+            text: "'Most important phone accessory? (I asked 1000 people)'",
+          },
+        },
+
+        {
+          day: 43,
+          week: "Wk 7",
+          phase: "2",
+          dayName: "Mon",
+          ig: {
+            type: "Reel",
+            text: "YouTube long-form teaser: '5 iPhone cases tested and ranked — full video now on YouTube.' Cross-promote, drive channel subscribers.",
+          },
+          fb: {
+            type: "YouTube Promo",
+            text: "🎬 New YouTube video: 'Testing 5 iPhone Cases — Honest Ranked Review.' Full drop tests, MagSafe alignment checks, 1-month wear results. Watch: [YouTube link]",
+          },
+          tt: {
+            type: "Video",
+            text: "'Just posted a YouTube video — here's the 60-second summary' of case comparison video. Drive cross-platform traffic.",
+          },
+          pt: {
+            type: "Blog Pin",
+            text: "'Kickstand iPhone Cases 2026 — Are They Worth It?' → Blog B10",
+          },
+          yt: {
+            type: "Long Form",
+            text: "LONG FORM: 'Testing 5 iPhone Cases for Drop Protection & MagSafe — Ranked' — full 8-minute video, case by case results, TheCaseCraft wins",
+          },
+        },
+        {
+          day: 44,
+          week: "Wk 7",
+          phase: "2",
+          dayName: "Tue",
+          ig: {
+            type: "Carousel",
+            text: "C15: Customer unboxing reactions — collage of review screenshots, reaction quotes, real social proof compilation.",
+          },
+          fb: {
+            type: "UGC",
+            text: "Customer photos are coming in! [Share 2–3 real customer photos with permission] These are real phones, real cases, real people. Join them at thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "UGC compilation: 'Customers are sending us these photos.' Feature real customer content with permission. Authentic social proof.",
+          },
+          pt: {
+            type: "Product Pin",
+            text: "Customer photo-inspired pin: 'Real Customer Setup — TheCaseCraft MagSafe Case' → Homepage",
+          },
+          yt: {
+            type: "Short",
+            text: "'Real customer photos of our cases (unsponsored)'",
+          },
+        },
+        {
+          day: 45,
+          week: "Wk 7",
+          phase: "2",
+          dayName: "Wed",
+          ig: {
+            type: "Reel",
+            text: "Referral program launch: 'Give $5, Get $5. Send your code to a friend.' Animated graphic, excitement build.",
+          },
+          fb: {
+            type: "Referral Launch",
+            text: "🎁 REFERRAL PROGRAM LAUNCHED: Give $5 off to a friend, get $5 off your next order when they buy. Find your personal code in your account at thecasecraft.com.",
+          },
+          tt: {
+            type: "Video",
+            text: "'We launched a referral program — give $5 get $5.' Simple, clear, motivating. Show how to find code.",
+          },
+          pt: {
+            type: "Info Pin",
+            text: "'Building a MagSafe iPhone Ecosystem Step by Step' → Blog B15",
+          },
+          yt: {
+            type: "Short",
+            text: "'We launched a referral program (how it works)'",
+          },
+        },
+        {
+          day: 46,
+          week: "Wk 7",
+          phase: "2",
+          dayName: "Thu",
+          ig: {
+            type: "Story",
+            text: "Cross-promote: 'We're working with [store name] — they sell [complementary product]. Check them out.' Warm audience cross-pollination.",
+          },
+          fb: {
+            type: "Cross Promo",
+            text: "We've partnered with [Complementary store] — they sell [product]. Our audiences overlap perfectly, so we're doing a mutual shoutout. Check them out: [link]. They're featuring us too!",
+          },
+          tt: {
+            type: "Video",
+            text: "'Small business collab announcement' — authentic, community-focused. Tag other brand.",
+          },
+          pt: {
+            type: "Lifestyle Pin",
+            text: "'Work From Home Phone Essentials — MagSafe Edition' → Blog B28",
+          },
+          yt: {
+            type: "Short",
+            text: "'We partnered with another small business (collab announcement)'",
+          },
+        },
+        {
+          day: 47,
+          week: "Wk 7",
+          phase: "2",
+          dayName: "Fri",
+          ig: {
+            type: "Carousel",
+            text: "C08: 'The Minimal Desk Setup Guide (MagSafe Edition)' — aspirational, product per slide, total cost reveal.",
+          },
+          fb: {
+            type: "Lifestyle",
+            text: "The minimal phone setup: 1 premium case ($6.53) + 1 MagSafe wireless stand + 1 car mount ($37.81) + 1 power bank for travel ($60.79) = Zero cable chaos. Always charged. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "Minimal desk setup tour: 'Every item, every cost, total setup.' Product by product, price by price. Transparent and satisfying.",
+          },
+          pt: {
+            type: "Lifestyle Pin",
+            text: "'The Minimal Phone Setup Guide 2026 — Cable-Free Life' → Blog B20",
+          },
+          yt: {
+            type: "Short",
+            text: "'The minimal desk setup tour (every item + cost)'",
+          },
+        },
+        {
+          day: 48,
+          week: "Wk 7",
+          phase: "2",
+          dayName: "Sat",
+          ig: {
+            type: "Static Post",
+            text: "Mid-journey milestone: 'Day 48 — [X] orders shipped.' Simple milestone post. Humanizing. Community celebration.",
+          },
+          fb: {
+            type: "Milestone",
+            text: "Day 48: [X] TheCaseCraft orders have shipped to customers across the USA. Each one hand-packed. Each one tracked. Thank you for being part of this from the start.",
+          },
+          tt: {
+            type: "Video",
+            text: "'Day 48 of my brand — numbers, learnings, what's next.' Honest founder reflection at halfway point.",
+          },
+          pt: {
+            type: "Info Pin",
+            text: "'Best Phone Accessories Under $65 — Holiday Gift Guide 2026' → Blog B19",
+          },
+          yt: {
+            type: "Short",
+            text: "'Day 48 — small business midpoint reflection'",
+          },
+        },
+        {
+          day: 49,
+          week: "Wk 7",
+          phase: "2",
+          dayName: "Sun",
+          ig: {
+            type: "Story",
+            text: "Week 7 content recap: 'Which post performed best?' Show top posts, insight into why.",
+          },
+          fb: {
+            type: "Engagement",
+            text: "What accessory should we add next? A) MagSafe wallet B) Magnetic ring stand C) 4-in-1 charging dock D) New case colors. Most votes determines what we launch next month!",
+          },
+          tt: {
+            type: "Video",
+            text: "Community poll: 'Help me decide what to launch next.' Engage audience in product development.",
+          },
+          pt: {
+            type: "Lifestyle Pin",
+            text: "'iPhone Photography Setup 2026 — Best Cases for Creators' → Blog B24",
+          },
+          yt: {
+            type: "Short",
+            text: "'Help me decide what to launch next (community poll)'",
+          },
+        },
+
+        {
+          day: 50,
+          week: "Wk 8",
+          phase: "2",
+          dayName: "Mon",
+          ig: {
+            type: "Reel",
+            text: "Viral attempt: 'Dropping iPhone from 8 feet without a case vs with our case.' Dramatic test, slow motion, satisfying result.",
+          },
+          fb: {
+            type: "Blog Share",
+            text: "📖 'Drop Test 2026: 12 iPhone Cases Tested on Concrete — Full Results' — detailed data, ranked by survival rate. thecasecraft.com/blog",
+          },
+          tt: {
+            type: "Video",
+            text: "VIRAL ATTEMPT: '8-foot drop test — does the $6.53 case survive?' Maximum drama, slow motion, satisfying reveal.",
+          },
+          pt: {
+            type: "Blog Pin",
+            text: "'iPhone Drop Test 2026 — 12 Cases Ranked by Survival Rate' → Blog B08",
+          },
+          yt: {
+            type: "Short",
+            text: "'8-foot drop test of our $6.53 phone case'",
+          },
+        },
+        {
+          day: 51,
+          week: "Wk 8",
+          phase: "2",
+          dayName: "Tue",
+          ig: {
+            type: "Carousel",
+            text: "C11: 'iPhone 16 vs 15 vs 14 — Case Differences You Need to Know' — dimension comparison, camera differences, case compatibility",
+          },
+          fb: {
+            type: "Education",
+            text: "Common mistake: Buying an iPhone 15 Pro case for your iPhone 16 Pro. The dimensions are different by 0.3mm — but that's enough to misalign buttons and block ports. Verify your model before ordering. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "'Don't make this phone case mistake' — wrong model case consequences, how to find your exact model (Settings → About).",
+          },
+          pt: {
+            type: "Info Pin",
+            text: "'iPhone Case Size Guide — Every Model 2026' → Blog or collection",
+          },
+          yt: {
+            type: "Short",
+            text: "'Most common phone case mistake (and how to avoid it)'",
+          },
+        },
+        {
+          day: 52,
+          week: "Wk 8",
+          phase: "2",
+          dayName: "Wed",
+          ig: {
+            type: "Reel",
+            text: "Facebook group community launch: 'We created a MagSafe community — join 500 people talking phone setups.' Drive FB group growth.",
+          },
+          fb: {
+            type: "Group Launch",
+            text: "🎉 Launching: MagSafe Accessories Community group! A space for iPhone and Samsung users to share setups, get case recommendations, and connect. Join now: [Group link]. First 100 members get 15% off at thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "'Starting a community for MagSafe users — join us.' Show Facebook group, explain value proposition.",
+          },
+          pt: {
+            type: "Lifestyle Pin",
+            text: "'Galaxy vs iPhone — Which Needs More Case Protection?' → Blog B27",
+          },
+          yt: {
+            type: "Short",
+            text: "'I started a phone accessories community'",
+          },
+        },
+        {
+          day: 53,
+          week: "Wk 8",
+          phase: "2",
+          dayName: "Thu",
+          ig: {
+            type: "Story",
+            text: "'Behind the scenes of Month 2' — show analytics growth, order volume, content planning. Transparency builds huge loyalty.",
+          },
+          fb: {
+            type: "Month 2 Review",
+            text: "Month 2 review: Orders up [X]%. Best-performing content: MagSafe education posts. Biggest lesson: audiences want to learn, not just buy. Building a brand means educating first.",
+          },
+          tt: {
+            type: "Video",
+            text: "Month 2 honest update: 'What worked, what flopped, numbers if comfortable.' Authentic founder content.",
+          },
+          pt: {
+            type: "Blog Pin",
+            text: "'Why We Started TheCaseCraft — Founder Story' → Blog B23",
+          },
+          yt: {
+            type: "Short",
+            text: "'Month 2 — biggest lessons from growing a phone case brand'",
+          },
+        },
+        {
+          day: 54,
+          week: "Wk 8",
+          phase: "2",
+          dayName: "Fri",
+          ig: {
+            type: "Carousel",
+            text: "C13: 'MagSafe Charging Speed: Everything Affects It' — comprehensive education carousel on all speed variables.",
+          },
+          fb: {
+            type: "Blog Share",
+            text: "📖 'Best MagSafe Power Banks 2026 — Complete Buyer's Guide' — capacity, speed, portability tested. Which one is worth $60? thecasecraft.com/blog",
+          },
+          tt: {
+            type: "Video",
+            text: "'The complete MagSafe speed guide' — every variable that affects charging speed, with visual demonstrations.",
+          },
+          pt: {
+            type: "Blog Pin",
+            text: "'Best MagSafe Power Banks 2026 — Capacity & Speed Tested' → Blog B13",
+          },
+          yt: {
+            type: "Short",
+            text: "'Why your MagSafe charges at different speeds (full guide)'",
+          },
+        },
+        {
+          day: 55,
+          week: "Wk 8",
+          phase: "2",
+          dayName: "Sat",
+          ig: {
+            type: "Static Post",
+            text: "Month 2 milestone: '[X] customers protected. [X] countries shipped to. [X] ⭐ reviews received.' Clean milestone graphic.",
+          },
+          fb: {
+            type: "Milestone",
+            text: "End of Month 2: [X] orders shipped. [X] countries reached. [X] average rating. 30-day return rate: under 3%. None of this happens without you. Thank you, genuinely.",
+          },
+          tt: {
+            type: "Video",
+            text: "'Month 2 done. Here are the real stats.' Transparent numbers, what they mean, where we're going next.",
+          },
+          pt: {
+            type: "Lifestyle Pin",
+            text: "'Minimal Bedside Charging Setup 2026 — MagSafe Edition' → Lifestyle board",
+          },
+          yt: { type: "Short", text: "'End of month 2 — real growth stats'" },
+        },
+        {
+          day: 56,
+          week: "Wk 8",
+          phase: "2",
+          dayName: "Sun",
+          ig: {
+            type: "Story",
+            text: "Planning Month 3: 'We're launching [new product/color] in Week 9. Stay tuned.' Teaser build, saves, notifications.",
+          },
+          fb: {
+            type: "Teaser",
+            text: "Something new is coming in Week 9. Follow our page to be first to know — and to get the launch discount code. Hint: it's something every iPhone user needs.",
+          },
+          tt: {
+            type: "Video",
+            text: "'Teaser: something new is coming next week.' Mystery product reveal build-up. No details yet.",
+          },
+          pt: {
+            type: "Lifestyle Pin",
+            text: "'Travel Essentials 2026 — iPhone MagSafe Accessories' → Blog B16",
+          },
+          yt: {
+            type: "Short",
+            text: "'Something new is coming to TheCaseCraft (teaser)'",
+          },
+        },
+
+        // PHASE 3 — SCALE (Weeks 9–12)
+        {
+          day: 57,
+          week: "Wk 9",
+          phase: "3",
+          dayName: "Mon",
+          ig: {
+            type: "Reel",
+            text: "Search Console SEO win: 'Our blog post is now ranking on Google.' Share the milestone. Show search result (blurred if needed).",
+          },
+          fb: {
+            type: "SEO Milestone",
+            text: "TheCaseCraft now appears on Google for '[keyword]'! If you search '[keyword]' you'll find our honest review. This is what 8 weeks of consistent content looks like. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "'Our blog post started ranking on Google after 8 weeks.' SEO reality check, what consistency achieves.",
+          },
+          pt: {
+            type: "Blog Pin",
+            text: "'How to Choose the Right iPhone Case in 2026' → Blog B11",
+          },
+          yt: {
+            type: "Short",
+            text: "'My blog is ranking on Google now (8-week results)'",
+          },
+        },
+        {
+          day: 58,
+          week: "Wk 9",
+          phase: "3",
+          dayName: "Tue",
+          ig: {
+            type: "Carousel",
+            text: "C01: 'The 5 Types of MagSafe Cases' — comprehensive education, each type with TheCaseCraft example",
+          },
+          fb: {
+            type: "Blog Share",
+            text: "📖 'How to Choose the Right iPhone Case in 2026' — complete buyer's guide for every type. thecasecraft.com/blog",
+          },
+          tt: {
+            type: "Video",
+            text: "'5 types of MagSafe cases (which one is right for you?)' Fast-paced guide, one case type per 10 seconds.",
+          },
+          pt: {
+            type: "Blog Pin",
+            text: "'How to Choose the Right iPhone Case — Complete Guide 2026' → Blog B11",
+          },
+          yt: {
+            type: "Short",
+            text: "'5 types of phone cases explained (60 seconds)'",
+          },
+        },
+        {
+          day: 59,
+          week: "Wk 9",
+          phase: "3",
+          dayName: "Wed",
+          ig: {
+            type: "Reel",
+            text: "A/B test reveal: 'We tested two different case styles for a month. Here's which customers preferred.' Data-driven content.",
+          },
+          fb: {
+            type: "Education",
+            text: "After 2 months of customer data: Frosted transparent cases get 2x more reviews than matte black. Customers mention 'seeing phone color' as top feature. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "'Data from 2 months: what customers actually love about our cases.' Real data insight, authentic brand transparency.",
+          },
+          pt: {
+            type: "Lifestyle Pin",
+            text: "'iPhone MagSafe Case Review — 2 Months Later' → Blog B10 or testimonial",
+          },
+          yt: {
+            type: "Short",
+            text: "'2 months of customer data — here's what people actually want'",
+          },
+        },
+        {
+          day: 60,
+          week: "Wk 9",
+          phase: "3",
+          dayName: "Thu",
+          ig: {
+            type: "Story",
+            text: "VIP list launch: 'Join our VIP list for early access to new products + 20% launch discount.' Email capture drive.",
+          },
+          fb: {
+            type: "VIP Launch",
+            text: "Launching TheCaseCraft VIP early access list. Members get: new product early access (24 hrs early), launch discounts, behind-the-scenes updates. Join: thecasecraft.com/vip (or email signup)",
+          },
+          tt: {
+            type: "Video",
+            text: "'We're launching a VIP list — here's what you get.' Benefits walkthrough, how to join.",
+          },
+          pt: {
+            type: "Info Pin",
+            text: "'Best iPhone Accessories for Content Creators 2026' → Blog B22",
+          },
+          yt: {
+            type: "Short",
+            text: "'TheCaseCraft VIP list launch (what members get)'",
+          },
+        },
+        {
+          day: 61,
+          week: "Wk 9",
+          phase: "3",
+          dayName: "Fri",
+          ig: {
+            type: "Carousel",
+            text: "C-new: 'TheCaseCraft vs [Brand]: Honest 2026 Comparison' — objective, data-based comparison, we win on MagSafe and value",
+          },
+          fb: {
+            type: "Blog Share",
+            text: "📖 'TheCaseCraft vs Spigen vs Apple: Honest Comparison 2026' — price, drop test, MagSafe alignment compared with data. thecasecraft.com/blog",
+          },
+          tt: {
+            type: "Video",
+            text: "'TheCaseCraft vs other brands — honest comparison.' Side-by-side testing, transparent results.",
+          },
+          pt: {
+            type: "Blog Pin",
+            text: "'TheCaseCraft vs Spigen vs Apple Case 2026 — Full Comparison' → Blog B17",
+          },
+          yt: {
+            type: "Short",
+            text: "'Comparing our case to the big brands (honest data)'",
+          },
+        },
+        {
+          day: 62,
+          week: "Wk 9",
+          phase: "3",
+          dayName: "Sat",
+          ig: {
+            type: "Static Post",
+            text: "Weekend product spotlight: Car mount in golden hour car scene. Beautiful lifestyle shot. Aspirational.",
+          },
+          fb: {
+            type: "Lifestyle",
+            text: "Weekend drives hit different with a MagSafe setup. Phone snapped on. Navigation visible. Charging at 15W. Zero cables. Zero stress. $37.81 for the mount. Free shipping on $35+. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "'Weekend drive with full MagSafe setup.' Genuine lifestyle vlog, no scripted feel.",
+          },
+          pt: {
+            type: "Lifestyle Pin",
+            text: "'Weekend Car Setup — MagSafe Mount Golden Hour' → Car mount product",
+          },
+          yt: {
+            type: "Short",
+            text: "'Weekend drive with MagSafe (lifestyle vlog)'",
+          },
+        },
+        {
+          day: 63,
+          week: "Wk 9",
+          phase: "3",
+          dayName: "Sun",
+          ig: {
+            type: "Story",
+            text: "'Week 9: Here's what's coming this week.' Content preview. Builds anticipation, drives daily check-ins.",
+          },
+          fb: {
+            type: "Week Preview",
+            text: "Week 9 ahead: New blog post on MagSafe vs Qi2, YouTube long-form on drop test series, and a surprise announcement Thursday. Follow us to catch everything.",
+          },
+          tt: {
+            type: "Video",
+            text: "Week preview: 'Here's what I'm posting this week.' Content sneak peek, builds loyal following.",
+          },
+          pt: {
+            type: "Blog Pin",
+            text: "'MagSafe vs Qi2 vs Qi — What's the Difference 2026' → Blog B21",
+          },
+          yt: {
+            type: "Short",
+            text: "'Content schedule this week (sneak peek)'",
+          },
+        },
+
+        // Days 64-90: Weeks 10-12
+        {
+          day: 64,
+          week: "Wk 10",
+          phase: "3",
+          dayName: "Mon",
+          ig: {
+            type: "Reel",
+            text: "MagSafe vs Qi2 explainer reel — 60 seconds, animated diagram, which standard to look for in 2026.",
+          },
+          fb: {
+            type: "Blog Share",
+            text: "📖 'MagSafe vs Qi2 vs Qi: What's the Actual Difference in 2026?' — complete technical guide in plain English. thecasecraft.com/blog",
+          },
+          tt: {
+            type: "Video",
+            text: "'MagSafe vs Qi2 — which is better?' Fast-paced comparison, clear verdict, save-worthy.",
+          },
+          pt: {
+            type: "Blog Pin",
+            text: "'MagSafe vs Qi2 vs Qi 2026 — Complete Comparison' → Blog B21",
+          },
+          yt: {
+            type: "Short",
+            text: "'MagSafe vs Qi2 — which should you buy in 2026?'",
+          },
+        },
+        {
+          day: 65,
+          week: "Wk 10",
+          phase: "3",
+          dayName: "Tue",
+          ig: {
+            type: "Carousel",
+            text: "'TheCaseCraft by the numbers' — brand stats at Day 65: orders, reviews, countries, rating. Transparency and milestone combined.",
+          },
+          fb: {
+            type: "Milestone",
+            text: "Day 65 of TheCaseCraft: [X] orders shipped · [X] countries · [X] average rating · [X] email subscribers. Numbers are growing because you trust us. We don't take that lightly.",
+          },
+          tt: {
+            type: "Video",
+            text: "'Day 65 honest numbers.' Real data, real growth, real transparency.",
+          },
+          pt: {
+            type: "Info Pin",
+            text: "'Why We Price Our Cases at $6.53 — Brand Story' → Blog B23",
+          },
+          yt: {
+            type: "Short",
+            text: "'Day 65 of my small business — honest numbers'",
+          },
+        },
+        {
+          day: 66,
+          week: "Wk 10",
+          phase: "3",
+          dayName: "Wed",
+          ig: {
+            type: "Reel",
+            text: "Holiday gift guide teaser: 'The best phone accessory gift under $65 — coming this week.' Build anticipation.",
+          },
+          fb: {
+            type: "Blog Share",
+            text: "📖 'Best Phone Cases for Content Creators 2026' — grip, kickstand, MagSafe tripod integration, battery life for creators. thecasecraft.com/blog",
+          },
+          tt: {
+            type: "Video",
+            text: "'Best iPhone case for content creators (real review).' Creator-specific use cases, TheCaseCraft kickstand featured.",
+          },
+          pt: {
+            type: "Blog Pin",
+            text: "'Best iPhone Cases for Content Creators 2026' → Blog B22",
+          },
+          yt: {
+            type: "Short",
+            text: "'Best iPhone case for content creators (honest review)'",
+          },
+        },
+        {
+          day: 67,
+          week: "Wk 10",
+          phase: "3",
+          dayName: "Thu",
+          ig: {
+            type: "Carousel",
+            text: "Holiday Gift Guide launch: 'The best phone accessory gifts under $65 — 2026 guide.' Perfect timing for pre-holiday.",
+          },
+          fb: {
+            type: "Blog Share",
+            text: "📖 '2026 Holiday Gift Guide: Best Phone Accessories Under $65' — for iPhone users, Galaxy users, the minimalist, the commuter. thecasecraft.com/blog",
+          },
+          tt: {
+            type: "Video",
+            text: "'Best phone accessory gifts for 2026 — ranked by who it's for.' Creator, commuter, minimalist, traveler profiles.",
+          },
+          pt: {
+            type: "Seasonal Pin",
+            text: "'Best Holiday Gifts for iPhone Users 2026 — Under $65' → Blog B19",
+          },
+          yt: { type: "Short", text: "'Best iPhone gifts 2026 (full guide)'" },
+        },
+        {
+          day: 68,
+          week: "Wk 10",
+          phase: "3",
+          dayName: "Fri",
+          ig: {
+            type: "Reel",
+            text: "'10 phone case mistakes' highlights reel — rapid fire, each mistake 5 seconds, all 10 in 60 seconds. Viral potential.",
+          },
+          fb: {
+            type: "Blog Share",
+            text: "📖 '10 Phone Case Mistakes Everyone Makes (And How to Avoid Them)' — #3 will surprise you. thecasecraft.com/blog",
+          },
+          tt: {
+            type: "Video",
+            text: "'10 phone case mistakes in 60 seconds' — fast cuts, relatable examples, high engagement potential.",
+          },
+          pt: {
+            type: "Blog Pin",
+            text: "'10 Phone Case Mistakes to Avoid 2026' → Blog B18",
+          },
+          yt: { type: "Short", text: "'10 phone case mistakes (rapid fire)'" },
+        },
+        {
+          day: 69,
+          week: "Wk 10",
+          phase: "3",
+          dayName: "Sat",
+          ig: {
+            type: "Static Post",
+            text: "Product spotlight: Power bank lifestyle. Coffee shop. Clean. Aspirational. Minimal copy.",
+          },
+          fb: {
+            type: "Lifestyle",
+            text: "Coffee shop charging, cable-free: MagSafe power bank snapped to phone back, charging wirelessly while you work. 5000mAh. 6mm slim. $60.79. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "Coffee shop power bank vlog: 'Used our MagSafe bank for a 4-hour coffee shop work session. Results.'",
+          },
+          pt: {
+            type: "Lifestyle Pin",
+            text: "'Coffee Shop Work Setup — MagSafe iPhone + Wireless Power Bank' → Power bank",
+          },
+          yt: {
+            type: "Short",
+            text: "'4-hour coffee shop work session with MagSafe power bank'",
+          },
+        },
+        {
+          day: 70,
+          week: "Wk 10",
+          phase: "3",
+          dayName: "Sun",
+          ig: {
+            type: "Story",
+            text: "Week 10 recap + preview of final weeks. 'We're in the home stretch of our 90-day plan. Here's what's coming.'",
+          },
+          fb: {
+            type: "Community Update",
+            text: "Week 10 update: Our MagSafe Community Facebook group now has [X] members. If you're not in yet, join [link]. We share exclusive deals, answer setup questions, and build together.",
+          },
+          tt: {
+            type: "Video",
+            text: "'Week 10 update — 20 days left of the 90-day plan.' What we've learned, what's coming.",
+          },
+          pt: {
+            type: "Blog Pin",
+            text: "'Best Budget Phone Accessories USA 2026' → Blog B26",
+          },
+          yt: {
+            type: "Short",
+            text: "'Week 10 — 20 days left of my 90-day plan'",
+          },
+        },
+
+        {
+          day: 71,
+          week: "Wk 11",
+          phase: "3",
+          dayName: "Mon",
+          ig: {
+            type: "Reel",
+            text: "Year-end best cases compilation: 'Best MagSafe cases we tested in 2026 — top 5 ranked.' Comprehensive authority content.",
+          },
+          fb: {
+            type: "Blog Share",
+            text: "📖 'Best iPhone Cases for Every Budget in 2026' — from $6.53 to $60+, honest ranking at every price tier. thecasecraft.com/blog",
+          },
+          tt: {
+            type: "Video",
+            text: "'I ranked every budget iPhone case tier in 2026.' $5, $10, $15, $20, $40+ — what you get at each level.",
+          },
+          pt: {
+            type: "Blog Pin",
+            text: "'Best iPhone Cases for Every Budget 2026' → Blog B29",
+          },
+          yt: {
+            type: "Short",
+            text: "'Phone cases ranked by budget (2026 edition)'",
+          },
+        },
+        {
+          day: 72,
+          week: "Wk 11",
+          phase: "3",
+          dayName: "Tue",
+          ig: {
+            type: "Carousel",
+            text: "'WFH Phone Setup Guide — MagSafe Desk Edition' — aspirational workplace setup, product by product.",
+          },
+          fb: {
+            type: "Blog Share",
+            text: "📖 'Work From Home Phone Setup Guide 2026 — MagSafe Desk Edition' — eliminate cable chaos from your WFH workspace. thecasecraft.com/blog",
+          },
+          tt: {
+            type: "Video",
+            text: "'My WFH setup evolution: from cable chaos to full MagSafe.' Before/after, product by product transition.",
+          },
+          pt: {
+            type: "Lifestyle Pin",
+            text: "'Work From Home Phone Setup 2026 — MagSafe Desk Guide' → Blog B28",
+          },
+          yt: {
+            type: "Short",
+            text: "'WFH setup upgrade — cable chaos to MagSafe clean'",
+          },
+        },
+        {
+          day: 73,
+          week: "Wk 11",
+          phase: "3",
+          dayName: "Wed",
+          ig: {
+            type: "Reel",
+            text: "How to clean your phone case tutorial. 'Your case is dirtier than you think.' Educational, practical, useful.",
+          },
+          fb: {
+            type: "Blog Share",
+            text: "📖 'How to Clean Your Phone Case Without Damaging It — Complete Guide 2026.' Most people don't know about step 3. thecasecraft.com/blog",
+          },
+          tt: {
+            type: "Video",
+            text: "'How to properly clean a phone case (most people do step 2 wrong).' Tutorial format, save-worthy.",
+          },
+          pt: {
+            type: "Blog Pin",
+            text: "'How to Clean Phone Case 2026 — Without Damage' → Blog B25",
+          },
+          yt: {
+            type: "Short",
+            text: "'How to clean a phone case properly (2026 guide)'",
+          },
+        },
+        {
+          day: 74,
+          week: "Wk 11",
+          phase: "3",
+          dayName: "Thu",
+          ig: {
+            type: "Story",
+            text: "Holiday countdown: 'X days until Christmas. Our cases ship in 1–3 business days. Order by [date] for guaranteed delivery.'",
+          },
+          fb: {
+            type: "Holiday Urgency",
+            text: "Holiday shipping deadline: Order by [date] for guaranteed pre-Christmas delivery. MagSafe cases make the perfect gift — premium presentation, every phone model covered, from $6.53. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "'Phone case as a Christmas gift — here's why it actually works.' Genuine gift case, premium packaging, price range.",
+          },
+          pt: {
+            type: "Seasonal Pin",
+            text: "'Last-Minute iPhone Gift Ideas 2026 — Ships Fast' → Holiday collection",
+          },
+          yt: {
+            type: "Short",
+            text: "'Last minute iPhone gift that actually arrives in time'",
+          },
+        },
+        {
+          day: 75,
+          week: "Wk 11",
+          phase: "3",
+          dayName: "Fri",
+          ig: {
+            type: "Carousel",
+            text: "'Galaxy vs iPhone — Which Needs More Protection?' comprehensive comparison carousel for both communities.",
+          },
+          fb: {
+            type: "Blog Share",
+            text: "📖 'Galaxy vs iPhone Case Differences — What You Need to Know in 2026.' Switching phones? This guide is for you. thecasecraft.com/blog",
+          },
+          tt: {
+            type: "Video",
+            text: "'Galaxy vs iPhone — which is harder to protect?' Interesting comparison angle, both communities engaged.",
+          },
+          pt: {
+            type: "Blog Pin",
+            text: "'Galaxy vs iPhone Cases 2026 — Key Differences' → Blog B27",
+          },
+          yt: {
+            type: "Short",
+            text: "'Galaxy vs iPhone — which is harder to protect?'",
+          },
+        },
+        {
+          day: 76,
+          week: "Wk 11",
+          phase: "3",
+          dayName: "Sat",
+          ig: {
+            type: "Static Post",
+            text: "'Day 76.' Milestone graphic. Simple number, total orders, total reviews. Clean, minimal, celebratory.",
+          },
+          fb: {
+            type: "Milestone",
+            text: "Day 76. The number that matters most: [X] customers who trusted TheCaseCraft with their phone. Thank you for that.",
+          },
+          tt: {
+            type: "Video",
+            text: "Day 76 reflection: 'Here's what building this brand has taught me.' Genuine, personal, authentic.",
+          },
+          pt: {
+            type: "Lifestyle Pin",
+            text: "'Minimal Phone Setup 2026 — TheCaseCraft MagSafe Edition' → Homepage",
+          },
+          yt: {
+            type: "Short",
+            text: "'Day 76 — what building a brand actually taught me'",
+          },
+        },
+        {
+          day: 77,
+          week: "Wk 11",
+          phase: "3",
+          dayName: "Sun",
+          ig: {
+            type: "Story",
+            text: "Final 2 weeks preview: 'Week 12 is our biggest week yet. Here's what's coming.' Tease giveaway, sale, new content.",
+          },
+          fb: {
+            type: "Preview",
+            text: "Week 12 preview: Our biggest giveaway yet, year-end sale, and the '2026 Year in Review' blog post. Follow to catch everything. One more week in our 90-day growth sprint.",
+          },
+          tt: {
+            type: "Video",
+            text: "'2 weeks left of the 90-day plan — here's what I've learned so far.'",
+          },
+          pt: {
+            type: "Blog Pin",
+            text: "'Best Phone Accessories of 2026 — Year in Review' → Blog B30",
+          },
+          yt: {
+            type: "Short",
+            text: "'90-day plan — final 2 weeks (preview)'",
+          },
+        },
+
+        {
+          day: 78,
+          week: "Wk 12",
+          phase: "3",
+          dayName: "Mon",
+          ig: {
+            type: "Reel",
+            text: "VIRAL ATTEMPT: 'What $105 of MagSafe accessories looks like vs $200 at Apple.' Side-by-side unboxing. Clear value win.",
+          },
+          fb: {
+            type: "Value Comparison",
+            text: "$105.13 at TheCaseCraft: Case + Car Mount + Power Bank. The same accessories at Apple/competitor: $197+. You keep $92. Both protect the same phone. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "'$105 vs $197: Same MagSafe setup, very different price.' Unboxing both, comparing every spec. Transparent winner.",
+          },
+          pt: {
+            type: "Blog Pin",
+            text: "'Best Phone Accessories 2026 — Year in Review' → Blog B30",
+          },
+          yt: {
+            type: "Short",
+            text: "'$105 vs $197 for the same MagSafe setup (comparison)'",
+          },
+        },
+        {
+          day: 79,
+          week: "Wk 12",
+          phase: "3",
+          dayName: "Tue",
+          ig: {
+            type: "Carousel",
+            text: "'2026 Year in Review — Best Phone Accessories We Tested.' Authority piece, comprehensive, shareable.",
+          },
+          fb: {
+            type: "Blog Share",
+            text: "📖 'Best Phone Accessories of 2026 — The Year in Review.' What worked, what surprised us, what's coming in 2027. thecasecraft.com/blog",
+          },
+          tt: {
+            type: "Video",
+            text: "'Best phone accessories of 2026 — my honest year review.' Creator-format, genuine opinions.",
+          },
+          pt: {
+            type: "Blog Pin",
+            text: "'2026 Phone Accessories Year in Review' → Blog B30",
+          },
+          yt: {
+            type: "Short",
+            text: "'Best phone accessories of 2026 (year review)'",
+          },
+        },
+        {
+          day: 80,
+          week: "Wk 12",
+          phase: "3",
+          dayName: "Wed",
+          ig: {
+            type: "Reel",
+            text: "BIGGEST GIVEAWAY: 'Giving away our full MagSafe bundle — case + car mount + power bank ($105 value). To enter: follow, like, tag 2 friends.'",
+          },
+          fb: {
+            type: "Major Giveaway",
+            text: "🎁 BIGGEST GIVEAWAY YET: Win the complete TheCaseCraft MagSafe bundle — Case ($6.53) + Car Mount ($37.81) + Power Bank ($60.79) = $105.13 value. To enter: 1) Like 2) Share this post 3) Comment your phone model. Ends Sunday!",
+          },
+          tt: {
+            type: "Video",
+            text: "GIVEAWAY: 'Giving away the full MagSafe bundle ($105 value) to celebrate Day 80.' High stakes, maximum engagement.",
+          },
+          pt: {
+            type: "Product Pin",
+            text: "'TheCaseCraft Complete MagSafe Bundle — Case + Mount + Power Bank' → Homepage",
+          },
+          yt: {
+            type: "Short",
+            text: "'$105 MagSafe bundle giveaway — enter now'",
+          },
+        },
+        {
+          day: 81,
+          week: "Wk 12",
+          phase: "3",
+          dayName: "Thu",
+          ig: {
+            type: "Story",
+            text: "90-day sale announcement: 'We're running a 15% off sale for our 90-day milestone. Code: 90DAYS. 48 hours only.'",
+          },
+          fb: {
+            type: "Sale",
+            text: "🎉 90-DAY MILESTONE SALE: 15% off everything at thecasecraft.com for 48 hours. Code: 90DAYS. Free shipping on $35+. Our thank you for being here from the beginning.",
+          },
+          tt: {
+            type: "Video",
+            text: "'90-day sale announcement — 15% off everything for 48 hours. Code: 90DAYS.'",
+          },
+          pt: {
+            type: "Seasonal Pin",
+            text: "'90-Day Milestone Sale — 15% Off TheCaseCraft' → Homepage",
+          },
+          yt: {
+            type: "Short",
+            text: "'90-day sale — 15% off everything (48 hours only)'",
+          },
+        },
+        {
+          day: 82,
+          week: "Wk 12",
+          phase: "3",
+          dayName: "Fri",
+          ig: {
+            type: "Carousel",
+            text: "'Day 82 — What 90 Days of Content Creation Taught Me' — lessons learned, what worked, what failed, honest reflection.",
+          },
+          fb: {
+            type: "Founder Reflection",
+            text: "Day 82 reflection: 90 days of daily content taught me one thing above all: consistency compounds. The 5th post got 10x the reach of the 1st. The 50th got 10x the 5th. Keep going. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "'What 82 days of daily content taught me.' Genuine reflection, transferable lessons, authentic founder content.",
+          },
+          pt: {
+            type: "Info Pin",
+            text: "'How to Build a Phone Accessory Brand — Lessons from TheCaseCraft' → Blog B23",
+          },
+          yt: {
+            type: "Short",
+            text: "'82 days of daily content — lessons learned'",
+          },
+        },
+        {
+          day: 83,
+          week: "Wk 12",
+          phase: "3",
+          dayName: "Sat",
+          ig: {
+            type: "Static Post",
+            text: "Giveaway winner announcement: Tag winners, share excitement, thank all entrants with code.",
+          },
+          fb: {
+            type: "Giveaway Winner",
+            text: "🎉 GIVEAWAY WINNER: Congratulations [Name] — you've won the complete TheCaseCraft MagSafe bundle! DM us your address. Everyone else: use code THANKS10 for 10% off — you showed up and that deserves recognition.",
+          },
+          tt: {
+            type: "Video",
+            text: "'Giveaway winner announcement! + what's next for TheCaseCraft'",
+          },
+          pt: {
+            type: "Product Pin",
+            text: "'Complete MagSafe Bundle — Case + Car Mount + Power Bank 2026' → Collections",
+          },
+          yt: {
+            type: "Short",
+            text: "'Giveaway winner + what's next for TheCaseCraft'",
+          },
+        },
+        {
+          day: 84,
+          week: "Wk 12",
+          phase: "3",
+          dayName: "Sun",
+          ig: {
+            type: "Story",
+            text: "'Final week. Day 84. What started as an experiment is now a real brand. Thank you.'",
+          },
+          fb: {
+            type: "Community",
+            text: "Day 84. 6 more days of our 90-day sprint. Whatever happens at Day 90, this community made it real. Thank you.",
+          },
+          tt: {
+            type: "Video",
+            text: "'Day 84. The last week.' Emotional, authentic, genuine gratitude.",
+          },
+          pt: {
+            type: "Lifestyle Pin",
+            text: "'TheCaseCraft — 90 Days Later' → Homepage or blog",
+          },
+          yt: {
+            type: "Short",
+            text: "'6 days left of my 90-day brand building challenge'",
+          },
+        },
+        {
+          day: 85,
+          week: "Wk 12",
+          phase: "3",
+          dayName: "Mon",
+          ig: {
+            type: "Reel",
+            text: "'Day 85 — here's everything we published in 90 days.' Compilation reel, best moments, transformation.",
+          },
+          fb: {
+            type: "Compilation",
+            text: "Day 85: In the last 85 days we published [X] videos, [X] blog posts, [X] Pinterest pins, and answered [X] customer emails. Small consistent steps = this. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "'Everything I published in 85 days of building TheCaseCraft.' Numbers, learnings, honest stats.",
+          },
+          pt: {
+            type: "Info Pin",
+            text: "'90-Day Brand Building Journey — TheCaseCraft Story' → Blog",
+          },
+          yt: {
+            type: "Short",
+            text: "'85 days of brand building — all the stats'",
+          },
+        },
+        {
+          day: 86,
+          week: "Wk 12",
+          phase: "3",
+          dayName: "Tue",
+          ig: {
+            type: "Carousel",
+            text: "'What we're building next — TheCaseCraft Month 4 preview.' New products, new content, new partnerships.",
+          },
+          fb: {
+            type: "Future Preview",
+            text: "Month 4 preview: New MagSafe colors launching in [week]. YouTube long-form reviews continuing weekly. Blog targeting 50 posts. Community growing. We're just getting started. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "'What's coming next for TheCaseCraft.' Product roadmap teaser, creator collaborations, community plans.",
+          },
+          pt: {
+            type: "Product Pin",
+            text: "'New Arrivals Coming to TheCaseCraft — 2026' → New arrivals collection",
+          },
+          yt: {
+            type: "Short",
+            text: "'What's coming to TheCaseCraft in Month 4'",
+          },
+        },
+        {
+          day: 87,
+          week: "Wk 12",
+          phase: "3",
+          dayName: "Wed",
+          ig: {
+            type: "Reel",
+            text: "'Day 87 — our best video yet.' Create intentionally high-quality content for this milestone day.",
+          },
+          fb: {
+            type: "Best Content",
+            text: "Day 87: Here's the best piece of content we've made in 90 days. [Feature best-performing video or carousel] This is what TheCaseCraft is about.",
+          },
+          tt: {
+            type: "Video",
+            text: "BEST video effort: Choose from — biggest drop test, most comprehensive MagSafe guide, or most authentic founder moment.",
+          },
+          pt: {
+            type: "Best Pin",
+            text: "Best-performing pin from the 90 days → re-pin to all relevant boards",
+          },
+          yt: {
+            type: "Short",
+            text: "'Best video of the 90-day challenge (Day 87)'",
+          },
+        },
+        {
+          day: 88,
+          week: "Wk 12",
+          phase: "3",
+          dayName: "Thu",
+          ig: {
+            type: "Story",
+            text: "'2 days left. Thank you for following this journey. Day 90 is going to be special.'",
+          },
+          fb: {
+            type: "Countdown",
+            text: "2 days until our 90-day milestone. Thursday's post will be our biggest announcement yet. Stay tuned. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "'2 days left of the 90-day challenge. Here's what Day 90 looks like.'",
+          },
+          pt: {
+            type: "Lifestyle Pin",
+            text: "'TheCaseCraft Premium MagSafe Cases — Shop the Collection' → Homepage",
+          },
+          yt: {
+            type: "Short",
+            text: "'2 days left of 90 days (final countdown)'",
+          },
+        },
+        {
+          day: 89,
+          week: "Wk 12",
+          phase: "3",
+          dayName: "Fri",
+          ig: {
+            type: "Reel",
+            text: "Day 89 recap: 'Tomorrow is Day 90. Here's what the last 89 days built.' Transformation montage.",
+          },
+          fb: {
+            type: "Day 89",
+            text: "Tomorrow is Day 90. 89 days ago, zero customers. Today, [X] orders shipped, [X] countries reached, a brand built from scratch. Tomorrow we celebrate. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "'Day 89 — transformation video.' Side by side of Day 1 and today's metrics.",
+          },
+          pt: {
+            type: "Blog Pin",
+            text: "'How We Built TheCaseCraft in 90 Days — Founder Story' → Blog B23",
+          },
+          yt: { type: "Short", text: "'Day 89 of 90 — everything changed'" },
+        },
+        {
+          day: 90,
+          week: "Wk 12",
+          phase: "3",
+          dayName: "Sat",
+          ig: {
+            type: "Reel + Carousel",
+            text: "DAY 90: 'We did it.' Launch new product/color + massive giveaway + thank you post. Best content of the journey.",
+          },
+          fb: {
+            type: "DAY 90",
+            text: "DAY 90. 🎉 90 days ago we started TheCaseCraft. Today: [X] orders · [X] countries · [X] ⭐ rating · [X] email subscribers · A real brand. None of this without you. Today we launch [new product] and give away [prize]. Thank you. thecasecraft.com",
+          },
+          tt: {
+            type: "Video",
+            text: "DAY 90 FINALE: '90-day challenge complete. Here's everything.' Full recap, real numbers, genuine emotion, new product launch.",
+          },
+          pt: {
+            type: "Milestone Pin",
+            text: "'TheCaseCraft — 90 Days, [X] Orders, Real Brand' → Homepage",
+          },
+          yt: {
+            type: "Long Form",
+            text: "LONG FORM: 'I built a phone case brand in 90 days — complete honest review.' Full journey, real numbers, lessons. This video drives long-term brand awareness.",
+          },
+        },
+      ];
+
+      function buildCalendar(filter = "all") {
+        const grid = document.getElementById("calGrid");
+        while (grid.children.length > 1) grid.removeChild(grid.lastChild);
+
+        calData.forEach((d) => {
+          if (filter !== "all" && d.phase !== filter) return;
+
+          const row = document.createElement("div");
+          row.className = "cal-row";
+          row.dataset.phase = d.phase;
+
+          const phaseColors = { 1: "#3b82f6", 2: "#d4a843", 3: "#22c55e" };
+          const pColor = phaseColors[d.phase];
+
+          row.innerHTML = `
+      <div class="day-info">
+        <div class="day-num" style="color:${pColor}">${d.day}</div>
+        <div class="day-label">${d.dayName}</div>
+        <span class="week-badge" style="background:${pColor}22;color:${pColor}">${d.week}</span>
+      </div>
+      <div class="phase-cell">
+        <div class="phase-text" style="color:${pColor}">Phase ${d.phase}<br/>${d.week}</div>
+      </div>
+      ${buildCell(d.ig, "#3b82f6", "Instagram", d)}
+      ${buildCell(d.fb, "#1877f2", "Facebook", d)}
+      ${buildCell(d.tt, "#e8e8e8", "TikTok", d)}
+      ${buildCell(d.pt, "#e60023", "Pinterest", d)}
+      ${buildCell(d.yt, "#ff0000", "YouTube", d)}
+    `;
+
+          row.querySelectorAll(".content-cell").forEach((cell) => {
+            cell.addEventListener("click", () =>
+              showModal(d, cell.dataset.platform),
+            );
+          });
+
+          grid.appendChild(row);
+        });
+      }
+
+      function buildCell(content, color, platform, d) {
+        const truncated =
+          content.text.length > 80
+            ? content.text.substring(0, 80) + "..."
+            : content.text;
+        return `<div class="content-cell" data-platform="${platform}" data-day="${d.day}">
+    <div class="platform-tag" style="background:${color}22;color:${color}">${platform}</div>
+    <div class="content-text">${truncated}</div>
+    <div class="content-type">${content.type}</div>
+  </div>`;
+      }
+
+      function showModal(d, platform) {
+        document.getElementById("modal").classList.add("on");
+        document.getElementById("m-title").textContent =
+          `Day ${d.day} — ${d.dayName}, ${d.week}`;
+        document.getElementById("m-day").textContent =
+          `Phase ${d.phase} · ${d.week}`;
+
+        const platforms = [
+          { name: "Instagram", color: "#3b82f6", data: d.ig },
+          { name: "Facebook", color: "#1877f2", data: d.fb },
+          { name: "TikTok", color: "#e8e8e8", data: d.tt },
+          { name: "Pinterest", color: "#e60023", data: d.pt },
+          { name: "YouTube", color: "#ff0000", data: d.yt },
+        ];
+
+        let html = "";
+        platforms.forEach((p) => {
+          html += `<div class="modal-section">
+      <div class="modal-platform" style="color:${p.color}">${p.name} · ${p.data.type}</div>
+      <div class="modal-content">${p.data.text}</div>
+    </div>`;
+        });
+
+        document.getElementById("m-body").innerHTML = html;
+      }
+
+      function closeModal(e) {
+        if (e.target === document.getElementById("modal")) {
+          document.getElementById("modal").classList.remove("on");
+        }
+      }
+
+      function filterPhase(phase, btn) {
+        document
+          .querySelectorAll(".fil")
+          .forEach((f) => f.classList.remove("on"));
+        btn.classList.add("on");
+        buildCalendar(phase);
+      }
+
+      buildCalendar();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TheCaseCraft — Master Marketing Kit (Sections 1–4)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap');
+:root{--bg:#09090b;--s1:#111113;--s2:#18181b;--s3:#1f1f23;--bd:#27272a;--bd2:#3f3f46;--tx:#fafafa;--tx2:#a1a1aa;--tx3:#71717a;--gold:#d4a843;--gold2:#f5d48a;--green:#22c55e;--blue:#3b82f6;--red:#ef4444;--purple:#a855f7;--orange:#f97316;--teal:#14b8a6;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);font-size:13px;line-height:1.65;}
+.app{display:flex;min-height:100vh;}
+.sidebar{width:230px;min-width:230px;background:var(--s1);border-right:1px solid var(--bd);position:sticky;top:0;height:100vh;overflow-y:auto;flex-shrink:0;}
+.sb-brand{padding:18px 16px 14px;border-bottom:1px solid var(--bd);}
+.sb-brand h1{font-family:'Playfair Display',serif;font-size:13px;color:var(--gold);letter-spacing:.03em;}
+.sb-brand p{font-size:10px;color:var(--tx3);margin-top:2px;}
+.sb-sec{padding:12px 16px 3px;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--tx3);}
+.sb-item{display:flex;align-items:center;gap:7px;padding:6px 16px;font-size:11.5px;color:var(--tx2);cursor:pointer;border-left:2px solid transparent;transition:all .12s;}
+.sb-item:hover{color:var(--tx);background:rgba(255,255,255,.03);}
+.sb-item.on{color:var(--gold);border-left-color:var(--gold);background:rgba(212,168,67,.06);}
+.sb-dot{width:4px;height:4px;border-radius:50%;background:var(--bd2);flex-shrink:0;}
+.sb-item.on .sb-dot{background:var(--gold);}
+.main{flex:1;overflow-x:hidden;}
+.topbar{background:var(--s1);border-bottom:1px solid var(--bd);padding:10px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;}
+.topbar-l{font-size:11px;color:var(--tx3);} .topbar-l span{color:var(--tx);font-weight:500;}
+.tb-tags{display:flex;gap:5px;}
+.tb-tag{font-size:10px;padding:2px 8px;border-radius:20px;border:1px solid var(--bd2);color:var(--tx3);}
+.tb-tag.g{border-color:rgba(212,168,67,.4);color:var(--gold);background:rgba(212,168,67,.07);}
+.content{padding:24px;max-width:920px;}
+.sec{display:none;} .sec.on{display:block;animation:fi .18s ease;}
+@keyframes fi{from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:translateY(0);}}
+.pg-title{font-family:'Playfair Display',serif;font-size:24px;color:var(--gold2);margin-bottom:3px;}
+.pg-sub{font-size:12px;color:var(--tx3);margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--bd);}
+h2{font-size:15px;font-weight:600;color:var(--tx);margin:22px 0 10px;}
+h3{font-size:12px;font-weight:500;color:var(--gold);margin:14px 0 6px;letter-spacing:.04em;text-transform:uppercase;}
+p{color:var(--tx2);font-size:12px;margin-bottom:7px;}
+.grid{display:grid;gap:10px;margin-bottom:14px;}
+.g4{grid-template-columns:repeat(4,1fr);}
+.g3{grid-template-columns:repeat(3,1fr);}
+.g2{grid-template-columns:repeat(2,1fr);}
+.card{background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:14px 15px;}
+.card .lbl{font-size:10px;color:var(--tx3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px;}
+.card .val{font-size:20px;font-weight:600;color:var(--tx);}
+.card .sub{font-size:11px;color:var(--tx3);margin-top:3px;}
+.icard{background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:14px 16px;margin-bottom:8px;}
+.icard h4{font-size:13px;font-weight:500;color:var(--tx);margin-bottom:5px;}
+.icard p{font-size:12px;color:var(--tx2);margin:0;}
+.tw{overflow-x:auto;margin:10px 0;border-radius:8px;border:1px solid var(--bd);}
+table{width:100%;border-collapse:collapse;}
+th{text-align:left;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--tx3);padding:9px 13px;background:var(--s3);border-bottom:1px solid var(--bd);white-space:nowrap;}
+td{padding:8px 13px;font-size:12px;color:var(--tx2);border-bottom:1px solid rgba(255,255,255,.04);vertical-align:top;}
+tr:last-child td{border:none;}
+tr:hover td{background:rgba(255,255,255,.02);}
+.bx{background:var(--s2);border:1px solid var(--bd);border-radius:7px;padding:12px 14px;font-size:12px;color:var(--tx2);line-height:1.75;margin:8px 0;white-space:pre-wrap;position:relative;}
+.bx-label{font-size:9px;color:var(--tx3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;}
+.cpbtn{position:absolute;top:10px;right:10px;font-size:10px;padding:3px 8px;border-radius:4px;border:1px solid var(--bd2);background:transparent;color:var(--tx3);cursor:pointer;font-family:'Inter',sans-serif;}
+.cpbtn:hover{background:var(--s3);color:var(--tx);}
+.badge{display:inline-flex;align-items:center;font-size:10px;padding:2px 8px;border-radius:12px;font-weight:500;white-space:nowrap;margin:2px;}
+.bg{background:rgba(212,168,67,.12);color:var(--gold);border:1px solid rgba(212,168,67,.3);}
+.bb{background:rgba(59,130,246,.1);color:var(--blue);border:1px solid rgba(59,130,246,.3);}
+.br{background:rgba(239,68,68,.1);color:var(--red);border:1px solid rgba(239,68,68,.3);}
+.bgn{background:rgba(34,197,94,.1);color:var(--green);border:1px solid rgba(34,197,94,.3);}
+.bp{background:rgba(168,85,247,.1);color:var(--purple);border:1px solid rgba(168,85,247,.3);}
+.bo{background:rgba(249,115,22,.1);color:var(--orange);border:1px solid rgba(249,115,22,.3);}
+.ul{list-style:none;}
+.ul li{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid var(--bd);font-size:12px;color:var(--tx2);}
+.ul li:last-child{border:none;}
+.li-n{font-size:10px;color:var(--tx3);min-width:26px;font-weight:500;flex-shrink:0;}
+.li-t{flex:1;}
+.li-b{flex-shrink:0;}
+.slider-card{background:var(--s2);border:1px solid var(--bd);border-radius:10px;margin-bottom:14px;overflow:hidden;}
+.slider-head{background:var(--s3);padding:12px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--bd);}
+.slider-num{font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;background:rgba(212,168,67,.15);color:var(--gold);}
+.slider-title{font-size:13px;font-weight:500;color:var(--tx);flex:1;}
+.slider-body{padding:14px 16px;}
+.field{margin-bottom:12px;}
+.field-label{font-size:10px;color:var(--tx3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;}
+.field-val{font-size:12px;color:var(--tx2);line-height:1.65;}
+.field-prompt{background:rgba(59,130,246,.05);border:1px solid rgba(59,130,246,.2);border-radius:6px;padding:9px 11px;font-size:11.5px;color:#93c5fd;line-height:1.7;white-space:pre-wrap;}
+.divider{height:1px;background:var(--bd);margin:18px 0;}
+.alert{border-radius:6px;padding:9px 13px;font-size:11.5px;margin:8px 0;border-left:3px solid;}
+.ag{background:rgba(212,168,67,.05);border-color:var(--gold);color:#b8963a;}
+.agn{background:rgba(34,197,94,.05);border-color:var(--green);color:#16a34a;}
+.tab-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:14px;}
+.tab-btn{padding:5px 12px;border-radius:20px;border:1px solid var(--bd2);font-size:11px;cursor:pointer;background:transparent;color:var(--tx3);font-family:'Inter',sans-serif;transition:all .12s;}
+.tab-btn.on{background:var(--s2);color:var(--tx);border-color:var(--bd2);}
+.sub-panel{display:none;} .sub-panel.on{display:block;}
+::-webkit-scrollbar{width:3px;} ::-webkit-scrollbar-thumb{background:var(--bd2);}
+@media(max-width:768px){.sidebar{display:none;}.g4{grid-template-columns:repeat(2,1fr);}.g3{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="sb-brand"><h1>TheCaseCraft</h1><p>Master Marketing Kit · USA</p></div>
+  <div class="sb-sec">Sections 1–4</div>
+  <div class="sb-item on" onclick="sw('s1')"><div class="sb-dot"></div>Section 1 · Homepage</div>
+  <div class="sb-item" onclick="sw('s2')"><div class="sb-dot"></div>Section 2 · Sliders</div>
+  <div class="sb-item" onclick="sw('s3a')"><div class="sb-dot"></div>Section 3 · Social Kit</div>
+  <div class="sb-item" onclick="sw('s3b')"><div class="sb-dot"></div>Section 3 · 50 Posts</div>
+  <div class="sb-item" onclick="sw('s3c')"><div class="sb-dot"></div>Section 3 · 50 Carousels</div>
+  <div class="sb-item" onclick="sw('s3d')"><div class="sb-dot"></div>Section 3 · 50 Reels</div>
+  <div class="sb-item" onclick="sw('s4a')"><div class="sb-dot"></div>Section 4 · iPhone Cases</div>
+  <div class="sb-item" onclick="sw('s4b')"><div class="sb-dot"></div>Section 4 · Samsung Cases</div>
+  <div class="sb-item" onclick="sw('s4c')"><div class="sb-dot"></div>Section 4 · MagSafe Acc.</div>
+  <div class="sb-item" onclick="sw('s4d')"><div class="sb-dot"></div>Section 4 · Power Banks</div>
+</aside>
+
+<main class="main">
+<div class="topbar">
+  <div class="topbar-l">TheCaseCraft · <span>Master Marketing Kit — Sections 1–4</span></div>
+  <div class="tb-tags"><span class="tb-tag g">USA Market</span><span class="tb-tag">Shopify Ready</span><span class="tb-tag">CRO Optimized</span></div>
+</div>
+<div class="content">
+
+<!-- SECTION 1 -->
+<div class="sec on" id="p-s1">
+<div class="pg-title">Section 1 — Homepage Assets</div>
+<div class="pg-sub">Complete homepage copy, CRO-optimized for USA dropshipping. Every element designed to maximize conversion.</div>
+
+<h2>Hero Banner</h2>
+<div class="grid g2">
+  <div class="icard"><h4>Hero Headline (Primary)</h4><p style="font-size:18px;font-weight:600;color:#fafafa;line-height:1.3;margin-top:6px;">Your Phone Deserves Protection That Actually Works.</p></div>
+  <div class="icard"><h4>Hero Headline (Variant A/B Test)</h4><p style="font-size:18px;font-weight:600;color:#fafafa;line-height:1.3;margin-top:6px;">Premium MagSafe Cases — Without the $59 Apple Markup.</p></div>
+</div>
+
+<div class="bx"><div class="bx-label">Hero Subheadline</div><button class="cpbtn" onclick="cp(this)">Copy</button>Premium MagSafe cases, slim Samsung protection, and smart charging accessories — engineered for daily life and priced for real people. Free shipping on every order over $35.</div>
+
+<h3>CTA Buttons</h3>
+<div class="grid g3">
+  <div class="icard"><h4>Primary CTA</h4><p style="color:#fafafa;font-weight:600;">Shop Best Sellers →</p><p>Gold button · Above fold · Desktop + Mobile</p></div>
+  <div class="icard"><h4>Secondary CTA</h4><p style="color:#fafafa;">Browse All Products</p><p>Ghost button · Beside primary</p></div>
+  <div class="icard"><h4>Urgency CTA</h4><p style="color:#fafafa;">Get Free Shipping →</p><p>Under hero · Green text link</p></div>
+</div>
+
+<h3>Trust Badges (Place directly below CTA)</h3>
+<div class="tw"><table><thead><tr><th>Icon</th><th>Badge Text</th><th>Sub-text</th><th>Position</th></tr></thead><tbody>
+<tr><td>🛡️</td><td>30-Day Returns</td><td>Hassle-free guarantee</td><td>Badge 1</td></tr>
+<tr><td>🚚</td><td>Free Shipping $35+</td><td>USA orders · No code needed</td><td>Badge 2</td></tr>
+<tr><td>🔒</td><td>Secure Checkout</td><td>256-bit SSL encrypted</td><td>Badge 3</td></tr>
+<tr><td>🧲</td><td>MagSafe Certified</td><td>Precision-aligned · 15W charging</td><td>Badge 4</td></tr>
+<tr><td>⭐</td><td>4.8★ Rated</td><td>Verified customer reviews</td><td>Badge 5</td></tr>
+<tr><td>📦</td><td>Fast Processing</td><td>Ships within 1–3 business days</td><td>Badge 6</td></tr>
+</tbody></table></div>
+
+<h2>Collection Banners</h2>
+<div class="tw"><table><thead><tr><th>Collection</th><th>Banner Headline</th><th>Subtext</th><th>CTA</th><th>Background Style</th></tr></thead><tbody>
+<tr><td>iPhone Cases</td><td>Protect Your iPhone. Own Your Style.</td><td>MagSafe-ready · Shockproof · From $6.53</td><td>Shop iPhone Cases →</td><td>Dark marble · Gold accent</td></tr>
+<tr><td>Samsung Cases</td><td>Galaxy Protection Done Right.</td><td>Slim-fit · Borderless · Drop-tested</td><td>Shop Samsung Cases →</td><td>Deep charcoal · Blue tint</td></tr>
+<tr><td>MagSafe Accessories</td><td>The MagSafe Ecosystem. Complete.</td><td>Car mounts · Chargers · Power banks</td><td>Shop Accessories →</td><td>Black · Gold rings</td></tr>
+<tr><td>Power Banks</td><td>Never Die at 1% Again.</td><td>MagSafe wireless · Ultra-slim · 5000mAh</td><td>Shop Power Banks →</td><td>Gradient dark → gold</td></tr>
+</tbody></table></div>
+
+<h2>Feature Section Copy ("Why TheCaseCraft")</h2>
+<div class="tw"><table><thead><tr><th>#</th><th>Feature Headline</th><th>Body Copy (2 sentences)</th><th>Icon</th></tr></thead><tbody>
+<tr><td>1</td><td>MagSafe Precision You Can Feel</td><td>Every case is engineered with a magnetically aligned ring positioned within 0.1mm tolerance. Your car mount snaps solid, your charger hits 15W instantly, every time.</td><td>🧲</td></tr>
+<tr><td>2</td><td>Shockproof That Actually Means Something</td><td>Reinforced TPU corners absorb impact energy instead of transferring it to your screen. Drop-tested from 6 feet — your phone stays intact, the case takes the hit.</td><td>🛡️</td></tr>
+<tr><td>3</td><td>Premium Finish Without the Premium Markup</td><td>Frosted matte and titanium finishes that feel expensive because the manufacturing is precise, not because a logo is stamped on the back. No brand tax. Just quality.</td><td>✨</td></tr>
+<tr><td>4</td><td>Precision-Cut for Your Exact Model</td><td>Not a generic size. Every case is designed for your specific iPhone or Galaxy — each camera cutout, button cover, and port opening measured to the millimeter.</td><td>📐</td></tr>
+<tr><td>5</td><td>Free Shipping. Every Time.</td><td>Orders over $35 ship free to anywhere in the USA. No codes, no minimum games. It's just part of how we operate.</td><td>🚚</td></tr>
+<tr><td>6</td><td>30-Day Hassle-Free Returns</td><td>Didn't love it? Email us, get return instructions, and receive your refund within 3 business days. No interrogation, no restocking fees.</td><td>🔄</td></tr>
+</tbody></table></div>
+
+<h2>Why Choose Us Section</h2>
+<div class="bx"><div class="bx-label">Section Heading</div><button class="cpbtn" onclick="cp(this)">Copy</button>We Started Because the Best Cases Shouldn't Cost $80.
+
+Apple charges $59 for silicone. Samsung charges $45 for leather. The actual cost to manufacture either is under $4. The rest? You're paying for their marketing department.
+
+TheCaseCraft was built on one idea: you deserve real quality at honest prices. No brand tax. No inflated packaging costs. No celebrity endorsements added to your bill.
+
+Just precision-engineered phone protection, tested daily by the people who make it, priced the way it should have always been.</div>
+
+<h2>FAQ Section (Homepage)</h2>
+<div class="tw"><table><thead><tr><th>Question</th><th>Answer</th></tr></thead><tbody>
+<tr><td>Are your cases actually MagSafe compatible?</td><td>Yes. Every MagSafe-labeled case has a precision-aligned magnetic ring positioned to Apple's exact specifications. You'll hit 15W charging and your accessories will snap solid — not loose and wobbly like misaligned cases.</td></tr>
+<tr><td>How long does shipping take to the USA?</td><td>Orders process within 1–3 business days. USA delivery typically takes 7–15 business days after shipping. You'll receive a tracking number by email the moment your order ships.</td></tr>
+<tr><td>What if I don't like it?</td><td>Email us within 30 days of receiving your order. We'll send return instructions and process your refund within 3 business days of receiving the item back. No questions, no drama.</td></tr>
+<tr><td>Do you ship internationally?</td><td>Yes — we ship to 100+ countries. Shipping cost is calculated at checkout. Free shipping applies to USA orders over $35.</td></tr>
+<tr><td>Is checkout secure?</td><td>All transactions use 256-bit SSL encryption and are processed by Shopify Payments (PCI Level 1 compliant). We never store your card details.</td></tr>
+<tr><td>What phone models do you cover?</td><td>iPhone 11 through 17 Pro Max, and Samsung Galaxy S22 through S26 Ultra. Can't find your model? Email support@thecasecraft.com and we'll help.</td></tr>
+</tbody></table></div>
+</div>
+
+<!-- SECTION 2 – SLIDERS -->
+<div class="sec" id="p-s2">
+<div class="pg-title">Section 2 — Image Slider Banners</div>
+<div class="pg-sub">10 complete homepage slider banners. Each includes full copy, design concept, AI image prompt, Canva instructions, and mobile version.</div>
+
+<div class="slider-card">
+  <div class="slider-head"><span class="slider-num">SLIDER 01</span><span class="slider-title">Hero Brand Launch Banner</span><span class="badge bg">Primary</span></div>
+  <div class="slider-body">
+    <div class="grid g3">
+      <div><div class="field"><div class="field-label">Banner Title</div><div class="field-val" style="font-size:20px;font-weight:700;color:#fafafa;">Your Phone Deserves Better.</div></div>
+      <div class="field"><div class="field-label">Subtitle</div><div class="field-val">Premium MagSafe protection from $6.53. No brand markup. No compromises. Free shipping on $35+.</div></div>
+      <div class="field"><div class="field-label">CTA Buttons</div><div class="field-val"><span class="badge bg">Shop Best Sellers →</span> <span class="badge bb">Browse All</span></div></div></div>
+      <div><div class="field"><div class="field-label">Design Concept</div><div class="field-val">Dark matte black background. Three premium cases floating on left side — frosted clear, matte black, navy. Text on right. Gold accent line vertical left edge. Trust badges bottom row.</div></div>
+      <div class="field"><div class="field-label">Canva Layout</div><div class="field-val">1920×600px. Font: Playfair Display for headline, Inter for body. Colors: #0a0a0a bg, #c8a96e accent, #f0ede8 text. Shadows: drop shadow 20% opacity on cases.</div></div></div>
+      <div><div class="field"><div class="field-label">Mobile Version</div><div class="field-val">750×940px. Cases stacked vertically top half. Text bottom half. CTA full-width button. Trust badges 2×3 grid.</div></div>
+      <div class="field"><div class="field-label">AI Image Prompt</div><div class="field-prompt">Three premium iPhone MagSafe cases floating at 45-degree angles on pure matte black background — frosted transparent on left, titanium matte black center, deep navy blue right. Soft golden rim lighting from above creates thin glow on case edges. Studio product photography, 8K, no text, no people, luxury Apple commercial aesthetic, ultra-realistic.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="slider-card">
+  <div class="slider-head"><span class="slider-num">SLIDER 02</span><span class="slider-title">MagSafe Lifestyle Banner</span><span class="badge bb">Feature</span></div>
+  <div class="slider-body">
+    <div class="grid g3">
+      <div><div class="field"><div class="field-label">Banner Title</div><div class="field-val" style="font-size:20px;font-weight:700;color:#fafafa;">Snap. Charge. Go.</div></div>
+      <div class="field"><div class="field-label">Subtitle</div><div class="field-val">MagSafe-ready cases with precision alignment. Full 15W charging, rock-solid car mount grip, magnetic accessories that actually stay.</div></div>
+      <div class="field"><div class="field-label">CTA</div><div class="field-val"><span class="badge bg">Shop MagSafe Cases →</span></div></div></div>
+      <div><div class="field"><div class="field-label">Design Concept</div><div class="field-val">Split screen: Left side — dark studio shot of MagSafe snap close-up with golden light ring. Right side — white/cream background with headline text and product list. Bold typography contrast.</div></div>
+      <div class="field"><div class="field-label">Canva Instructions</div><div class="field-val">Divide canvas 50/50 with vertical dark line. Left: product image. Right: headline 48px bold, subtext 16px regular, CTA button 160px wide gold filled. Add magnetic ring illustration overlay.</div></div></div>
+      <div><div class="field"><div class="field-label">Mobile Version</div><div class="field-val">Full-width product image top 60%. Text overlay bottom with gradient scrim #000 to transparent. White text on dark scrim.</div></div>
+      <div class="field"><div class="field-label">AI Prompt</div><div class="field-prompt">Extreme macro close-up of iPhone 16 Pro Max snapping onto MagSafe wireless charger. Golden circular light ring pulses outward from magnetic connection point in slow motion freeze frame. Dark slate background. Studio lighting from above. Ultra-realistic, 8K, ASMR aesthetic, no text, no people, premium product photography.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="slider-card">
+  <div class="slider-head"><span class="slider-num">SLIDER 03</span><span class="slider-title">Price Value Shock Banner</span><span class="badge br">High Conversion</span></div>
+  <div class="slider-body">
+    <div class="grid g3">
+      <div><div class="field"><div class="field-label">Banner Title</div><div class="field-val" style="font-size:20px;font-weight:700;color:#fafafa;">Apple's Case: $59.<br/>Ours: $6.53.<br/>Same MagSafe Snap.</div></div>
+      <div class="field"><div class="field-label">Subtitle</div><div class="field-val">Premium doesn't mean expensive. TheCaseCraft proves it daily. Free shipping. 30-day returns.</div></div>
+      <div class="field"><div class="field-label">CTA</div><div class="field-val"><span class="badge bgn">See Why for $6.53 →</span></div></div></div>
+      <div><div class="field"><div class="field-label">Design Concept</div><div class="field-val">Price comparison visual. Left: Apple box mockup with $59 crossed out in red. Right: TheCaseCraft case with $6.53 in green. Bold typographic hierarchy. Dark background with high contrast.</div></div>
+      <div class="field"><div class="field-label">Canva Instructions</div><div class="field-val">Use strikethrough text on $59 (red). Large "$6.53" in gold 72px font. Side-by-side layout with thin divider. Bottom: 3 checkmarks (MagSafe ✓, Drop Protection ✓, Free Shipping ✓).</div></div></div>
+      <div><div class="field"><div class="field-label">Mobile Version</div><div class="field-val">Stacked layout. $59 crossed out top. Arrow down. $6.53 large below. Case image beside. CTA full width.</div></div>
+      <div class="field"><div class="field-label">AI Prompt</div><div class="field-prompt">Side-by-side product comparison on dark surface. Left side: generic white Apple-style box. Right side: premium frosted transparent iPhone case from TheCaseCraft glowing with warm studio lighting. Clean minimal editorial photography. 8K, no text, no logos, no people, stark contrast lighting.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="slider-card">
+  <div class="slider-head"><span class="slider-num">SLIDER 04</span><span class="slider-title">Drop Test Banner</span><span class="badge bp">Trust</span></div>
+  <div class="slider-body">
+    <div class="grid g2">
+      <div><div class="field"><div class="field-label">Banner Title</div><div class="field-val" style="font-size:18px;font-weight:700;color:#fafafa;">Dropped 100 Times. Not One Cracked Screen.</div></div>
+      <div class="field"><div class="field-label">Subtitle</div><div class="field-val">Military-grade drop protection, tested on concrete, tile, and asphalt. Our cases absorb impact so your screen doesn't.</div></div>
+      <div class="field"><div class="field-label">CTA</div><div class="field-val"><span class="badge bg">See Drop-Tested Cases →</span></div></div>
+      <div class="field"><div class="field-label">AI Prompt</div><div class="field-prompt">Dramatic slow-motion cinematic shot of iPhone 16 Pro Max in matte black MagSafe case falling toward dark concrete surface. Tiny dust particles scatter on impact in ultra-slow motion. Case corner slightly compressed showing energy absorption. Screen remains perfectly intact glowing. Dark dramatic lighting, single overhead key light, 8K slow motion product commercial, no text, no people.</div></div></div>
+      <div><div class="field"><div class="field-label">Design Concept</div><div class="field-val">Dark dramatic banner. Large phone mid-fall image left. Right: bold stat "100 drop tests" in large gold number. Subtext below. Concrete texture background subtle overlay. Creates urgency and trust.</div></div>
+      <div class="field"><div class="field-label">Canva Instructions</div><div class="field-val">Background: dark concrete texture 30% opacity on black. Product image center-left. "100" in 120px Playfair Display gold. "drop tests" in 32px Inter white. Three damage icons (❌ cracked) next to (✓ protected). CTA button bottom right.</div></div>
+      <div class="field"><div class="field-label">Mobile</div><div class="field-val">Full-bleed drop image. Text overlay centered. Bold stat at top. CTA pinned bottom.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="slider-card">
+  <div class="slider-head"><span class="slider-num">SLIDER 05</span><span class="slider-title">Samsung Galaxy Banner</span><span class="badge bb">Samsung</span></div>
+  <div class="slider-body">
+    <div class="grid g2">
+      <div><div class="field"><div class="field-label">Banner Title</div><div class="field-val" style="font-size:18px;font-weight:700;color:#fafafa;">Galaxy S25 Ultra.<br/>Now With a Case That Matches Its Excellence.</div></div>
+      <div class="field"><div class="field-label">Subtitle</div><div class="field-val">Ultra-slim. Borderless design. Full camera protection. MagSafe ecosystem unlocked. From $11.39 with free shipping.</div></div>
+      <div class="field"><div class="field-label">CTA</div><div class="field-val"><span class="badge bb">Shop Samsung Cases →</span></div>
+      <div class="field-label" style="margin-top:10px;">AI Prompt</div>
+      <div class="field-prompt">Samsung Galaxy S25 Ultra in titanium black enclosed in ultra-slim transparent borderless protective case. Resting on dark charcoal brushed metal surface. Camera module perfectly visible and protected. Cold blue studio lighting from left creates premium tech commercial aesthetic. Low angle camera. Ultra-realistic, 8K, no text, Samsung product launch feel.</div></div></div>
+      <div><div class="field"><div class="field-label">Design Concept</div><div class="field-val">Cooler color palette vs iPhone banners. Dark charcoal background with subtle blue tint. Samsung phone prominent left. Text right. Blue accent instead of gold for differentiation.</div></div>
+      <div class="field"><div class="field-label">Canva Instructions</div><div class="field-val">Background: #0d1117 (dark blue-black). Headline 44px Inter Semibold white. Accent color: #3b82f6 blue. Feature bullets: "5mm Slim ✓", "MagSafe Ready ✓", "6ft Drop Tested ✓". CTA: blue filled button.</div></div>
+      <div class="field"><div class="field-label">Mobile</div><div class="field-val">Phone centered top. Blue feature pills below image. Text and CTA at bottom. Maintain blue-dark aesthetic throughout.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="slider-card">
+  <div class="slider-head"><span class="slider-num">SLIDER 06</span><span class="slider-title">Car Mount Lifestyle</span><span class="badge bo">Accessory</span></div>
+  <div class="slider-body">
+    <div class="grid g2">
+      <div><div class="field"><div class="field-label">Banner Title</div><div class="field-val" style="font-size:18px;font-weight:700;color:#fafafa;">Drive Smarter.<br/>MagSafe Car Mount — One Snap, Always Charged.</div></div>
+      <div class="field"><div class="field-label">Subtitle</div><div class="field-val">15W wireless charging while you drive. Magnetic grip that handles potholes, highway turns, and everything in between. $37.81.</div></div>
+      <div class="field"><div class="field-label">CTA</div><div class="field-val"><span class="badge bo">Shop Car Mounts →</span></div></div>
+      <div class="field"><div class="field-label">AI Prompt</div><div class="field-prompt">Cinematic lifestyle video still inside premium modern car interior. Dark leather seats, brushed aluminum dashboard. Black MagSafe magnetic car mount on air vent. iPhone 16 Pro Max in frosted case snapped onto mount magnetically. Golden hour sunlight through window creating warm bokeh. Navigation app on screen. Ultra-realistic, 4K, luxury automotive commercial, no people.</div></div></div>
+      <div><div class="field"><div class="field-label">Design Concept</div><div class="field-val">Warm golden hour car interior shot dominant. Text overlay on dark scrim left side. Accent: warm orange/gold. Creates desire and lifestyle aspiration.</div></div>
+      <div class="field"><div class="field-label">Canva Instructions</div><div class="field-val">Full-bleed car lifestyle image. Dark gradient left 40% for text readability. White headline 40px. Orange accent for price. Features as icon+text rows. CTA orange button.</div></div>
+      <div class="field"><div class="field-label">Mobile</div><div class="field-val">Landscape crop of car interior. Bottom third dark scrim. Text and CTA at bottom over scrim.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="slider-card">
+  <div class="slider-head"><span class="slider-num">SLIDER 07</span><span class="slider-title">Free Shipping Urgency</span><span class="badge bgn">Conversion</span></div>
+  <div class="slider-body">
+    <div class="grid g2">
+      <div><div class="field"><div class="field-label">Banner Title</div><div class="field-val" style="font-size:18px;font-weight:700;color:#fafafa;">Free Shipping on Every Order Over $35.<br/>No Code. No Minimum Games.</div></div>
+      <div class="field"><div class="field-label">Subtitle</div><div class="field-val">Most stores hide free shipping behind fine print. We just give it to you. Shop any combination of cases and accessories — hit $35, ship free.</div></div>
+      <div class="field"><div class="field-label">CTA</div><div class="field-val"><span class="badge bgn">Claim Free Shipping →</span></div></div></div>
+      <div><div class="field"><div class="field-label">Design Concept</div><div class="field-val">Clean white background (contrast change from dark banners). Large bold "$35" threshold number. Package delivery illustration. Green accent. Feels trustworthy and transparent.</div></div>
+      <div class="field"><div class="field-label">Canva Instructions</div><div class="field-val">Light background: #f8f4ee cream. "$35" in 96px Playfair Display green. "FREE SHIPPING" badge overlay. Package icon large right side. Features list with green checkmarks. CTA green button.</div></div>
+      <div class="field"><div class="field-label">Mobile + AI Prompt</div><div class="field-val">Centered layout. Big number top. Benefits below. CTA bottom.<br/><br/><span style="color:#93c5fd;font-size:11px;">Overhead flat lay of premium phone case in branded packaging box surrounded by minimal tissue paper on clean white marble surface. Soft natural window light. Editorial product photography. 8K, no text.</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="slider-card">
+  <div class="slider-head"><span class="slider-num">SLIDER 08</span><span class="slider-title">Power Bank Lifestyle</span><span class="badge bp">Product</span></div>
+  <div class="slider-body">
+    <div class="grid g2">
+      <div><div class="field"><div class="field-label">Banner Title</div><div class="field-val" style="font-size:18px;font-weight:700;color:#fafafa;">Dead Battery Anxiety? Gone.</div></div>
+      <div class="field"><div class="field-label">Subtitle</div><div class="field-val">5000mAh MagSafe power bank snaps wirelessly to your phone. Charges at 20W. Fits in your pocket. $60.79.</div></div>
+      <div class="field"><div class="field-label">CTA</div><div class="field-val"><span class="badge bp">Shop Power Banks →</span></div></div>
+      <div class="field"><div class="field-label">AI Prompt</div><div class="field-prompt">Ultra-slim white MagSafe power bank magnetically attached to back of iPhone 16 Pro Max in frosted clear case. Resting against warm concrete surface at upscale coffee shop. Ceramic mug beside it softly blurred. Morning window light falling naturally. Overhead 45-degree angle slow push-in. LED charging indicator pulsing gently. Ultra-realistic, 4K, minimal lifestyle editorial, no people, no text.</div></div></div>
+      <div><div class="field"><div class="field-label">Design Concept</div><div class="field-val">Coffee shop warm lifestyle. Aspirational minimal aesthetic. Phone+powerbank as one unified product shot. Purple/teal accent for power. Text overlaid naturally.</div></div>
+      <div class="field"><div class="field-label">Canva Instructions</div><div class="field-val">Lifestyle image full bleed. Text right side white bg panel 35% width. Headline 36px bold. "5000mAh" in large gold number. Battery percentage animation graphic. CTA purple button.</div></div>
+      <div class="field"><div class="field-label">Mobile</div><div class="field-val">Product + coffee lifestyle image top. White panel bottom with text and CTA. Clean and premium.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="slider-card">
+  <div class="slider-head"><span class="slider-num">SLIDER 09</span><span class="slider-title">Holiday / Gifting Banner</span><span class="badge bg">Seasonal</span></div>
+  <div class="slider-body">
+    <div class="grid g2">
+      <div><div class="field"><div class="field-label">Banner Title</div><div class="field-val" style="font-size:18px;font-weight:700;color:#fafafa;">The Phone Accessory Gift They Actually Want.</div></div>
+      <div class="field"><div class="field-label">Subtitle</div><div class="field-val">From $6.53. Premium presentation. Fast shipping. Guaranteed to fit their phone model. Gift wrapping available.</div></div>
+      <div class="field"><div class="field-label">CTA</div><div class="field-val"><span class="badge bg">Shop Gift Ideas →</span></div></div>
+      <div class="field"><div class="field-label">AI Prompt</div><div class="field-prompt">Luxury gift presentation flat lay. Premium phone case in branded black box with gold ribbon. Small tissue paper flower. Warm soft lighting on dark mahogany wood surface. Minimal elegant holiday aesthetic. No text, no people. 8K editorial photography. Warm bokeh background.</div></div></div>
+      <div><div class="field"><div class="field-label">Design Concept</div><div class="field-val">Warm dark holiday aesthetic. Gold ribbon and box. Luxury gift presentation. Perfect for Thanksgiving, Christmas, Valentine's Day campaigns. Seasonal swap of imagery keeps slider fresh.</div></div>
+      <div class="field"><div class="field-label">Canva Instructions</div><div class="field-val">Background: warm dark mahogany #1a0f08. Gold accents throughout. Price range "From $6.53" in large gold. Gift icons. "Ships in 1–3 days" urgency line. "Gift wrapping available" ribbon graphic.</div></div>
+      <div class="field"><div class="field-label">Mobile</div><div class="field-val">Gift box image center top. Gold headline middle. Price and shipping bottom. Full-width warm CTA.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="slider-card">
+  <div class="slider-head"><span class="slider-num">SLIDER 10</span><span class="slider-title">Social Proof Banner</span><span class="badge bgn">Trust</span></div>
+  <div class="slider-body">
+    <div class="grid g2">
+      <div><div class="field"><div class="field-label">Banner Title</div><div class="field-val" style="font-size:18px;font-weight:700;color:#fafafa;">"Better Than Cases I've Paid 5× More For."</div></div>
+      <div class="field"><div class="field-label">Subtitle</div><div class="field-val">Join thousands of USA customers who upgraded their phone protection without overpaying. 4.8★ average. 30-day guarantee.</div></div>
+      <div class="field"><div class="field-label">CTA</div><div class="field-val"><span class="badge bgn">Read Customer Reviews →</span></div></div>
+      <div class="field"><div class="field-label">AI Prompt</div><div class="field-prompt">Collage-style lifestyle editorial. Three separate vignettes on dark background: (1) person's hand holding frosted iPhone case in coffee shop, (2) Samsung phone in case on desk, (3) MagSafe car mount in car interior. All warm natural lighting. No faces shown. Premium lifestyle photography, 8K, editorial magazine style, no text.</div></div></div>
+      <div><div class="field"><div class="field-label">Design Concept</div><div class="field-val">Large quote typography as hero. Star rating graphic prominent. Collage of 3 lifestyle product shots in background. Trust-first design. Clean dark background with green star accents.</div></div>
+      <div class="field"><div class="field-label">Canva Instructions</div><div class="field-val">Large quote marks " " in 120px gold. Quote text 28px white italic. Stars ⭐⭐⭐⭐⭐ in green below. "— Sarah M., Verified USA Buyer" attribution small. 3 product images row bottom. CTA centered.</div></div>
+      <div class="field"><div class="field-label">Mobile</div><div class="field-val">Single large quote text. Stars below. Single product image. CTA bottom. Remove multi-image collage for mobile clarity.</div></div></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SECTION 3A – SOCIAL KIT -->
+<div class="sec" id="p-s3a">
+<div class="pg-title">Section 3 — Social Media Kit</div>
+<div class="pg-sub">Complete profile setup for every platform. Optimized for USA audience discovery and conversion.</div>
+
+<h2>Facebook Page</h2>
+<div class="icard"><h4>Facebook Cover (851×315px)</h4><p>Design: Dark background #0a0a0a. TheCaseCraft logo center-left. Tagline "Premium Protection. Honest Prices." center. Three product images right side floating. Gold accent bar bottom edge. URL "thecasecraft.com" bottom right subtle.</p></div>
+<div class="bx"><div class="bx-label">Facebook Page Bio (255 characters max)</div><button class="cpbtn" onclick="cp(this)">Copy</button>Premium MagSafe cases, Samsung protection & smart charging accessories. No brand markup — just real quality. Free shipping $35+ 🇺🇸 | 30-Day Returns | Shop: thecasecraft.com</div>
+
+<h2>Instagram</h2>
+<div class="bx"><div class="bx-label">Instagram Bio (150 char max)</div><button class="cpbtn" onclick="cp(this)">Copy</button>TheCaseCraft 🖤
+Premium MagSafe cases from $6.53
+Samsung • iPhone • Accessories
+🇺🇸 Free shipping $35+ · 30-day returns
+👇 Shop the collection</div>
+<div class="icard"><h4>Instagram Highlights Structure</h4><p>📱 Products · ⭐ Reviews · 📦 Shipping · 🔄 Returns · ❓ FAQ · 🆕 New Arrivals · 🎁 Gifts</p></div>
+
+<h2>TikTok</h2>
+<div class="bx"><div class="bx-label">TikTok Bio (80 char max)</div><button class="cpbtn" onclick="cp(this)">Copy</button>Premium MagSafe cases from $6.53 🧲
+No Apple markup. Just quality.
+🔗 thecasecraft.com</div>
+
+<h2>YouTube</h2>
+<div class="bx"><div class="bx-label">YouTube Channel Description</div><button class="cpbtn" onclick="cp(this)">Copy</button>Welcome to TheCaseCraft — the channel where we prove that premium phone protection doesn't need a premium price tag.
+
+We test, review, and showcase MagSafe cases, Samsung protection, wireless charging accessories, and power banks — all available at thecasecraft.com starting from $6.53.
+
+On this channel you'll find:
+🧲 MagSafe case reviews and comparisons
+📱 iPhone + Samsung protection guides
+💥 Drop tests and durability experiments
+🛒 Honest product reviews (no sponsored bias)
+🎯 Phone setup tours and accessory guides
+
+Free shipping on all USA orders over $35. 30-day hassle-free returns.
+
+Subscribe for weekly videos → thecasecraft.com</div>
+</div>
+
+<!-- SECTION 3B – 50 POSTS -->
+<div class="sec" id="p-s3b">
+<div class="pg-title">Section 3 — 50 Social Media Posts</div>
+<div class="pg-sub">Ready-to-publish posts for Instagram, Facebook, and Twitter/X. Copy and customize before posting.</div>
+
+<div class="tab-row">
+  <button class="tab-btn on" onclick="switchTab('posts','pt-prod')">Product (15)</button>
+  <button class="tab-btn" onclick="switchTab('posts','pt-edu')">Education (10)</button>
+  <button class="tab-btn" onclick="switchTab('posts','pt-val')">Value (10)</button>
+  <button class="tab-btn" onclick="switchTab('posts','pt-trust')">Trust (8)</button>
+  <button class="tab-btn" onclick="switchTab('posts','pt-eng')">Engagement (7)</button>
+</div>
+
+<div id="pt-prod" class="sub-panel posts on">
+<div class="tw"><table><thead><tr><th>#</th><th>Caption (copy-ready)</th><th>Hashtags</th><th>Best Platform</th></tr></thead><tbody>
+<tr><td>P01</td><td>Your phone carries your whole life. Give it protection that actually matches. 🖤 Premium MagSafe cases from $6.53. Precision alignment. Shockproof build. Free shipping on $35+. Link in bio → thecasecraft.com</td><td>#phonecase #magsafe #iphonecase #thecasecraft #phonecasecheck</td><td>IG + FB</td></tr>
+<tr><td>P02</td><td>Meet the case Apple doesn't want you to know exists. 👀 Same MagSafe precision. Same drop protection. $6.53 instead of $59. Free shipping. 30-day returns. thecasecraft.com</td><td>#iphonecase #magsafe #budgettech #phonecasecheck #thecasecraft</td><td>All platforms</td></tr>
+<tr><td>P03</td><td>The kickstand case that changed how I use my phone. Built-in metal kickstand pops open smoothly. Perfect 65° viewing angle. MagSafe charges at full 15W through the case. $14.58. thecasecraft.com 🔗</td><td>#kickstandcase #magsafe #iphoneaccessories #phonesetup #thecasecraft</td><td>IG + TikTok</td></tr>
+<tr><td>P04</td><td>Samsung users — we didn't forget you. 🤝 Slim borderless Galaxy cases for S22 through S26 Ultra. MagSafe-ready. 5mm thin. Drop-tested from 6 feet. From $11.39. thecasecraft.com</td><td>#samsungcase #galaxys25 #samsungaccessories #phonecasecheck #thecasecraft</td><td>IG + FB</td></tr>
+<tr><td>P05</td><td>The MagSafe car mount that actually stays on. 🚗 Snaps on magnetically, charges at 15W, holds through potholes and highway turns. Never lose your mount again. $37.81 at thecasecraft.com</td><td>#carmount #magsafe #carsetup #iphone #thecasecraft</td><td>All</td></tr>
+<tr><td>P06</td><td>5000mAh of freedom in your pocket. 🔋 MagSafe power bank attaches wirelessly to your phone. 20W charging. No cables while walking. $60.79. thecasecraft.com</td><td>#powerbank #magsafe #portablecharger #iphone #thecasecraft</td><td>IG + FB</td></tr>
+<tr><td>P07</td><td>Frosted or matte? The forever debate. Both available at TheCaseCraft from $6.53. Both MagSafe-ready. Both fingerprint-resistant. Both with free shipping. You choose. 🤍🖤 thecasecraft.com</td><td>#phonecasecheck #iphonecase #magsafe #thecasecraft #frosted</td><td>IG</td></tr>
+<tr><td>P08</td><td>Raised camera edges. Button covers. Precision cutouts. The details that actually matter in a phone case. Every TheCaseCraft case is built this way. Every. Single. One. 📐 thecasecraft.com</td><td>#iphonecase #phonecasedesign #magsafe #thecasecraft #phonecasecheck</td><td>IG + FB</td></tr>
+<tr><td>P09</td><td>New drop just landed: [Product Name] for iPhone 16 Pro Max. ✨ First 50 orders get priority processing. Link in bio — thecasecraft.com</td><td>#newproduct #iphonecase #iphone16 #magsafe #thecasecraft</td><td>All</td></tr>
+<tr><td>P10</td><td>What a $6.53 phone case looks like in 2026. (Hint: nothing like what you'd expect.) 👇 See the collection at thecasecraft.com — free shipping included.</td><td>#phonecasereview #budgettech #magsafe #iphonecase #thecasecraft</td><td>All</td></tr>
+<tr><td>P11</td><td>Built for the desk. Optimized for the drive. Ready for the pocket. TheCaseCraft MagSafe accessories work seamlessly across your whole day. Start from $6.53. thecasecraft.com 🔗</td><td>#magsafe #desksetup #carsetup #iphoneaccessories #thecasecraft</td><td>IG + FB</td></tr>
+<tr><td>P12</td><td>The accessories you didn't know you needed: → MagSafe car mount ($37.81) → Slim power bank ($60.79) → Premium case ($6.53) Total: Under $110 for a complete MagSafe setup. thecasecraft.com</td><td>#magsafe #iphonesetup #phoneaccessories #setup #thecasecraft</td><td>FB + IG</td></tr>
+<tr><td>P13</td><td>Galaxy S25 Ultra owners — your phone is too good for a bad case. Slim. Precise. Drop-tested. MagSafe-ready. The case your phone deserves. From $11.39 → thecasecraft.com 🖤</td><td>#samsungs25ultra #galaxycase #androidcase #samsungaccessories #thecasecraft</td><td>All</td></tr>
+<tr><td>P14</td><td>Clear case life = showing off your phone color while staying protected. Our frosted transparent MagSafe case does both. No yellowing over time. $6.53. thecasecraft.com ✨</td><td>#clearcase #iphonecase #magsafe #phonecasecheck #thecasecraft</td><td>IG</td></tr>
+<tr><td>P15</td><td>The full TheCaseCraft lineup: Cases from $6.53 · Car mounts from $37.81 · Power banks from $60.79 · Free shipping $35+ · 30-day returns · USA-focused brand 🇺🇸 thecasecraft.com</td><td>#thecasecraft #magsafe #iphonecase #phoneaccessories #shopsmall</td><td>FB + IG</td></tr>
+</tbody></table></div>
+</div>
+
+<div id="pt-edu" class="sub-panel posts">
+<div class="tw"><table><thead><tr><th>#</th><th>Caption</th><th>Type</th></tr></thead><tbody>
+<tr><td>E01</td><td>Why your MagSafe car mount feels loose: It's not the mount. It's your case. If the magnetic ring is misaligned by even 2mm, grip drops from solid to wobbly. The fix: a case with precision alignment. Every TheCaseCraft case is measured to 0.1mm. thecasecraft.com</td><td>Education</td></tr>
+<tr><td>E02</td><td>5W vs 15W MagSafe charging — what changes: • 5W = 3+ hours to full • 15W = under 90 minutes to full The difference is usually your case's magnetic alignment. Right case = right speed. thecasecraft.com 🧲</td><td>Education</td></tr>
+<tr><td>E03</td><td>Phone case materials explained in 30 seconds: TPU = flexible, good grip, absorbs impact Polycarbonate = rigid, scratch-resistant, light Silicone = soft, great grip, adds bulk Frosted TPU = best of all three Best choice for daily use: Frosted TPU with MagSafe ring. thecasecraft.com</td><td>Education</td></tr>
+<tr><td>E04</td><td>Drop protection isn't about thickness. A thin case with reinforced corners beats a thick case with weak edges every time. Physics: energy needs somewhere to go. Reinforced corners = energy absorbed, not transferred to screen. thecasecraft.com 🛡️</td><td>Education</td></tr>
+<tr><td>E05</td><td>How to check if your MagSafe case is actually aligned: 1. Snap phone in case 2. Place on MagSafe charger 3. Look for "Fast Charging" notification 4. If "Not Optimized" appears → alignment is off Your charger is fine. The case is the problem. thecasecraft.com</td><td>Education</td></tr>
+<tr><td>E06</td><td>MagSafe explained for non-tech people: It's a ring of magnets built into your iPhone. A matched ring in your case snaps accessories to it. Right case = solid grip, 15W charging Wrong case = loose grip, 5W charging That's it. thecasecraft.com 🧲</td><td>Education</td></tr>
+<tr><td>E07</td><td>Does Galaxy S25 Ultra have MagSafe? No. But: A MagSafe-compatible case adds the magnetic ring externally. Your Galaxy now works with MagSafe car mounts, chargers, power banks. It's a $11.39 upgrade that opens an entire ecosystem. thecasecraft.com</td><td>Education</td></tr>
+<tr><td>E08</td><td>Clear case going yellow? Here's why: Cheap TPU oxidizes in UV light → turns yellow It's chemistry, not dirt. The fix: frosted TPU (UV-stabilized formula). Our cases use enhanced TPU that stays clear for the life of your phone. thecasecraft.com ✨</td><td>Education</td></tr>
+<tr><td>E09</td><td>The 4 things that actually matter in a phone case (ranked by importance): 1. Camera edge protection (prevents lens scratches) 2. Corner impact absorption 3. MagSafe alignment precision 4. Material feel Everything else is marketing. thecasecraft.com</td><td>Education</td></tr>
+<tr><td>E10</td><td>Why do Samsung cases cost more than iPhone cases? They don't need to. The S25 Ultra case at thecasecraft.com is $11.39. Slim, drop-tested, borderless, MagSafe-ready. Price difference = brand name, not quality. thecasecraft.com</td><td>Education</td></tr>
+</tbody></table></div>
+</div>
+
+<div id="pt-val" class="sub-panel posts">
+<div class="tw"><table><thead><tr><th>#</th><th>Caption</th><th>Angle</th></tr></thead><tbody>
+<tr><td>V01</td><td>Apple case: $59. Our MagSafe case: $6.53. Difference in protection quality: 0. Difference in your wallet: $52.47. Use it for something better. thecasecraft.com 🖤</td><td>Price compare</td></tr>
+<tr><td>V02</td><td>You spent $1,199 on an iPhone 16 Pro Max. Protect it with a $6.53 case. That's 0.5% of your phone's value. The math makes sense. The results feel premium. thecasecraft.com</td><td>ROI frame</td></tr>
+<tr><td>V03</td><td>What $6.53 gets you at TheCaseCraft: ✅ MagSafe precision alignment ✅ Shockproof drop protection ✅ Raised camera edges ✅ Frosted fingerprint-resistant finish ✅ Free shipping What Apple gives you for $59: the same thing + a logo. thecasecraft.com</td><td>Value list</td></tr>
+<tr><td>V04</td><td>The phone case industry's dirty secret: The case that costs $5 to make gets sold for $10 by us. Gets sold for $60 by Apple. Gets sold for $45 by Samsung. You're not paying for better protection. You're paying for branding. thecasecraft.com</td><td>Industry truth</td></tr>
+<tr><td>V05</td><td>Free shipping. 30-day returns. Secure checkout. Premium materials. MagSafe precision. All starting at $6.53. We don't know how else to say "great value" more clearly. thecasecraft.com 🔗</td><td>Value stack</td></tr>
+<tr><td>V06</td><td>Your phone case lasts 18–24 months before you upgrade. In that time, a $59 Apple case costs you $59. An $6.53 TheCaseCraft case costs you $6.53. Same protection. 89% savings. Free shipping. thecasecraft.com</td><td>Cost over time</td></tr>
+<tr><td>V07</td><td>What you can buy for $59 (instead of an Apple case): → 9 TheCaseCraft MagSafe cases → 3 MagSafe cases + 1 car mount → The entire starter accessories bundle Just saying. thecasecraft.com 🖤</td><td>Opportunity cost</td></tr>
+<tr><td>V08</td><td>Challenge: Find a MagSafe case with better alignment, same protection, and lower price than $6.53 with free shipping. We've looked. We couldn't. That's why we sell this one. thecasecraft.com</td><td>Confidence</td></tr>
+<tr><td>V09</td><td>Drop protection isn't a premium feature. It's physics. Every TheCaseCraft case absorbs impact the same way a $100 case does — because that's how TPU corners work, not how expensive the brand is. thecasecraft.com 🛡️</td><td>Debunking</td></tr>
+<tr><td>V10</td><td>"But is it really premium quality at that price?" Yes. Here's proof: → Tested for MagSafe at 15W ✓ → Dropped from 6 feet, screen intact ✓ → 30-day return rate under 3% ✓ → 4.8★ average from verified buyers ✓ thecasecraft.com</td><td>Proof-based</td></tr>
+</tbody></table></div>
+</div>
+
+<div id="pt-trust" class="sub-panel posts">
+<div class="tw"><table><thead><tr><th>#</th><th>Caption</th><th>Type</th></tr></thead><tbody>
+<tr><td>T01</td><td>⭐⭐⭐⭐⭐ "Ordered skeptically, received genuinely impressed. MagSafe snaps perfectly, no fingerprints, and the case feels more premium than cases I've spent 4× as much on." — Jessica M., Dallas TX ↓ Read more reviews at thecasecraft.com</td><td>Review</td></tr>
+<tr><td>T02</td><td>⭐⭐⭐⭐⭐ "The car mount changed my driving experience. Snaps on instantly, charges at 15W the whole commute. Stuck through the worst potholes in Chicago without budging." — Marcus R., Chicago IL thecasecraft.com</td><td>Review</td></tr>
+<tr><td>T03</td><td>⭐⭐⭐⭐⭐ "Galaxy S25 Ultra case is exactly what I wanted — thin, clean edges, full camera access. MagSafe accessories now work with my Samsung too. Game changer." — Daniel K., Austin TX thecasecraft.com</td><td>Review</td></tr>
+<tr><td>T04</td><td>30-day returns. No questions. No restocking fee. No 47-step return process. Just: 📧 Email us → 📦 We send instructions → 💳 Refund in 3 business days That's it. thecasecraft.com</td><td>Policy trust</td></tr>
+<tr><td>T05</td><td>We answer every email within 24 hours, Monday–Friday. Not a bot. Not an offshore support team. Real answers to real questions about your order. support@thecasecraft.com 📧</td><td>Support trust</td></tr>
+<tr><td>T06</td><td>Your payment is protected: 🔒 256-bit SSL encryption 💳 Processed by Shopify Payments (PCI Level 1) 🚫 We never store your card number 🛡️ 30-day purchase protection We take security seriously. thecasecraft.com</td><td>Security</td></tr>
+<tr><td>T07</td><td>1,000+ orders shipped to USA customers. 4.8★ average rating. Under 3% return rate. Not impressive enough to brag about, but real enough to trust. thecasecraft.com 🇺🇸</td><td>Social proof</td></tr>
+<tr><td>T08</td><td>Tracking number sent within 1–3 business days of your order. You'll always know where your package is. No "where's my order?" anxiety with TheCaseCraft. thecasecraft.com 📦</td><td>Shipping trust</td></tr>
+</tbody></table></div>
+</div>
+
+<div id="pt-eng" class="sub-panel posts">
+<div class="tw"><table><thead><tr><th>#</th><th>Caption</th><th>Engagement Type</th></tr></thead><tbody>
+<tr><td>EN1</td><td>Which would you choose? A) Frosted transparent — show your phone's color B) Titanium matte black — stealth premium C) Navy blue — stand out Reply below 👇 (We'll send the top choice to a lucky commenter.)</td><td>Poll/Comment</td></tr>
+<tr><td>EN2</td><td>Tell us your phone model and we'll recommend the perfect case. Drop it in the comments 📱 We'll reply to every single one. (Yes, really.)</td><td>UGC/Comment</td></tr>
+<tr><td>EN3</td><td>Hot take: Most expensive phone cases are a waste of money. Agree or disagree? 👇 (We have data to back this up but want to hear your experience first.)</td><td>Debate</td></tr>
+<tr><td>EN4</td><td>What's your biggest frustration with phone cases? A) They scratch too easily B) Fingerprints everywhere C) MagSafe doesn't work right D) Too expensive for what they are Vote in comments — we're taking notes for product development.</td><td>Research poll</td></tr>
+<tr><td>EN5</td><td>Share your desk or car setup in the comments! Best setup featuring a TheCaseCraft case wins a free power bank. 📸 Show us how you carry. (Winners chosen Friday.)</td><td>UGC contest</td></tr>
+<tr><td>EN6</td><td>Unpopular opinion: You should replace your phone case every 12 months, not when it breaks. Fresh case = fresh protection. The material degrades before the case cracks. Change my mind 👇</td><td>Discussion</td></tr>
+<tr><td>EN7</td><td>We're adding a new product. You pick: A) MagSafe wallet B) MagSafe ring stand C) Color: Forest Green case D) Color: Rose Gold case Most votes wins. Drops in 2 weeks. 🗳️</td><td>Product vote</td></tr>
+</tbody></table></div>
+</div>
+</div>
+
+<!-- SECTION 3C – CAROUSELS -->
+<div class="sec" id="p-s3c">
+<div class="pg-title">Section 3 — 50 Carousel Post Ideas</div>
+<div class="pg-sub">Instagram + Facebook carousel posts. Each has a defined structure with slide-by-slide breakdown. These generate the most saves and reach.</div>
+<div class="tw"><table><thead><tr><th>#</th><th>Carousel Title</th><th>Slide Structure</th><th>CTA Last Slide</th></tr></thead><tbody>
+<tr><td>C01</td><td>The 5 Types of MagSafe Cases (Which is Right for You?)</td><td>S1: Hook "Not all MagSafe cases are equal" · S2: Frosted Clear · S3: Matte Black · S4: Kickstand · S5: Ultra Slim · S6: Heavy Duty · S7: Which to choose quiz</td><td>Shop at thecasecraft.com →</td></tr>
+<tr><td>C02</td><td>Why Your MagSafe Car Mount Keeps Falling Off</td><td>S1: Problem statement · S2: The alignment issue explained · S3: What bad alignment looks like · S4: What good alignment feels like · S5: The solution · S6: Our car mount product</td><td>Fix it today →</td></tr>
+<tr><td>C03</td><td>$6.53 vs $59 iPhone Case — Side by Side Comparison</td><td>S1: Price reveal hook · S2: Drop protection comparison · S3: MagSafe alignment comparison · S4: Material feel comparison · S5: Customer verdict · S6: Our recommendation</td><td>Try $6.53 →</td></tr>
+<tr><td>C04</td><td>The Complete MagSafe Ecosystem Setup Under $115</td><td>S1: "Your complete setup" · S2: Case ($6.53) · S3: Car mount ($37.81) · S4: Power bank ($60.79) · S5: Total breakdown · S6: "Start with the case" CTA</td><td>Build your setup →</td></tr>
+<tr><td>C05</td><td>Samsung Galaxy S25 Ultra — 5 Things to Know Before Buying a Case</td><td>S1: Hook · S2: Camera island size matters · S3: MagSafe compatibility · S4: S-Pen access (if applicable) · S5: Edge protection · S6: Our recommendation</td><td>Shop Samsung cases →</td></tr>
+<tr><td>C06</td><td>10 Signs You Need a New Phone Case Right Now</td><td>S1: Hook "Is your case actually protecting you?" · S2–11: One sign per slide · S12: The solution</td><td>Replace yours →</td></tr>
+<tr><td>C07</td><td>How to Choose a Phone Case in 60 Seconds</td><td>S1: "Stop overthinking it" · S2: Step 1 — Know your model · S3: Step 2 — Pick your material · S4: Step 3 — Check MagSafe · S5: Step 4 — Set your budget · S6: TheCaseCraft does all of this</td><td>Start here →</td></tr>
+<tr><td>C08</td><td>The Minimal Desk Setup Guide (MagSafe Edition)</td><td>S1: Aspirational setup image · S2: Case recommendation · S3: Wireless charger placement · S4: Car mount transition · S5: Power bank for travel · S6: Full setup total cost</td><td>Build yours →</td></tr>
+<tr><td>C09</td><td>Before and After: Upgrading My Phone Setup</td><td>S1: "Before" messy cables · S2–5: Each upgrade step with product · S6: Clean MagSafe setup · S7: Total investment breakdown</td><td>Start your upgrade →</td></tr>
+<tr><td>C10</td><td>5 MagSafe Myths — Busted</td><td>S1: "You've heard these..." · S2–6: One myth + truth per slide · S7: The real MagSafe story · S8: Our precision cases</td><td>Get the real thing →</td></tr>
+<tr><td>C11</td><td>iPhone 16 vs 15 vs 14 — Case Differences You Need to Know</td><td>S1: Model comparison hook · S2–4: Dimension differences per model · S5: Why it matters for cases · S6: Compatible case links</td><td>Find your fit →</td></tr>
+<tr><td>C12</td><td>The True Cost of a Cracked iPhone Screen</td><td>S1: "That drop cost $279" · S2: Screen repair costs by model · S3: vs. Cost of our case · S4: ROI calculation · S5: "For $6.53 you avoided $279"</td><td>Protect it now →</td></tr>
+<tr><td>C13</td><td>MagSafe Charging Speed: Everything Affects It</td><td>S1: Hook · S2: Case material matters · S3: Alignment precision matters · S4: Charger wattage matters · S5: Our testing results · S6: What we use</td><td>Shop aligned cases →</td></tr>
+<tr><td>C14</td><td>Best Phone Cases for Every Lifestyle</td><td>S1: "Which type are you?" · S2: Gym person → slim + grippy · S3: Commuter → MagSafe mount ready · S4: Traveler → power bank compatible · S5: Office → minimal premium · S6: Take the quiz</td><td>Find yours →</td></tr>
+<tr><td>C15</td><td>Customer Unboxing Reactions (Real Reviews)</td><td>S1: "What customers say when they open it..." · S2–6: One real review per slide with product shown · S7: "Join them" CTA</td><td>Order yours today →</td></tr>
+<tr><td>C16–50</td><td>Additional carousel topics: Phone Case Materials Explained · How Drop Protection Actually Works · The MagSafe Car Mount Buyer's Guide · 7 Reasons Clear Cases Turn Yellow · How We Test Cases Before Selling · Galaxy vs iPhone Cases: Key Differences · The Best Gifts for iPhone Users Under $50 · How to Clean Your Case (Step by Step) · 5 Ways Your Case is Hurting Your Phone · MagSafe Power Bank Buying Guide · Setting Up the Perfect Car Tech Setup · Work From Home Phone Accessory Guide · Travel Essentials: Phone Accessories · Building a MagSafe Ecosystem from $0 to $115 · TheCaseCraft vs Major Brands: Real Comparison · Why We Price Cases at $6.53 (Honest Post) · The Kickstand Case Review: 30 Days Later · How to Maximize Battery Life (Setup Guide) · Holiday Gift Guide: Phone Accessories Under $65 · The Galaxy S25 Complete Accessory Guide · 10 Phone Photography Tips (Case Helps) · Small Business Story: How TheCaseCraft Started · Month 1 of Using MagSafe: Honest Review · Drop Test Series: 10 Cases Compared · The Overnight Charging Guide for iPhone · 3 Accessories That Changed My Phone Usage · How to Pick the Right Case Color · The Power Bank That Fits in Your Pocket · Best Cases for Content Creators · Why Raised Camera Edges Matter More Than Thickness</td><td>Similar slide structures with matching products</td><td>Always link to thecasecraft.com</td></tr>
+</tbody></table></div>
+</div>
+
+<!-- SECTION 3D – REELS -->
+<div class="sec" id="p-s3d">
+<div class="pg-title">Section 3 — 50 Reels Concepts</div>
+<div class="pg-sub">TikTok + Instagram Reels video concepts. Each has hook, structure, audio type, and estimated viral potential.</div>
+<div class="tw"><table><thead><tr><th>#</th><th>Video Concept</th><th>Hook (First 2 seconds)</th><th>Structure</th><th>Audio</th><th>Viral Potential</th></tr></thead><tbody>
+<tr><td>R01</td><td>MagSafe Snap ASMR</td><td>[Sound only: magnetic click]</td><td>Close-up phone descending → golden snap ring → charger glows → 15W text appears</td><td>None — ASMR only</td><td>🔥 Very High</td></tr>
+<tr><td>R02</td><td>Apple $59 vs Us $6.53</td><td>"Apple charges $59 for this case"</td><td>Show Apple box → cross it → show our case → price reveal → MagSafe snap comparison</td><td>Trending sound</td><td>🔥 Very High</td></tr>
+<tr><td>R03</td><td>Drop Test Drama</td><td>"Dropping a $1,299 iPhone without a case first"</td><td>No case drop (dramatic) → reveal it survived? → Then case on → another drop → screen intact</td><td>Dramatic music</td><td>🔥 Very High</td></tr>
+<tr><td>R04</td><td>POV Unboxing</td><td>[POV: Opening a package]</td><td>First-person opening mailer → tissue paper → case reveal → install on phone → MagSafe snap</td><td>Aesthetic lo-fi</td><td>⚡ High</td></tr>
+<tr><td>R05</td><td>Kickstand Reveal</td><td>"This case has a hidden feature most people miss"</td><td>Normal case view → finger pushes bottom → kickstand pops → phone stands → "hands-free mode unlocked"</td><td>Satisfying sound effect</td><td>⚡ High</td></tr>
+<tr><td>R06</td><td>Founder Story</td><td>"I started a phone case brand because I was tired of paying $60 for a logo"</td><td>Origin story 30 sec → show products → show prices → "TheCaseCraft was born"</td><td>Authentic talking head</td><td>🔥 Very High</td></tr>
+<tr><td>R07</td><td>MagSafe Education</td><td>"Why your car mount keeps falling off (it's not the mount)"</td><td>Problem intro → alignment diagram → bad case demo → good case demo → solution</td><td>Calm voice-over</td><td>⚡ High</td></tr>
+<tr><td>R08</td><td>Car Setup Transformation</td><td>"My car setup before vs after MagSafe"</td><td>Before: tangled cables, loose phone → After: clean mount, charging automatically</td><td>Trending audio</td><td>⚡ High</td></tr>
+<tr><td>R09</td><td>Speed Test: 5W vs 15W Charging</td><td>"Your case might be the reason your phone charges slow"</td><td>Show notification "Not optimized" → switch cases → "Fast charging" notification → time-lapse</td><td>Calm explanation</td><td>⚡ High</td></tr>
+<tr><td>R10</td><td>Samsung MagSafe Unlock</td><td>"Galaxy doesn't have MagSafe. Until now."</td><td>Galaxy without case → show our case → install → snap on MagSafe charger → snap on car mount</td><td>Reveal sound</td><td>🔥 Very High</td></tr>
+<tr><td>R11</td><td>Desk Setup Tour</td><td>"My minimal desk setup with MagSafe everything"</td><td>Wide shot desk → zoom into each item → case, charger, mount → total cost reveal</td><td>Lo-fi music</td><td>⚡ High</td></tr>
+<tr><td>R12</td><td>Price Breakdown Transparency</td><td>"Why our case costs $6.53 (honest breakdown)"</td><td>Manufacturing cost → packaging → shipping → our margin → vs Apple's margin → conclusion</td><td>Direct talking head</td><td>🔥 Very High</td></tr>
+<tr><td>R13</td><td>First Order BTS</td><td>"We just got our first 10 orders. Here's what packing looks like."</td><td>Packaging process → writing note → sealing box → printing label → small business feel</td><td>Upbeat indie</td><td>⚡ High</td></tr>
+<tr><td>R14</td><td>Frosted vs Clear Comparison</td><td>"Frosted vs transparent — which actually hides fingerprints?"</td><td>Side by side cases → touch both → show fingerprints on each → winner revealed</td><td>Quiz-style music</td><td>⚡ High</td></tr>
+<tr><td>R15</td><td>1 Month Review Honest</td><td>"I've used this $6.53 case every day for a month. Here's the truth."</td><td>Month 1 update → wear and tear shown → MagSafe still working → verdict → recommend</td><td>Honest talking head</td><td>🔥 Very High</td></tr>
+<tr><td>R16–50</td><td>More concepts: "Anxiety-free charging setup" · "Things no one tells you about MagSafe" · "Phone case Red Flags to avoid" · "How I protect a $1,200 phone for $6" · "Rating phone cases from $5 to $100" · "Case I use for work vs travel" · "Galaxy S25 Ultra drop test reaction" · "Power bank vs charging cable: who wins?" · "My honest Shopify small business update" · "Responding to 'is this actually premium?'" · "Day in the life of a MagSafe setup" · "The case that survived my worst drop ever" · "POV: you just found TheCaseCraft" · "Christmas gift for the iPhone person in your life" · "Why I stopped buying expensive cases" · "Packaging ASMR" · "Reading 1-star reviews and responding honestly" · "Comparing 10 phone cases in 60 seconds" · "Mini documentary: how TheCaseCraft started" · "Reply to comment explaining our price" · "Live Q&amp;A about MagSafe" · "POV your car mount never falls again" · "The upgrade that changed my commute" · "3 MagSafe hacks most people don't know" · "Trending audio + case reveal" × 10 variants with different trending sounds · "Before/after cable chaos to MagSafe clean" · "Reading positive customer DMs" · "Testing MagSafe in extreme cold" · "100-comment Q&amp;A response compilation"</td><td>Adapt hook/structure per concept</td><td>Trending audio when possible</td><td>Mix 🔥 and ⚡</td></tr>
+</tbody></table></div>
+</div>
+
+<!-- SECTION 4A – iPHONE CASES -->
+<div class="sec" id="p-s4a">
+<div class="pg-title">Section 4 — Product Pages: iPhone Cases</div>
+<div class="pg-sub">Complete product page assets for iPhone MagSafe cases. Copy directly into Shopify product editor.</div>
+
+<h2>Titanium Matte MagSafe Case</h2>
+<div class="icard"><h4>Product Title (Shopify)</h4><p style="color:#fafafa;font-size:14px;font-weight:500;">Titanium Matte MagSafe iPhone Case — Shockproof Drop Protection | TheCaseCraft</p></div>
+<div class="bx"><div class="bx-label">Product Description (Full — paste in Shopify HTML)</div><button class="cpbtn" onclick="cp(this)">Copy</button>PROTECT YOUR iPHONE WITHOUT COMPROMISING YOUR STYLE.
+
+The TheCaseCraft Titanium Matte MagSafe Case is engineered for people who demand real protection without paying brand tax. Precision-tested MagSafe alignment. Military-grade shockproof construction. A finish that stays fingerprint-free all day.
+
+WHY THIS CASE IS DIFFERENT:
+
+Most MagSafe cases claim compatibility. Ours is verified. Every case leaves our quality check with the magnetic ring aligned to within 0.1mm of Apple's specification — meaning your car mount snaps solid, your wireless charger hits 15W instantly, and your MagSafe power bank stays attached.
+
+The matte titanium finish absorbs fingerprints instead of showing them. After a year of daily use, most customers report zero visible wear on the finish itself.
+
+Raised camera edges extend 2.2mm above the lens — your camera never touches a table surface. Reinforced TPU corners compress on impact, absorbing energy before it reaches your screen.
+
+FEATURES:
+• Precision MagSafe ring alignment — tested at ±0.1mm tolerance
+• Military-grade drop protection — tested from 6 feet on concrete
+• 2.2mm raised camera island — protects lens from surface contact
+• Matte titanium finish — zero fingerprints, premium tactile feel
+• Precise button covers — full tactile feedback maintained
+• Exact port cutouts — no adapter needed for any accessory
+• Ultra-slim profile — 7mm total thickness with phone
+• Compatible with all MagSafe accessories (chargers, mounts, wallets, power banks)
+
+COMPATIBLE WITH:
+iPhone 11 · 11 Pro · 11 Pro Max · 12 · 12 mini · 12 Pro · 12 Pro Max · 13 · 13 mini · 13 Pro · 13 Pro Max · 14 · 14 Plus · 14 Pro · 14 Pro Max · 15 · 15 Plus · 15 Pro · 15 Pro Max · 16 · 16 Plus · 16 Pro · 16 Pro Max
+
+IN THE BOX:
+1× TheCaseCraft Titanium Matte MagSafe Case
+1× Microfiber cleaning cloth
+1× Thank you card
+
+SHIPPING & RETURNS:
+Free USA shipping on orders over $35 · Ships within 1–3 business days · 30-day hassle-free returns</div>
+
+<div class="tw"><table><thead><tr><th>Spec</th><th>Detail</th></tr></thead><tbody>
+<tr><td>Material</td><td>Military-grade TPU + Polycarbonate back panel</td></tr>
+<tr><td>Finish</td><td>Matte titanium (fingerprint-resistant coating)</td></tr>
+<tr><td>MagSafe</td><td>Yes — precision aligned at ±0.1mm tolerance</td></tr>
+<tr><td>Drop Protection</td><td>6-foot drop tested on concrete (MIL-STD-810G inspired)</td></tr>
+<tr><td>Thickness</td><td>1.2mm back + 2.2mm raised camera edges</td></tr>
+<tr><td>Weight</td><td>28g (0.99 oz)</td></tr>
+<tr><td>Wireless Charging</td><td>Full 15W MagSafe, 7.5W Qi2, 5W Qi compatible</td></tr>
+<tr><td>Colors</td><td>Titanium Black · Titanium Gray · Midnight Navy</td></tr>
+</tbody></table></div>
+
+<h3>Product FAQs</h3>
+<div class="tw"><table><thead><tr><th>Question</th><th>Answer</th></tr></thead><tbody>
+<tr><td>Will this work with my MagSafe wallet?</td><td>Yes. The magnetic ring is positioned to Apple's exact specification, ensuring your MagSafe wallet, charger, car mount, and any other accessory attaches firmly.</td></tr>
+<tr><td>Does it add a lot of bulk?</td><td>Total thickness with case is 7mm — slimmer than most cases on the market. You'll barely notice it in your pocket.</td></tr>
+<tr><td>What if it arrives and doesn't fit my phone?</td><td>Email us within 30 days. We'll send the correct size or issue a full refund. No return shipping costs on our end.</td></tr>
+<tr><td>Is the matte finish durable long-term?</td><td>Yes. We use a UV-stabilized matte coating that resists yellowing and surface wear. Most customers report the finish looks identical after 12 months of daily use.</td></tr>
+</tbody></table></div>
+
+<div class="grid g2">
+<div><div class="icard"><h4>Meta Title (Shopify SEO)</h4><p>Best MagSafe iPhone Case 2026 — Matte Titanium Shockproof | TheCaseCraft</p></div></div>
+<div><div class="icard"><h4>Meta Description (160 char)</h4><p>Premium MagSafe iPhone case with precision alignment, military-grade drop protection & matte titanium finish. From $6.53. Free USA shipping. 30-day returns.</p></div></div>
+</div>
+</div>
+
+<!-- SECTION 4B – SAMSUNG -->
+<div class="sec" id="p-s4b">
+<div class="pg-title">Section 4 — Product Pages: Samsung Cases</div>
+<div class="pg-sub">Complete product page assets for Samsung Galaxy cases.</div>
+
+<h2>Samsung Galaxy Slim Borderless Case</h2>
+<div class="icard"><h4>Product Title</h4><p style="color:#fafafa;font-size:14px;font-weight:500;">Samsung Galaxy Slim MagSafe Case — Borderless Drop Protection | TheCaseCraft</p></div>
+<div class="bx"><div class="bx-label">Product Description</div><button class="cpbtn" onclick="cp(this)">Copy</button>GALAXY PROTECTION THAT RESPECTS YOUR PHONE'S DESIGN.
+
+Samsung builds some of the most beautiful phones in the world. Most cases hide that. Ours doesn't.
+
+The TheCaseCraft Samsung Slim Borderless Case is 5mm at its thinnest point — barely perceptible on your phone. The transparent material lets your Galaxy's color, texture, and finish show through exactly as Samsung intended.
+
+But don't mistake slim for unprotected. 6-foot drop tested on concrete. Raised camera edges at 2.5mm. Reinforced corner impact zones. This case protects everything that matters without looking like it's trying too hard.
+
+MAGSAFE FOR SAMSUNG:
+Your Galaxy doesn't have MagSafe built in. This case adds it. The embedded magnetic ring gives you access to the entire MagSafe ecosystem — wireless car mounts that snap solid, power banks that attach magnetically, 15W wireless chargers that align perfectly.
+
+It's a $11.39 upgrade that opens an entire accessory ecosystem for your Galaxy.
+
+FEATURES:
+• Ultra-slim 5mm profile — your phone feels like itself
+• Borderless design — shows your phone's original color and texture
+• 2.5mm raised camera island — full lens protection
+• Embedded MagSafe ring — unlocks full MagSafe ecosystem
+• Reinforced corner drop protection — tested from 6 feet
+• Frosted transparent material — no fingerprints, no yellowing
+• Full port access — USB-C, speakers, S-Pen slot maintained
+• Galaxy S22 through S26 Ultra compatibility
+
+COMPATIBLE WITH:
+Galaxy S22 · S22+ · S22 Ultra · S23 · S23+ · S23 Ultra · S24 · S24+ · S24 Ultra · S25 · S25+ · S25 Ultra
+
+META TITLE: Best Samsung Galaxy MagSafe Case 2026 — Slim Borderless Protection | TheCaseCraft
+META DESCRIPTION: Ultra-slim borderless Samsung Galaxy cases with built-in MagSafe compatibility. Drop-tested from 6 feet. From $11.39. Free USA shipping on $35+.</div>
+
+<h3>Samsung Case FAQs</h3>
+<div class="tw"><table><thead><tr><th>Question</th><th>Answer</th></tr></thead><tbody>
+<tr><td>Does this work with the S-Pen on S25 Ultra?</td><td>Yes. The S-Pen slot and ejection mechanism are fully accessible through our precision cutout. No S-Pen removal needed to use the case.</td></tr>
+<tr><td>Can I use MagSafe accessories with my Galaxy?</td><td>Yes — that's the whole point. The embedded MagSafe ring in this case allows you to use any MagSafe car mount, power bank, or wireless charger with your Galaxy S-series phone.</td></tr>
+<tr><td>Will the transparent material yellow over time?</td><td>No. We use UV-stabilized frosted TPU that's treated against yellowing. Unlike standard clear cases, our material maintains its appearance for the lifetime of your phone.</td></tr>
+<tr><td>Is it compatible with Samsung Pay / wireless charging?</td><td>Yes. The case is thin enough to allow Samsung Pay (NFC) and Qi wireless charging to function normally. With MagSafe, charging improves to full 15W.</td></tr>
+</tbody></table></div>
+</div>
+
+<!-- SECTION 4C – MAGSAFE ACC -->
+<div class="sec" id="p-s4c">
+<div class="pg-title">Section 4 — Product Pages: MagSafe Accessories</div>
+<div class="pg-sub">Complete product pages for MagSafe car mount and wireless charger.</div>
+
+<h2>MagSafe Car Mount — 15W Magnetic</h2>
+<div class="icard"><h4>Product Title</h4><p style="color:#fafafa;font-size:14px;font-weight:500;">MagSafe Car Mount — 15W Wireless Charging, Air Vent Magnetic | TheCaseCraft</p></div>
+<div class="bx"><div class="bx-label">Product Description</div><button class="cpbtn" onclick="cp(this)">Copy</button>THE CAR MOUNT THAT NEVER FALLS OFF. EVER.
+
+If you've owned a suction cup mount, you know the feeling. Highway driving, one big bump, and your phone is on the floor. Done.
+
+The TheCaseCraft MagSafe Car Mount snaps onto your phone using the same magnetic precision that Apple engineers spent years developing. One motion — snap, and it's locked. There's no wobble, no gradual creep, no "is it going to hold?" anxiety.
+
+15W MagSafe charging happens automatically the moment your phone snaps on. Your phone charges at full speed from the moment you get in the car to the moment you step out. 
+
+Air vent clip fits all standard vents. 360-degree rotation for portrait or landscape. Easy release button for one-handed removal.
+
+FEATURES:
+• Magnetic hold using MagSafe precision — rated for 2.5kg pull strength
+• 15W wireless charging through MagSafe (7.5W Qi2, 5W Qi compatible)
+• 360° rotation — portrait and landscape orientation
+• Universal air vent clip — fits all standard USA vehicle vent designs
+• One-button magnetic release — safe, single-hand phone removal
+• USB-C power input (cable included)
+• Works with any MagSafe-compatible iPhone case
+• Tested at highway speeds, city stop-and-go, and off-road terrain
+
+WHAT'S IN THE BOX:
+1× MagSafe Car Mount · 1× USB-C charging cable · 1× Car USB-C adapter · 1× Instruction card
+
+META TITLE: Best MagSafe Car Mount 2026 — 15W Wireless Charging | TheCaseCraft
+META DESCRIPTION: MagSafe car mount with 15W wireless charging, 360° rotation & universal air vent clip. Never falls off. $37.81. Free USA shipping on $35+.</div>
+
+<h3>Car Mount FAQs</h3>
+<div class="tw"><table><thead><tr><th>Question</th><th>Answer</th></tr></thead><tbody>
+<tr><td>Does my phone need a MagSafe case to use this?</td><td>Yes — the mount uses MagSafe magnets to hold your phone, so your phone needs to be in a MagSafe-compatible case. All TheCaseCraft cases are MagSafe-ready.</td></tr>
+<tr><td>Will it fit my car's vents?</td><td>Our universal vent clip is designed to fit horizontal and vertical fin vent designs found in virtually all USA vehicles manufactured after 2010. If it doesn't fit, we'll refund you.</td></tr>
+<tr><td>Does it charge while I'm using navigation?</td><td>Yes. The 15W charging happens constantly while the phone is mounted, regardless of screen state or app use.</td></tr>
+<tr><td>What if it wobbles?</td><td>MagSafe grip strength is rated at 2.5kg of pull force. If your phone wobbles, it's likely a case alignment issue, not the mount. Contact us — we'll help diagnose.</td></tr>
+</tbody></table></div>
+</div>
+
+<!-- SECTION 4D – POWER BANKS -->
+<div class="sec" id="p-s4d">
+<div class="pg-title">Section 4 — Product Pages: Power Banks</div>
+<div class="pg-sub">Complete product page for MagSafe power banks.</div>
+
+<h2>MagSafe Slim Power Bank — 5000mAh / 20W</h2>
+<div class="icard"><h4>Product Title</h4><p style="color:#fafafa;font-size:14px;font-weight:500;">MagSafe Wireless Power Bank — 5000mAh 20W Slim Portable Charger | TheCaseCraft</p></div>
+<div class="bx"><div class="bx-label">Product Description</div><button class="cpbtn" onclick="cp(this)">Copy</button>DEAD BATTERY ANXIETY. ELIMINATED.
+
+Cables exist for one reason: we haven't solved charging friction yet. Until today.
+
+The TheCaseCraft MagSafe Power Bank snaps magnetically to the back of your iPhone — no cables, no plugging, no fiddling while walking. It charges at 20W wirelessly. It's 6mm slim when attached. It fits in your pocket with your phone.
+
+5000mAh = 1.5 full charges for iPhone 16 Pro Max. That's a full day of heavy use, a transatlantic flight, or a music festival without hunting for a power outlet.
+
+LED indicator shows remaining capacity in 4 clear levels. USB-C pass-through means you can charge the power bank and your phone simultaneously using a single cable.
+
+FEATURES:
+• 5000mAh capacity — 1.5 full iPhone 16 Pro Max charges
+• 20W MagSafe wireless charging while attached
+• 6mm slim profile — barely noticeable on phone back
+• 4-LED battery indicator — always know remaining capacity
+• USB-C input + USB-A output for wired charging
+• Pass-through charging — charge bank and phone simultaneously
+• Works with MagSafe car mount while attached to phone
+• Overheat, overcharge, and short-circuit protection (CE certified)
+• Compatible with all MagSafe iPhone cases and Samsung MagSafe cases
+
+IN THE BOX:
+1× MagSafe Power Bank · 1× USB-C cable (60cm) · 1× Instruction card
+
+META TITLE: Best MagSafe Power Bank 2026 — 5000mAh 20W Slim | TheCaseCraft
+META DESCRIPTION: Ultra-slim 5000mAh MagSafe wireless power bank. 20W charging, 6mm thin, snaps magnetically to iPhone. $60.79. Free USA shipping $35+. 30-day returns.</div>
+
+<h3>Power Bank FAQs</h3>
+<div class="tw"><table><thead><tr><th>Question</th><th>Answer</th></tr></thead><tbody>
+<tr><td>Will this stay attached while I'm walking?</td><td>Yes. The magnetic hold is rated at the same specification as MagSafe accessories. It stays attached during walking, light exercise, and travel. Not recommended for running or high-impact activity.</td></tr>
+<tr><td>How long does the power bank itself take to charge?</td><td>Using USB-C at 20W input, the power bank charges from 0% to 100% in approximately 1.5 hours.</td></tr>
+<tr><td>Can I use my car mount while the power bank is attached?</td><td>Yes. The power bank sits on the phone back, and the car mount attaches to the front MagSafe ring. They work simultaneously — your car mount holds the phone while the bank charges it.</td></tr>
+<tr><td>Does it work with Samsung?</td><td>Yes, if your Samsung phone is in a MagSafe-compatible case (like our Samsung Slim case). The magnetic attachment works with any phone that has a MagSafe ring — built-in or via case.</td></tr>
+</tbody></table></div>
+</div>
+
+</div><!-- /content -->
+</main>
+</div>
+
+<script>
+function sw(id){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('on'));
+  document.getElementById('p-'+id).classList.add('on');
+  event.currentTarget.classList.add('on');
+  document.querySelector('.main').scrollTop=0;
+}
+function cp(btn){
+  const bx=btn.closest('.bx');
+  const txt=bx.innerText.replace('Copy','').trim();
+  navigator.clipboard.writeText(txt).then(()=>{
+    const o=btn.textContent;btn.textContent='Copied!';
+    setTimeout(()=>btn.textContent=o,2000);
+  });
+}
+function switchTab(group,id){
+  document.querySelectorAll('.sub-panel.'+group).forEach(p=>p.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  event.currentTarget.closest('.sec').querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('on'));
+  event.currentTarget.classList.add('on');
+}
+</script>
+</body>
+</html>

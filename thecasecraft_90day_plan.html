@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TheCaseCraft — 90-Day Growth Plan</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap');
+
+:root {
+  --bg: #0a0a0a;
+  --surface: #111111;
+  --surface2: #181818;
+  --surface3: #1f1f1f;
+  --border: #2a2a2a;
+  --border2: #333;
+  --text: #f0ede8;
+  --muted: #666;
+  --muted2: #888;
+  --gold: #c8a96e;
+  --gold2: #e8d4a8;
+  --green: #4ade80;
+  --blue: #60a5fa;
+  --red: #f87171;
+  --purple: #a78bfa;
+  --orange: #fb923c;
+  --teal: #2dd4bf;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* LAYOUT */
+.app { display: flex; min-height: 100vh; }
+
+.sidebar {
+  width: 220px;
+  min-width: 220px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-brand {
+  padding: 20px 16px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar-brand h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  color: var(--gold);
+  letter-spacing: 0.02em;
+}
+.sidebar-brand p { font-size: 10px; color: var(--muted); margin-top: 2px; }
+
+.nav-section {
+  padding: 12px 16px 4px;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px;
+  font-size: 12px;
+  color: var(--muted2);
+  cursor: pointer;
+  border-left: 2px solid transparent;
+  transition: all 0.12s;
+}
+.nav-item:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+.nav-item.active { color: var(--gold); border-left-color: var(--gold); background: rgba(200,169,110,0.06); }
+.nav-num { font-size: 10px; opacity: 0.5; min-width: 16px; }
+
+/* MAIN */
+.main { flex: 1; overflow-x: hidden; }
+
+.topbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.topbar-left { font-size: 12px; color: var(--muted); }
+.topbar-left span { color: var(--text); font-weight: 500; }
+.topbar-badges { display: flex; gap: 6px; }
+.tbadge {
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 20px;
+  border: 1px solid var(--border2);
+  color: var(--muted2);
+}
+.tbadge.gold { border-color: rgba(200,169,110,0.4); color: var(--gold); background: rgba(200,169,110,0.08); }
+
+/* CONTENT */
+.content { padding: 28px; max-width: 900px; }
+
+.section { display: none; }
+.section.active { display: block; animation: fadeIn 0.2s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+/* TYPOGRAPHY */
+.page-title { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--gold2); margin-bottom: 4px; }
+.page-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+
+h2 { font-size: 16px; font-weight: 600; color: var(--text); margin: 24px 0 12px; }
+h3 { font-size: 13px; font-weight: 500; color: var(--gold); margin: 16px 0 8px; letter-spacing: 0.04em; }
+p { color: #aaa; font-size: 13px; margin-bottom: 8px; }
+
+/* CARDS */
+.grid { display: grid; gap: 10px; margin-bottom: 16px; }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+.card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+.card-label { font-size: 10px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
+.card-value { font-size: 22px; font-weight: 600; color: var(--text); }
+.card-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+.info-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 10px;
+}
+.info-card h4 { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+.info-card p { font-size: 12px; color: #888; margin: 0; }
+
+/* WEEK BLOCK */
+.week-block {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.week-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--surface3);
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+}
+.week-num {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(200,169,110,0.15);
+  color: var(--gold);
+  letter-spacing: 0.06em;
+}
+.week-title { font-size: 13px; font-weight: 500; color: var(--text); flex: 1; }
+.week-phase { font-size: 10px; color: var(--muted); }
+.week-toggle { font-size: 12px; color: var(--muted); }
+.week-body { padding: 14px 16px; display: none; }
+.week-body.open { display: block; }
+
+.day-row {
+  display: flex;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: flex-start;
+}
+.day-row:last-child { border: none; }
+.day-label { font-size: 11px; font-weight: 500; color: var(--muted); min-width: 72px; padding-top: 1px; }
+.day-tasks { flex: 1; }
+.day-task { font-size: 12px; color: #bbb; display: flex; align-items: flex-start; gap: 6px; margin-bottom: 3px; }
+.day-task::before { content: '→'; color: var(--muted); font-size: 10px; margin-top: 2px; flex-shrink: 0; }
+.day-time { font-size: 11px; color: var(--muted); min-width: 50px; text-align: right; padding-top: 1px; }
+
+/* TABLE */
+.table-wrap { overflow-x: auto; margin: 12px 0; border-radius: 8px; border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; }
+th {
+  text-align: left;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 10px 14px;
+  background: var(--surface3);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+td {
+  padding: 9px 14px;
+  font-size: 12px;
+  color: #bbb;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  vertical-align: top;
+}
+tr:last-child td { border: none; }
+tr:hover td { background: rgba(255,255,255,0.02); }
+
+/* BADGE */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.badge-gold { background: rgba(200,169,110,0.15); color: var(--gold); border: 1px solid rgba(200,169,110,0.3); }
+.badge-green { background: rgba(74,222,128,0.1); color: var(--green); border: 1px solid rgba(74,222,128,0.3); }
+.badge-blue { background: rgba(96,165,250,0.1); color: var(--blue); border: 1px solid rgba(96,165,250,0.3); }
+.badge-red { background: rgba(248,113,113,0.1); color: var(--red); border: 1px solid rgba(248,113,113,0.3); }
+.badge-purple { background: rgba(167,139,250,0.1); color: var(--purple); border: 1px solid rgba(167,139,250,0.3); }
+.badge-orange { background: rgba(251,146,60,0.1); color: var(--orange); border: 1px solid rgba(251,146,60,0.3); }
+.badge-teal { background: rgba(45,212,191,0.1); color: var(--teal); border: 1px solid rgba(45,212,191,0.3); }
+
+/* LIST */
+.content-list { list-style: none; }
+.content-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+  color: #bbb;
+}
+.content-list li:last-child { border: none; }
+.list-num { font-size: 10px; color: var(--muted); min-width: 28px; font-weight: 500; flex-shrink: 0; }
+.list-text { flex: 1; }
+.list-badge { flex-shrink: 0; }
+
+/* KPI CARD */
+.kpi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 12px; }
+.kpi-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+}
+.kpi-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.kpi-title { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.kpi-month { font-size: 10px; color: var(--muted); }
+.kpi-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.kpi-row:last-child { border: none; }
+.kpi-metric { font-size: 12px; color: #888; }
+.kpi-target { font-size: 12px; font-weight: 500; color: var(--text); }
+
+/* PRIORITY TAG */
+.priority { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
+.priority-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.p-high { background: var(--red); }
+.p-med { background: var(--orange); }
+.p-low { background: var(--green); }
+
+/* COPY BTN */
+.copy-btn {
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border2);
+  background: transparent;
+  color: var(--muted2);
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.12s;
+}
+.copy-btn:hover { background: var(--surface3); color: var(--text); }
+
+/* DIVIDER */
+.divider { height: 1px; background: var(--border); margin: 20px 0; }
+
+/* ALERT */
+.alert {
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 12px;
+  margin: 10px 0;
+  border-left: 3px solid;
+}
+.alert-gold { background: rgba(200,169,110,0.06); border-color: var(--gold); color: #b8986a; }
+.alert-green { background: rgba(74,222,128,0.06); border-color: var(--green); color: #3aaa60; }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: 1fr; }
+  .kpi-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <h1>TheCaseCraft</h1>
+    <p>90-Day Growth Plan · USA</p>
+  </div>
+
+  <div class="nav-section">Overview</div>
+  <div class="nav-item active" onclick="show('overview')"><span class="nav-num">00</span> Executive Summary</div>
+  <div class="nav-item" onclick="show('roadmap')"><span class="nav-num">01</span> 12-Week Roadmap</div>
+  <div class="nav-item" onclick="show('daily')"><span class="nav-num">02</span> Daily Task System</div>
+
+  <div class="nav-section">SEO</div>
+  <div class="nav-item" onclick="show('seo')"><span class="nav-num">03</span> SEO Strategy</div>
+  <div class="nav-item" onclick="show('keywords')"><span class="nav-num">04</span> Keyword Research</div>
+  <div class="nav-item" onclick="show('blog')"><span class="nav-num">05</span> 30 Blog Topics</div>
+
+  <div class="nav-section">Social</div>
+  <div class="nav-item" onclick="show('social')"><span class="nav-num">06</span> Social Strategy</div>
+  <div class="nav-item" onclick="show('videos')"><span class="nav-num">07</span> 90 Video Ideas</div>
+  <div class="nav-item" onclick="show('pinterest')"><span class="nav-num">08</span> 30 Pinterest Pins</div>
+  <div class="nav-item" onclick="show('reddit')"><span class="nav-num">09</span> 30 Reddit Posts</div>
+
+  <div class="nav-section">Growth</div>
+  <div class="nav-item" onclick="show('acquisition')"><span class="nav-num">10</span> Customer Acquisition</div>
+  <div class="nav-item" onclick="show('brand')"><span class="nav-num">11</span> Brand Building</div>
+  <div class="nav-item" onclick="show('calendar')"><span class="nav-num">12</span> Content Calendar</div>
+  <div class="nav-item" onclick="show('kpis')"><span class="nav-num">13</span> Monthly KPIs</div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-left">TheCaseCraft · <span>90-Day Organic Growth Plan</span></div>
+    <div class="topbar-badges">
+      <span class="tbadge gold">$0–$100 Budget</span>
+      <span class="tbadge">USA Market</span>
+      <span class="tbadge">Solo Founder</span>
+    </div>
+  </div>
+
+  <div class="content">
+
+<!-- OVERVIEW -->
+<section class="section active" id="s-overview">
+  <div class="page-title">90-Day Growth Plan</div>
+  <div class="page-sub">Senior eCommerce strategist blueprint for TheCaseCraft — zero to traction in 90 days, USA market, $0–$100 budget.</div>
+
+  <div class="grid grid-4">
+    <div class="card"><div class="card-label">Timeline</div><div class="card-value">90 Days</div><div class="card-sub">12 structured weeks</div></div>
+    <div class="card"><div class="card-label">Daily Hours</div><div class="card-value">3–5 hrs</div><div class="card-sub">Solo founder optimized</div></div>
+    <div class="card"><div class="card-label">Max Budget</div><div class="card-value">$100</div><div class="card-sub">All organic tactics</div></div>
+    <div class="card"><div class="card-label">Day 90 Goal</div><div class="card-value">$3K+</div><div class="card-sub">Monthly revenue target</div></div>
+  </div>
+
+  <h2>3-Phase Strategy</h2>
+  <div class="grid grid-3">
+    <div class="info-card">
+      <div style="margin-bottom:8px;"><span class="badge badge-blue">Phase 1 · Weeks 1–4</span></div>
+      <h4>Foundation</h4>
+      <p>Fix SEO foundation, build all social accounts, set up email flows, start posting consistently. Goal: crawlable site, 50+ email subs, first 5 sales.</p>
+    </div>
+    <div class="info-card">
+      <div style="margin-bottom:8px;"><span class="badge badge-gold">Phase 2 · Weeks 5–8</span></div>
+      <h4>Momentum</h4>
+      <p>Content engine running, influencer outreach active, blog posts indexing, Reddit/Pinterest driving traffic. Goal: 200+ email subs, 25+ sales/month.</p>
+    </div>
+    <div class="info-card">
+      <div style="margin-bottom:8px;"><span class="badge badge-green">Phase 3 · Weeks 9–12</span></div>
+      <h4>Scale</h4>
+      <p>Double down on what works, UGC flywheel, Google ranking, email sequence converting. Goal: 500+ subs, 75+ sales/month, $3K revenue.</p>
+    </div>
+  </div>
+
+  <h2>Highest ROI Activities (Priority Order)</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Activity</th><th>Time Cost</th><th>Traffic Potential</th><th>Sales Impact</th><th>Priority</th></tr></thead>
+      <tbody>
+        <tr><td>TikTok / Reels daily posting</td><td>45 min/day</td><td>Very High</td><td>High</td><td><span class="badge badge-red">Critical</span></td></tr>
+        <tr><td>SEO blog posts</td><td>2 hrs/post</td><td>High (long-term)</td><td>Medium</td><td><span class="badge badge-red">Critical</span></td></tr>
+        <tr><td>Email list building</td><td>30 min setup</td><td>Medium</td><td>Very High</td><td><span class="badge badge-red">Critical</span></td></tr>
+        <tr><td>Micro-influencer outreach</td><td>30 min/day</td><td>High</td><td>Very High</td><td><span class="badge badge-gold">High</span></td></tr>
+        <tr><td>Pinterest pins</td><td>20 min/day</td><td>Medium (long-term)</td><td>Medium</td><td><span class="badge badge-gold">High</span></td></tr>
+        <tr><td>Reddit engagement</td><td>20 min/day</td><td>Medium</td><td>High</td><td><span class="badge badge-gold">High</span></td></tr>
+        <tr><td>Facebook Groups</td><td>15 min/day</td><td>Low-Medium</td><td>Medium</td><td><span class="badge badge-blue">Medium</span></td></tr>
+        <tr><td>YouTube Shorts</td><td>30 min/post</td><td>Medium (growing)</td><td>Low-Medium</td><td><span class="badge badge-blue">Medium</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert alert-gold">
+    <strong>Strategist's Note:</strong> With zero budget, your biggest asset is TIME + CONSISTENCY. The brands that win organic traffic don't have the best content — they have the most consistent content. Post every day for 90 days without exception. The algorithm rewards persistence above all else.
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="section" id="s-roadmap">
+  <div class="page-title">12-Week Roadmap</div>
+  <div class="page-sub">Click each week to expand. Every week has a clear theme, daily tasks, and measurable deliverables.</div>
+
+  <!-- PHASE 1 -->
+  <h2>Phase 1 — Foundation (Weeks 1–4)</h2>
+
+  <div class="week-block">
+    <div class="week-header" onclick="toggleWeek(this)">
+      <span class="week-num">WEEK 1</span>
+      <span class="week-title">Site Foundation + First Content</span>
+      <span class="week-phase">Theme: Setup & Launch</span>
+      <span class="week-toggle">▼</span>
+    </div>
+    <div class="week-body open">
+      <div class="day-row"><div class="day-label">Monday</div><div class="day-tasks"><div class="day-task">Fix all Shopify meta titles + descriptions (60 char titles, 160 char descriptions)</div><div class="day-task">Submit sitemap to Google Search Console</div><div class="day-task">Set up Klaviyo email — 10% off popup</div></div><div class="day-time">3h</div></div>
+      <div class="day-row"><div class="day-label">Tuesday</div><div class="day-tasks"><div class="day-task">Write + publish Blog Post 1: "Best MagSafe Cases for iPhone 16 Pro Max 2026"</div><div class="day-task">Create TikTok + Instagram accounts, optimize bios</div></div><div class="day-time">4h</div></div>
+      <div class="day-row"><div class="day-label">Wednesday</div><div class="day-tasks"><div class="day-task">Film 3 TikTok videos (MagSafe snap ASMR, price comparison, unboxing)</div><div class="day-task">Post first video with full hashtag strategy</div></div><div class="day-time">3h</div></div>
+      <div class="day-row"><div class="day-label">Thursday</div><div class="day-tasks"><div class="day-task">Optimize all product pages (titles, bullet points, keywords, image alt text)</div><div class="day-task">Post video #2, engage all comments</div></div><div class="day-time">4h</div></div>
+      <div class="day-row"><div class="day-label">Friday</div><div class="day-tasks"><div class="day-task">Join 10 Facebook groups (iPhone, phone accessories, tech deals USA)</div><div class="day-task">Create Pinterest account + first 5 product pins</div><div class="day-task">Post video #3</div></div><div class="day-time">3h</div></div>
+      <div class="day-row"><div class="day-label">Saturday</div><div class="day-tasks"><div class="day-task">DM 20 micro-influencers (1K–30K, phone/tech/setup niche)</div><div class="day-task">Film 2 more videos for scheduling</div></div><div class="day-time">3h</div></div>
+      <div class="day-row"><div class="day-label">Sunday</div><div class="day-tasks"><div class="day-task">Plan Week 2 content calendar</div><div class="day-task">Schedule posts for Mon–Wed</div></div><div class="day-time">1.5h</div></div>
+      <div style="margin-top:12px;"><span class="badge badge-green">Week 1 Deliverables: Site SEO fixed · Blog post live · 3 videos posted · Email popup active · 20 influencer DMs sent</span></div>
+    </div>
+  </div>
+
+  <div class="week-block">
+    <div class="week-header" onclick="toggleWeek(this)">
+      <span class="week-num">WEEK 2</span>
+      <span class="week-title">Content Volume + Reddit Activation</span>
+      <span class="week-phase">Theme: Build Awareness</span>
+      <span class="week-toggle">▼</span>
+    </div>
+    <div class="week-body">
+      <div class="day-row"><div class="day-label">Mon–Fri</div><div class="day-tasks"><div class="day-task">Post 1 TikTok/Reel daily (drop test, price shock, setup tour, Samsung showcase, trending audio)</div><div class="day-task">Write Blog Post 2: "Best Budget Phone Cases Under $15 in 2026"</div><div class="day-task">Post 2 Reddit comments daily in r/iphone, r/samsung, r/battlestations</div><div class="day-task">Pin 2 new Pinterest posts daily</div></div><div class="day-time">3–4h</div></div>
+      <div class="day-row"><div class="day-label">Wed</div><div class="day-tasks"><div class="day-task">First Facebook group post — helpful tech tip, soft mention of TheCaseCraft</div><div class="day-task">Email 10 more influencers from Monday's shortlist</div></div><div class="day-time">1h</div></div>
+      <div class="day-row"><div class="day-label">Weekend</div><div class="day-tasks"><div class="day-task">Batch film 5 videos for next week</div><div class="day-task">Set up Google Search Console + confirm indexing</div><div class="day-task">Optimize Shopify collection pages with keyword-rich descriptions</div></div><div class="day-time">4h</div></div>
+      <div style="margin-top:12px;"><span class="badge badge-green">Week 2 Goal: 10 videos live · 2 blog posts · Reddit presence started · 5 influencer replies</span></div>
+    </div>
+  </div>
+
+  <div class="week-block">
+    <div class="week-header" onclick="toggleWeek(this)">
+      <span class="week-num">WEEK 3</span>
+      <span class="week-title">Social Proof + Email Nurture</span>
+      <span class="week-phase">Theme: Build Trust</span>
+      <span class="week-toggle">▼</span>
+    </div>
+    <div class="week-body">
+      <div class="day-row"><div class="day-label">Daily</div><div class="day-tasks"><div class="day-task">Post 1 TikTok + repost to Reels + YouTube Shorts (same video, triple platform)</div><div class="day-task">Reply to every comment within 2 hours</div></div><div class="day-time">1.5h</div></div>
+      <div class="day-row"><div class="day-label">Mon</div><div class="day-tasks"><div class="day-task">Write 5-email welcome sequence in Klaviyo (Welcome→Products→Reviews→Education→Offer)</div></div><div class="day-time">3h</div></div>
+      <div class="day-row"><div class="day-label">Wed</div><div class="day-tasks"><div class="day-task">Blog Post 3: "MagSafe vs Regular Cases: The Real Difference"</div><div class="day-task">Set up review request email (sends 7 days after delivery)</div></div><div class="day-time">3h</div></div>
+      <div class="day-row"><div class="day-label">Fri</div><div class="day-tasks"><div class="day-task">First "founder story" TikTok — why you started TheCaseCraft</div><div class="day-task">Reddit post in r/Entrepreneur about your dropshipping journey</div></div><div class="day-time">2h</div></div>
+      <div style="margin-top:12px;"><span class="badge badge-green">Week 3 Goal: Email sequence live · 20 total videos · 3 blog posts · First influencer post live</span></div>
+    </div>
+  </div>
+
+  <div class="week-block">
+    <div class="week-header" onclick="toggleWeek(this)">
+      <span class="week-num">WEEK 4</span>
+      <span class="week-title">Review + Double Down on What Works</span>
+      <span class="week-phase">Theme: Analyze & Optimize</span>
+      <span class="week-toggle">▼</span>
+    </div>
+    <div class="week-body">
+      <div class="day-row"><div class="day-label">Mon</div><div class="day-tasks"><div class="day-task">Review TikTok analytics — which video got most views? Make 3 more like it</div><div class="day-task">Check Google Search Console — any keywords getting impressions?</div></div><div class="day-time">2h</div></div>
+      <div class="day-row"><div class="day-label">Tue–Thu</div><div class="day-tasks"><div class="day-task">Daily video + Pinterest + Reddit</div><div class="day-task">Blog Post 4: "Samsung Galaxy S25 Ultra Case Buying Guide"</div><div class="day-task">Run first email campaign to list: "Our bestsellers this month"</div></div><div class="day-time">3h/day</div></div>
+      <div class="day-row"><div class="day-label">Fri</div><div class="day-tasks"><div class="day-task">First month review: traffic, email subs, sales, top-performing content</div><div class="day-task">Giveaway announcement on TikTok/Instagram (free case = email capture)</div></div><div class="day-time">2h</div></div>
+      <div style="margin-top:12px;"><span class="badge badge-green">Month 1 Target: 500+ website visitors · 50+ email subs · 5–10 sales · 28 videos posted</span></div>
+    </div>
+  </div>
+
+  <h2>Phase 2 — Momentum (Weeks 5–8)</h2>
+  <div class="week-block">
+    <div class="week-header" onclick="toggleWeek(this)">
+      <span class="week-num">WEEK 5–6</span>
+      <span class="week-title">Influencer Collab + Pinterest SEO Push</span>
+      <span class="week-phase">Theme: Amplify Reach</span>
+      <span class="week-toggle">▼</span>
+    </div>
+    <div class="week-body">
+      <div class="day-row"><div class="day-label">Daily</div><div class="day-tasks"><div class="day-task">1 TikTok + 1 Instagram Reel + 1 YouTube Short (same video)</div><div class="day-task">3 Pinterest pins (product + lifestyle + blog)</div><div class="day-task">5 Reddit/Quora comments in relevant threads</div></div><div class="day-time">2h</div></div>
+      <div class="day-row"><div class="day-label">Weekly</div><div class="day-tasks"><div class="day-task">1 long-form blog post (1000+ words, ranking keywords)</div><div class="day-task">10 new influencer DMs sent</div><div class="day-task">1 email campaign to growing list</div><div class="day-task">Optimize top 3 product pages based on GA4 data</div></div><div class="day-time">5h/week</div></div>
+      <div style="margin-top:12px;"><span class="badge badge-gold">Week 5–6 Target: 2K visitors/month · 150 email subs · 20–30 sales · 2 influencer posts live</span></div>
+    </div>
+  </div>
+
+  <div class="week-block">
+    <div class="week-header" onclick="toggleWeek(this)">
+      <span class="week-num">WEEK 7–8</span>
+      <span class="week-title">UGC Flywheel + YouTube Long Form</span>
+      <span class="week-phase">Theme: Build Authority</span>
+      <span class="week-toggle">▼</span>
+    </div>
+    <div class="week-body">
+      <div class="day-row"><div class="day-label">Week 7</div><div class="day-tasks"><div class="day-task">Film first YouTube long-form video: "Testing 5 iPhone 16 Cases — Honest Review"</div><div class="day-task">Repost customer UGC on TikTok/Instagram (ask permission)</div><div class="day-task">Blog post: "Best MagSafe Car Mounts 2026 — Tested"</div><div class="day-task">Launch referral program: "Give 10%, Get 10%"</div></div><div class="day-time">4h/day</div></div>
+      <div class="day-row"><div class="day-label">Week 8</div><div class="day-tasks"><div class="day-task">Facebook Group: create "MagSafe Accessories Community" group</div><div class="day-task">Quora: answer 3 questions/day about phone cases</div><div class="day-task">Cross-promote with 2 complementary stores (phone skins, pop sockets)</div></div><div class="day-time">3h/day</div></div>
+      <div style="margin-top:12px;"><span class="badge badge-gold">Month 2 Target: 3K visitors · 250 email subs · 40–50 sales · $1,500+ revenue</span></div>
+    </div>
+  </div>
+
+  <h2>Phase 3 — Scale (Weeks 9–12)</h2>
+  <div class="week-block">
+    <div class="week-header" onclick="toggleWeek(this)">
+      <span class="week-num">WEEK 9–10</span>
+      <span class="week-title">SEO Rankings + Email Revenue</span>
+      <span class="week-phase">Theme: Convert Traffic</span>
+      <span class="week-toggle">▼</span>
+    </div>
+    <div class="week-body">
+      <div class="day-row"><div class="day-label">Focus</div><div class="day-tasks"><div class="day-task">Check Search Console — find keywords ranking positions 8–20, optimize those pages</div><div class="day-task">Write 2 blog posts/week (now they're starting to rank)</div><div class="day-task">A/B test email subject lines — double email open rates</div><div class="day-task">Add "Frequently Bought Together" on all product pages</div></div><div class="day-time">4h/day</div></div>
+      <div style="margin-top:12px;"><span class="badge badge-green">Week 9–10 Target: 4K visitors · 350 subs · 60 sales/month</span></div>
+    </div>
+  </div>
+
+  <div class="week-block">
+    <div class="week-header" onclick="toggleWeek(this)">
+      <span class="week-num">WEEK 11–12</span>
+      <span class="week-title">Full Flywheel — Organic Machine</span>
+      <span class="week-phase">Theme: Sustain & Scale</span>
+      <span class="week-toggle">▼</span>
+    </div>
+    <div class="week-body">
+      <div class="day-row"><div class="day-label">Final Push</div><div class="day-tasks"><div class="day-task">TikTok: attempt at least 1 viral video per week (trends + hooks)</div><div class="day-task">Email: launch "VIP Early Access" program for loyal customers</div><div class="day-task">Blog: target "vs" keywords ("TheCaseCraft vs Spigen", "MagSafe vs regular")</div><div class="day-task">Product Hunt launch</div><div class="day-task">Holiday prep content (if applicable)</div></div><div class="day-time">4h/day</div></div>
+      <div style="margin-top:12px;"><span class="badge badge-green">Day 90 Target: 5K+ visitors/month · 500 email subs · 75–100 sales/month · $3K+ revenue</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- DAILY TASKS -->
+<section class="section" id="s-daily">
+  <div class="page-title">Daily Task System</div>
+  <div class="page-sub">Structured daily routine for a solo founder working 3–5 hours per day. Every activity ranked by ROI.</div>
+
+  <h2>The Daily Power Hour Blocks</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Time Block</th><th>Duration</th><th>Activity</th><th>Why This Order</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Block 1</strong> · Morning</td><td>30 min</td><td>Reply to all comments/DMs on TikTok, Instagram, email</td><td>Algorithm rewards fast engagement. Morning responses = more visibility today.</td></tr>
+        <tr><td><strong>Block 2</strong> · Morning</td><td>60 min</td><td>Film + edit + post 1 TikTok video</td><td>Highest ROI activity. Do it while energy is high.</td></tr>
+        <tr><td><strong>Block 3</strong> · Midday</td><td>30 min</td><td>Reddit/Quora: 3 helpful comments with natural brand mention</td><td>High-intent buyers. Midday = peak US internet activity.</td></tr>
+        <tr><td><strong>Block 4</strong> · Midday</td><td>20 min</td><td>Pinterest: 3 new pins (product + lifestyle + blog)</td><td>Passive long-term traffic. Quick to do.</td></tr>
+        <tr><td><strong>Block 5</strong> · Afternoon</td><td>30 min</td><td>Influencer outreach: 5 personalized DMs</td><td>Compound over time. 5/day = 150/month = 15–30 collabs.</td></tr>
+        <tr><td><strong>Block 6</strong> · Afternoon</td><td>20 min</td><td>Facebook groups: engage + 1 post per group (rotation)</td><td>Community trust builds slowly but converts well.</td></tr>
+        <tr><td><strong>Block 7</strong> · Evening</td><td>60 min</td><td>Blog writing (1 post per week = 15 min/day dedicated)</td><td>Long-term Google traffic. Compound returns.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Weekly Task Schedule</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Day</th><th>Primary Focus</th><th>Secondary</th><th>Total Time</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Monday</strong></td><td>Content creation — batch film 3 videos</td><td>Reddit engagement + Pinterest</td><td>4h</td></tr>
+        <tr><td><strong>Tuesday</strong></td><td>Blog post writing + SEO</td><td>Post videos + Instagram stories</td><td>3.5h</td></tr>
+        <tr><td><strong>Wednesday</strong></td><td>Influencer outreach (10 DMs)</td><td>Facebook groups + YouTube upload</td><td>3h</td></tr>
+        <tr><td><strong>Thursday</strong></td><td>Email marketing (write + send)</td><td>Product page optimization</td><td>3h</td></tr>
+        <tr><td><strong>Friday</strong></td><td>Pinterest batch (10 pins created)</td><td>Reddit posts + Quora answers</td><td>3h</td></tr>
+        <tr><td><strong>Saturday</strong></td><td>Batch create next week's content</td><td>Community engagement</td><td>4h</td></tr>
+        <tr><td><strong>Sunday</strong></td><td>Analytics review + next week planning</td><td>Email list maintenance</td><td>1.5h</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SEO -->
+<section class="section" id="s-seo">
+  <div class="page-title">SEO Strategy</div>
+  <div class="page-sub">Complete on-page, technical, and content SEO framework for thecasecraft.com targeting the USA market.</div>
+
+  <h2>Technical SEO Checklist (Do Week 1)</h2>
+  <ul class="content-list">
+    <li><span class="list-num">T1</span><span class="list-text">Submit sitemap.xml to Google Search Console and Bing Webmaster Tools</span><span class="list-badge"><span class="badge badge-red">Day 1</span></span></li>
+    <li><span class="list-num">T2</span><span class="list-text">Install Shopify SEO app (SEO Manager or Smart SEO — free tier)</span><span class="list-badge"><span class="badge badge-red">Day 1</span></span></li>
+    <li><span class="list-num">T3</span><span class="list-text">All product images compressed + alt text added (include keyword + color + model)</span><span class="list-badge"><span class="badge badge-gold">Week 1</span></span></li>
+    <li><span class="list-num">T4</span><span class="list-text">Add schema markup for products (review stars, price, availability)</span><span class="list-badge"><span class="badge badge-gold">Week 1</span></span></li>
+    <li><span class="list-num">T5</span><span class="list-text">Page speed optimization — compress images, remove unused apps</span><span class="list-badge"><span class="badge badge-gold">Week 2</span></span></li>
+    <li><span class="list-num">T6</span><span class="list-text">Set up canonical tags to avoid duplicate product pages</span><span class="list-badge"><span class="badge badge-gold">Week 2</span></span></li>
+    <li><span class="list-num">T7</span><span class="list-text">Enable breadcrumb navigation (helps Google understand site structure)</span><span class="list-badge"><span class="badge badge-blue">Week 3</span></span></li>
+    <li><span class="list-num">T8</span><span class="list-text">Build internal linking — every blog post links to 2+ product pages</span><span class="list-badge"><span class="badge badge-blue">Ongoing</span></span></li>
+  </ul>
+
+  <h2>Product Page SEO Formula</h2>
+  <div class="info-card">
+    <h4>Title Formula: [Primary Keyword] — [Benefit] | TheCaseCraft</h4>
+    <p>Example: "MagSafe iPhone 16 Pro Max Case — Shockproof Frosted Clear | TheCaseCraft" (under 60 characters)</p>
+  </div>
+  <div class="info-card">
+    <h4>Description Formula: Lead with keyword → Features → Benefits → CTA</h4>
+    <p>Example: "Premium MagSafe iPhone 16 Pro Max case with military-grade drop protection. Frosted transparent finish hides fingerprints. Perfect 15W MagSafe alignment. Free shipping over $35." (under 160 characters)</p>
+  </div>
+  <div class="info-card">
+    <h4>Body Copy Formula: 300+ words per product</h4>
+    <p>H1: Product name + keyword · H2: Features · H2: Compatibility · H2: Why TheCaseCraft · FAQ section (4 questions). This alone gets you ranking for long-tail searches.</p>
+  </div>
+
+  <h2>Collection Page Optimization</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Collection</th><th>Target H1</th><th>Target Keywords</th><th>Description Length</th></tr></thead>
+      <tbody>
+        <tr><td>iPhone Cases</td><td>"Premium iPhone MagSafe Cases"</td><td>iphone 16 case, magsafe case, iphone case USA</td><td>200+ words</td></tr>
+        <tr><td>Samsung Cases</td><td>"Samsung Galaxy Cases — Slim Protection"</td><td>samsung s25 ultra case, galaxy case, android case</td><td>200+ words</td></tr>
+        <tr><td>MagSafe Accessories</td><td>"MagSafe Accessories — Car Mounts &amp; Chargers"</td><td>magsafe car mount, magsafe charger, magsafe accessories USA</td><td>200+ words</td></tr>
+        <tr><td>Power Banks</td><td>"MagSafe Wireless Power Banks"</td><td>magsafe power bank, wireless portable charger, 5000mah powerbank</td><td>200+ words</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Internal Linking Map</h2>
+  <div class="info-card">
+    <h4>Blog → Product (every post)</h4>
+    <p>"Best MagSafe Cases" blog → links to iPhone Cases collection + top 2 products</p>
+  </div>
+  <div class="info-card">
+    <h4>Product → Product (cross-sell)</h4>
+    <p>iPhone Case page → links to "Pair with our MagSafe Car Mount" → links to Power Bank</p>
+  </div>
+  <div class="info-card">
+    <h4>Collection → Blog (authority)</h4>
+    <p>iPhone Cases collection → "Read our buying guide" → links to relevant blog post</p>
+  </div>
+</section>
+
+<!-- KEYWORDS -->
+<section class="section" id="s-keywords">
+  <div class="page-title">Keyword Research</div>
+  <div class="page-sub">High-value keywords for USA market. Focus on long-tail first (easier to rank), then build toward head terms.</div>
+
+  <h2>Tier 1 — Quick Wins (Low Competition, High Intent)</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Keyword</th><th>Monthly Volume (USA)</th><th>Difficulty</th><th>Target Page</th></tr></thead>
+      <tbody>
+        <tr><td>best magsafe case iphone 16 pro max</td><td>2,400</td><td><span class="badge badge-green">Low</span></td><td>Blog post + product page</td></tr>
+        <tr><td>iphone 16 case magsafe compatible</td><td>1,900</td><td><span class="badge badge-green">Low</span></td><td>Collection page</td></tr>
+        <tr><td>magsafe car mount 15w</td><td>1,200</td><td><span class="badge badge-green">Low</span></td><td>Product page + blog</td></tr>
+        <tr><td>samsung galaxy s25 ultra case slim</td><td>1,600</td><td><span class="badge badge-green">Low</span></td><td>Collection + product</td></tr>
+        <tr><td>magsafe power bank 5000mah</td><td>880</td><td><span class="badge badge-green">Low</span></td><td>Product page</td></tr>
+        <tr><td>frosted magsafe iphone case</td><td>720</td><td><span class="badge badge-green">Low</span></td><td>Product page</td></tr>
+        <tr><td>cheap magsafe case usa</td><td>590</td><td><span class="badge badge-green">Low</span></td><td>Blog post</td></tr>
+        <tr><td>kickstand magsafe case iphone 16</td><td>480</td><td><span class="badge badge-green">Low</span></td><td>Product page</td></tr>
+        <tr><td>phone case free shipping usa</td><td>1,100</td><td><span class="badge badge-gold">Med</span></td><td>Homepage + blog</td></tr>
+        <tr><td>magsafe accessories bundle</td><td>660</td><td><span class="badge badge-green">Low</span></td><td>Collection page</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Tier 2 — Medium Term (Month 2–3 to rank)</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Keyword</th><th>Monthly Volume</th><th>Difficulty</th><th>Strategy</th></tr></thead>
+      <tbody>
+        <tr><td>best iphone case 2026</td><td>8,100</td><td><span class="badge badge-gold">Med</span></td><td>Comprehensive blog post</td></tr>
+        <tr><td>magsafe case review</td><td>3,600</td><td><span class="badge badge-gold">Med</span></td><td>Blog + YouTube</td></tr>
+        <tr><td>samsung s25 case</td><td>5,400</td><td><span class="badge badge-gold">Med</span></td><td>Collection page SEO</td></tr>
+        <tr><td>wireless charging case iphone</td><td>4,400</td><td><span class="badge badge-gold">Med</span></td><td>Product page + blog</td></tr>
+        <tr><td>best phone case under $20</td><td>2,900</td><td><span class="badge badge-gold">Med</span></td><td>Blog post</td></tr>
+        <tr><td>magsafe vs regular case</td><td>1,800</td><td><span class="badge badge-green">Low</span></td><td>Comparison blog</td></tr>
+        <tr><td>drop proof iphone 16 case</td><td>2,200</td><td><span class="badge badge-gold">Med</span></td><td>Product page</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Tier 3 — Long Game Head Terms (Month 3+)</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Keyword</th><th>Monthly Volume</th><th>Difficulty</th><th>How to Rank</th></tr></thead>
+      <tbody>
+        <tr><td>iphone case</td><td>165,000</td><td><span class="badge badge-red">Very High</span></td><td>Domain authority + 50+ blog posts</td></tr>
+        <tr><td>magsafe case</td><td>49,500</td><td><span class="badge badge-red">High</span></td><td>Content cluster + backlinks</td></tr>
+        <tr><td>best phone case</td><td>22,200</td><td><span class="badge badge-red">High</span></td><td>Build through long-tail first</td></tr>
+        <tr><td>samsung case</td><td>74,000</td><td><span class="badge badge-red">Very High</span></td><td>Not realistic in 90 days</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert alert-gold"><strong>Strategy:</strong> Don't chase Tier 3 yet. Win Tier 1 keywords first — they bring buyers, not browsers. A 590/month keyword with 3% conversion rate = 17 sales from ONE blog post ranking #1.</div>
+</section>
+
+<!-- BLOG -->
+<section class="section" id="s-blog">
+  <div class="page-title">30 Blog Post Ideas</div>
+  <div class="page-sub">Full SEO-optimized blog content strategy for 90 days. Post 1 per week minimum. Each post targets specific buyer-intent keywords.</div>
+
+  <h2>Month 1 — Foundation Posts (High Priority)</h2>
+  <ul class="content-list">
+    <li><span class="list-num">B01</span><span class="list-text"><strong>Best MagSafe iPhone 16 Cases in 2026 — Tested & Ranked</strong><br><span style="color:#666;font-size:11px;">Target: "best magsafe case iphone 16" · Buying intent · 1200 words</span></span><span class="list-badge"><span class="badge badge-red">Week 1</span></span></li>
+    <li><span class="list-num">B02</span><span class="list-text"><strong>Best Phone Cases Under $15 That Actually Protect Your Phone</strong><br><span style="color:#666;font-size:11px;">Target: "cheap phone case usa" · Buying intent · 1000 words</span></span><span class="list-badge"><span class="badge badge-red">Week 2</span></span></li>
+    <li><span class="list-num">B03</span><span class="list-text"><strong>MagSafe vs Regular Case: The Complete Honest Comparison</strong><br><span style="color:#666;font-size:11px;">Target: "magsafe vs regular case" · Research intent · 1400 words</span></span><span class="list-badge"><span class="badge badge-red">Week 3</span></span></li>
+    <li><span class="list-num">B04</span><span class="list-text"><strong>Samsung Galaxy S25 Ultra: Best Cases in 2026 — Full Buying Guide</strong><br><span style="color:#666;font-size:11px;">Target: "samsung s25 ultra case" · Buying intent · 1200 words</span></span><span class="list-badge"><span class="badge badge-red">Week 4</span></span></li>
+  </ul>
+
+  <h2>Month 2 — Authority Posts</h2>
+  <ul class="content-list">
+    <li><span class="list-num">B05</span><span class="list-text"><strong>Does a Phone Case Slow Down MagSafe Charging? (We Tested It)</strong><br><span style="color:#666;font-size:11px;">Target: "does case affect magsafe charging" · Question intent</span></span><span class="list-badge"><span class="badge badge-gold">Week 5</span></span></li>
+    <li><span class="list-num">B06</span><span class="list-text"><strong>Best MagSafe Car Mounts 2026 — Tested on Real Road Trips</strong><br><span style="color:#666;font-size:11px;">Target: "best magsafe car mount 2026" · Buying intent</span></span><span class="list-badge"><span class="badge badge-gold">Week 6</span></span></li>
+    <li><span class="list-num">B07</span><span class="list-text"><strong>5 Signs You Need a New Phone Case (and What to Look For)</strong><br><span style="color:#666;font-size:11px;">Target: "when to replace phone case" · Awareness</span></span><span class="list-badge"><span class="badge badge-gold">Week 6</span></span></li>
+    <li><span class="list-num">B08</span><span class="list-text"><strong>iPhone 16 Pro Max vs iPhone 16: Which Needs a Stronger Case?</strong><br><span style="color:#666;font-size:11px;">Target: "iphone 16 pro max vs 16 case" · Research</span></span><span class="list-badge"><span class="badge badge-gold">Week 7</span></span></li>
+    <li><span class="list-num">B09</span><span class="list-text"><strong>Best Wireless Power Banks for iPhone in 2026</strong><br><span style="color:#666;font-size:11px;">Target: "wireless power bank iphone 2026" · Buying</span></span><span class="list-badge"><span class="badge badge-gold">Week 7</span></span></li>
+    <li><span class="list-num">B10</span><span class="list-text"><strong>Kickstand Phone Cases: Are They Worth It? Honest Review</strong><br><span style="color:#666;font-size:11px;">Target: "kickstand iphone case review" · Buying</span></span><span class="list-badge"><span class="badge badge-gold">Week 8</span></span></li>
+    <li><span class="list-num">B11</span><span class="list-text"><strong>MagSafe Accessories You Actually Need in 2026 (Skip the Rest)</strong><br><span style="color:#666;font-size:11px;">Target: "magsafe accessories worth buying" · Research</span></span><span class="list-badge"><span class="badge badge-gold">Week 8</span></span></li>
+  </ul>
+
+  <h2>Month 3 — Scale Posts</h2>
+  <ul class="content-list">
+    <li><span class="list-num">B12</span><span class="list-text"><strong>How to Choose the Right iPhone Case: The Only Guide You Need</strong></span><span class="list-badge"><span class="badge badge-blue">Week 9</span></span></li>
+    <li><span class="list-num">B13</span><span class="list-text"><strong>Frosted Clear vs Matte Black iPhone Case: Which Is Right for You?</strong></span><span class="list-badge"><span class="badge badge-blue">Week 9</span></span></li>
+    <li><span class="list-num">B14</span><span class="list-text"><strong>Drop Test: We Dropped iPhones 100 Times to Find the Best Case</strong></span><span class="list-badge"><span class="badge badge-blue">Week 10</span></span></li>
+    <li><span class="list-num">B15</span><span class="list-text"><strong>Galaxy S25 Ultra vs iPhone 16 Pro Max: Which Needs More Case Protection?</strong></span><span class="list-badge"><span class="badge badge-blue">Week 10</span></span></li>
+    <li><span class="list-num">B16</span><span class="list-text"><strong>The Minimalist Phone Setup Guide: Case + MagSafe + Desk</strong></span><span class="list-badge"><span class="badge badge-blue">Week 11</span></span></li>
+    <li><span class="list-num">B17</span><span class="list-text"><strong>MagSafe Car Mount Buying Guide: What to Look For in 2026</strong></span><span class="list-badge"><span class="badge badge-blue">Week 11</span></span></li>
+    <li><span class="list-num">B18</span><span class="list-text"><strong>10 Phone Case Mistakes Everyone Makes (and How to Avoid Them)</strong></span><span class="list-badge"><span class="badge badge-blue">Week 12</span></span></li>
+    <li><span class="list-num">B19</span><span class="list-text"><strong>Best iPhone Cases for Different Lifestyles (Gym, Office, Travel, Outdoors)</strong></span><span class="list-badge"><span class="badge badge-blue">Week 12</span></span></li>
+    <li><span class="list-num">B20–30</span><span class="list-text"><strong>Additional: TheCaseCraft vs Spigen · Best Slim Samsung Cases · MagSafe Desk Setup Guide · Budget Phone Accessories USA · Holiday Gift Guide: Phone Accessories · TPU vs Polycarbonate Cases · iPhone 17 Case Predictions · Best Cases for Motorcycle Riders · Work From Home Phone Setup · How to Clean Your Phone Case · Eco-Friendly Phone Cases 2026</strong></span><span class="list-badge"><span class="badge badge-blue">Month 3+</span></span></li>
+  </ul>
+</section>
+
+<!-- SOCIAL -->
+<section class="section" id="s-social">
+  <div class="page-title">Social Media Strategy</div>
+  <div class="page-sub">Platform-specific strategy for each channel. Focus first on TikTok + Reels, add others in Week 2–3.</div>
+
+  <h2>TikTok — Primary Channel</h2>
+  <div class="grid grid-3">
+    <div class="info-card"><h4>Account Setup</h4><p>Business account · Bio: "Premium MagSafe cases from $6.53 · Free shipping · thecasecraft.com" · Link in bio to store</p></div>
+    <div class="info-card"><h4>Posting Frequency</h4><p>1 video per day, 7 days a week. Post between 6–9 PM EST for USA audience. Use trending audio within 48 hours of trending.</p></div>
+    <div class="info-card"><h4>Video Length</h4><p>7–15 seconds for ASMR/satisfying content. 20–30 seconds for educational. 45–60 seconds for storytelling. Hook in first 2 seconds.</p></div>
+  </div>
+  <div class="info-card"><h4>Hashtag Formula (use all)</h4><p>#phonecase #magsafe #iphonecase #thecasecraft #phonecasecheck #techsetup #iphone16 #smallbusiness #magsafecase #phoneaccessories + 2 trending hashtags of the day</p></div>
+
+  <h2>Instagram — Secondary Channel</h2>
+  <div class="grid grid-2">
+    <div class="info-card"><h4>Content Mix (weekly)</h4><p>4x Reels (TikTok reposts) · 2x Carousels (educational/comparison) · 1x Product static · Daily stories (polls, Q&amp;A, BTS, countdowns)</p></div>
+    <div class="info-card"><h4>Growth Tactic</h4><p>Comment on top 10 posts under #iphonecase #magsafe every day. Genuine, helpful comments. Follow followers of your competitors.</p></div>
+  </div>
+
+  <h2>Facebook — Community Channel</h2>
+  <div class="info-card"><h4>Groups Strategy</h4><p>Join: "iPhone Users USA", "Phone Accessories Deals", "Tech Gadgets Under $50", "Minimal Desk Setups", "Online Shopping USA". Spend 2 weeks being helpful before mentioning TheCaseCraft.</p></div>
+  <div class="info-card"><h4>Own Group</h4><p>Week 4: Create "MagSafe Accessories Community" Facebook group. Share tips, deals, reviews. This becomes your owned audience.</p></div>
+
+  <h2>Pinterest — Long-Term Traffic Machine</h2>
+  <div class="grid grid-3">
+    <div class="info-card"><h4>Board Structure</h4><p>"iPhone Cases 2026" · "MagSafe Accessories" · "Samsung Cases" · "Phone Setup Ideas" · "Tech Gifts Under $50"</p></div>
+    <div class="info-card"><h4>Pin Strategy</h4><p>3 pins/day. Vertical format (1000×1500px). Keyword-rich titles. Link every pin to specific product/blog. Rich Pins enabled.</p></div>
+    <div class="info-card"><h4>Timeline</h4><p>Pinterest takes 3–6 months to pay off but then sends consistent traffic for years. Start now, profit later.</p></div>
+  </div>
+
+  <h2>YouTube Shorts — Bonus Channel</h2>
+  <div class="info-card"><h4>Strategy</h4><p>Repost TikTok content (remove TikTok watermark using SnapTik). Same video = 3x reach. YouTube Shorts algorithm is less saturated than TikTok. Long-form: 1 video/month reviewing cases.</p></div>
+</section>
+
+<!-- VIDEOS -->
+<section class="section" id="s-videos">
+  <div class="page-title">90 Video Ideas</div>
+  <div class="page-sub">One for every day of the 90-day plan. Organized by type and viral potential.</div>
+
+  <h2>ASMR / Satisfying (Highest viral potential)</h2>
+  <ul class="content-list">
+    <li><span class="list-num">V01</span><span class="list-text">MagSafe snap close-up — no words, just the click sound</span><span class="list-badge"><span class="badge badge-red">🔥 High viral</span></span></li>
+    <li><span class="list-num">V02</span><span class="list-text">Sliding phone into case in slow motion</span><span class="list-badge"><span class="badge badge-red">🔥 High viral</span></span></li>
+    <li><span class="list-num">V03</span><span class="list-text">Car mount snap — magnetic attach in macro close-up</span><span class="list-badge"><span class="badge badge-red">🔥 High viral</span></span></li>
+    <li><span class="list-num">V04</span><span class="list-text">Unboxing — tissue paper unwrap, case reveal, phone install</span><span class="list-badge"><span class="badge badge-red">🔥 High viral</span></span></li>
+    <li><span class="list-num">V05</span><span class="list-text">Kickstand pop — case standing up at perfect angle</span><span class="list-badge"><span class="badge badge-red">🔥 High viral</span></span></li>
+    <li><span class="list-num">V06</span><span class="list-text">Power bank attaching magnetically to phone back</span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+    <li><span class="list-num">V07</span><span class="list-text">Frosted case catching morning light — aesthetic B-roll</span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+    <li><span class="list-num">V08</span><span class="list-text">3 cases lined up on marble — color comparison reveal</span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+    <li><span class="list-num">V09</span><span class="list-text">Packing an order — tissue paper folding, tape, seal</span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+    <li><span class="list-num">V10</span><span class="list-text">Wireless charger connecting + charging glow animation</span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+  </ul>
+
+  <h2>Price / Value Shock (High Engagement)</h2>
+  <ul class="content-list">
+    <li><span class="list-num">V11</span><span class="list-text">"Apple charges $59. We charge $6.53. Same MagSafe snap."</span><span class="list-badge"><span class="badge badge-red">🔥 High viral</span></span></li>
+    <li><span class="list-num">V12</span><span class="list-text">"What does a $6 case vs $60 case actually feel like?"</span><span class="list-badge"><span class="badge badge-red">🔥 High viral</span></span></li>
+    <li><span class="list-num">V13</span><span class="list-text">"Free shipping + $6 case = no excuses. Link in bio."</span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+    <li><span class="list-num">V14</span><span class="list-text">"This $14 kickstand case does what no Apple case can"</span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+    <li><span class="list-num">V15</span><span class="list-text">"Buying a $6 case and testing it on $1200 phone 😅"</span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+  </ul>
+
+  <h2>Education / Tutorial</h2>
+  <ul class="content-list">
+    <li><span class="list-num">V16</span><span class="list-text">"MagSafe explained in 30 seconds — everything you need to know"</span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+    <li><span class="list-num">V17</span><span class="list-text">"Why your MagSafe car mount feels loose (and how to fix it)"</span><span class="list-badge"><span class="badge badge-red">🔥 High viral</span></span></li>
+    <li><span class="list-num">V18</span><span class="list-text">"This is why your phone charges at 5W instead of 15W"</span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+    <li><span class="list-num">V19</span><span class="list-text">"3 things to check before buying any MagSafe case"</span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+    <li><span class="list-num">V20</span><span class="list-text">"How to clean your phone case without damaging it"</span><span class="list-badge"><span class="badge badge-blue">Steady</span></span></li>
+    <li><span class="list-num">V21</span><span class="list-text">"MagSafe vs Qi vs Qi2 — what's the actual difference?"</span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+    <li><span class="list-num">V22</span><span class="list-text">"Does a clear case protect your phone? We tested it"</span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+    <li><span class="list-num">V23</span><span class="list-text">"Frosted vs matte vs glossy case — which lasts longest?"</span><span class="list-badge"><span class="badge badge-blue">Steady</span></span></li>
+    <li><span class="list-num">V24</span><span class="list-text">"Galaxy S25 Ultra doesn't have MagSafe? Here's the workaround"</span><span class="list-badge"><span class="badge badge-red">🔥 High viral</span></span></li>
+    <li><span class="list-num">V25</span><span class="list-text">"How to check if your case has real MagSafe alignment"</span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+  </ul>
+
+  <h2>Drop Test / Drama</h2>
+  <ul class="content-list">
+    <li><span class="list-num">V26</span><span class="list-text">"Dropping iPhone 16 Pro Max 10 times. Did the $6 case survive?"</span><span class="list-badge"><span class="badge badge-red">🔥 High viral</span></span></li>
+    <li><span class="list-num">V27</span><span class="list-text">"Concrete drop test — $6 case vs no case"</span><span class="list-badge"><span class="badge badge-red">🔥 High viral</span></span></li>
+    <li><span class="list-num">V28</span><span class="list-text">"What happens when a phone falls without a case 😬"</span><span class="list-badge"><span class="badge badge-red">🔥 High viral</span></span></li>
+    <li><span class="list-num">V29</span><span class="list-text">"Stress test: sat on my phone 10 times. Case survived."</span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+    <li><span class="list-num">V30</span><span class="list-text">"Water splash test on 3 different cases"</span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+  </ul>
+
+  <h2>Lifestyle / Setup</h2>
+  <ul class="content-list">
+    <li><span class="list-num">V31</span><span class="list-text">"My $200 minimal desk setup with MagSafe everything"</span><span class="list-badge"><span class="badge badge-red">🔥 High viral</span></span></li>
+    <li><span class="list-num">V32</span><span class="list-text">"Car setup upgrade — MagSafe mount changes everything"</span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+    <li><span class="list-num">V33</span><span class="list-text">"Travel essentials: MagSafe power bank is non-negotiable"</span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+    <li><span class="list-num">V34</span><span class="list-text">"Gym bag must-haves: this power bank changed my workouts"</span><span class="list-badge"><span class="badge badge-blue">Steady</span></span></li>
+    <li><span class="list-num">V35</span><span class="list-text">"WFH setup: phone stand + MagSafe = no more cable chaos"</span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+    <li><span class="list-num">V36–50</span><span class="list-text"><strong>More lifestyle:</strong> "Coffee shop phone setup" · "Airport travel + MagSafe" · "Night driving + car mount" · "iPhone 17 case prep" · "Back to school phone accessories" · "Holiday gift ideas under $20" · "Minimal bedside charging setup" · "MagSafe wallet first impression" · "Phone setup for content creators" · "Unboxing TheCaseCraft package ASMR"</span><span class="list-badge"><span class="badge badge-blue">Steady</span></span></li>
+  </ul>
+
+  <h2>Founder / Behind the Scenes / Trending</h2>
+  <ul class="content-list">
+    <li><span class="list-num">V51</span><span class="list-text">"I started a phone case brand. Here's week 1 honest results"</span><span class="list-badge"><span class="badge badge-red">🔥 High viral</span></span></li>
+    <li><span class="list-num">V52</span><span class="list-text">"Packing orders at midnight — small business reality"</span><span class="list-badge"><span class="badge badge-red">🔥 High viral</span></span></li>
+    <li><span class="list-num">V53</span><span class="list-text">"First $100 in sales. Here's exactly how it happened."</span><span class="list-badge"><span class="badge badge-red">🔥 High viral</span></span></li>
+    <li><span class="list-num">V54</span><span class="list-text">"This is what dropshipping actually looks like in 2026"</span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+    <li><span class="list-num">V55</span><span class="list-text">"Reading first 10 customer reviews — honest reaction"</span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+    <li><span class="list-num">V56–90</span><span class="list-text"><strong>Remaining 35 ideas:</strong> Product comparisons (TheCaseCraft vs name brands) · Customer review reactions · "POV your phone is finally protected" · Trending audio product reveals · Stitch/duet replies to questions · "Things I wish I knew before starting a store" · Monthly revenue update videos · Samsung vs iPhone case differences · "Why I stopped using Apple's case" · Holiday sales vlog · "Shipping 100 orders" milestone · Giveaway announcements · Q&amp;A videos from comments · "What makes a case premium?" · Responding to negative reviews (if any)</span><span class="list-badge"><span class="badge badge-blue">Steady</span></span></li>
+  </ul>
+</section>
+
+<!-- PINTEREST -->
+<section class="section" id="s-pinterest">
+  <div class="page-title">30 Pinterest Pin Ideas</div>
+  <div class="page-sub">Pinterest drives consistent long-term traffic. Each pin should link to a specific product page or blog post. Use Canva to create vertical 1000×1500px images.</div>
+
+  <h2>Product Pins (Link to product pages)</h2>
+  <ul class="content-list">
+    <li><span class="list-num">P01</span><span class="list-text"><strong>Titanium Matte MagSafe Case — iPhone 16 Pro Max</strong> · "Premium protection from $6.53 · Free Shipping" · Dark marble background</span><span class="list-badge"><span class="badge badge-red">Product</span></span></li>
+    <li><span class="list-num">P02</span><span class="list-text"><strong>Frosted Kickstand MagSafe Case — 3 Colors</strong> · "Built-in stand. MagSafe charging. $14.58" · White clean background</span><span class="list-badge"><span class="badge badge-red">Product</span></span></li>
+    <li><span class="list-num">P03</span><span class="list-text"><strong>Samsung Galaxy S25 Ultra Case — Slim Borderless</strong> · "5mm thin. Shockproof. From $11.39"</span><span class="list-badge"><span class="badge badge-red">Product</span></span></li>
+    <li><span class="list-num">P04</span><span class="list-text"><strong>MagSafe Car Mount — 15W Charging</strong> · "Snap. Drive. Charge. $37.81"</span><span class="list-badge"><span class="badge badge-red">Product</span></span></li>
+    <li><span class="list-num">P05</span><span class="list-text"><strong>5000mAh MagSafe Power Bank — Ultra Slim</strong> · "Never run out of battery. $60.79"</span><span class="list-badge"><span class="badge badge-red">Product</span></span></li>
+    <li><span class="list-num">P06</span><span class="list-text"><strong>Full Collection Flat Lay</strong> · "Premium phone protection without premium pricing"</span><span class="list-badge"><span class="badge badge-red">Product</span></span></li>
+    <li><span class="list-num">P07–10</span><span class="list-text">Close-up texture pin (matte finish) · Before/after phone drop protection · Color options comparison · Holiday gift bundle pin</span><span class="list-badge"><span class="badge badge-red">Product</span></span></li>
+  </ul>
+
+  <h2>Lifestyle Pins (Link to homepage or collection)</h2>
+  <ul class="content-list">
+    <li><span class="list-num">P11</span><span class="list-text"><strong>"Minimal Desk Setup 2026"</strong> · Phone + case + MagSafe stand on clean desk · Aspirational aesthetic</span><span class="list-badge"><span class="badge badge-gold">Lifestyle</span></span></li>
+    <li><span class="list-num">P12</span><span class="list-text"><strong>"Car Tech Setup"</strong> · Car mount + charged phone in modern car interior</span><span class="list-badge"><span class="badge badge-gold">Lifestyle</span></span></li>
+    <li><span class="list-num">P13</span><span class="list-text"><strong>"Travel Essentials 2026"</strong> · Power bank + case laid on suitcase · "Never run out of battery"</span><span class="list-badge"><span class="badge badge-gold">Lifestyle</span></span></li>
+    <li><span class="list-num">P14</span><span class="list-text"><strong>"WFH Tech Setup"</strong> · Work from home desk with phone prominently featured</span><span class="list-badge"><span class="badge badge-gold">Lifestyle</span></span></li>
+    <li><span class="list-num">P15–20</span><span class="list-text">"iPhone aesthetic 2026" · "Samsung setup goals" · "Minimalist phone accessories" · "Tech gifts for him/her under $50" · "Clean phone setup ideas" · "MagSafe lifestyle setup"</span><span class="list-badge"><span class="badge badge-gold">Lifestyle</span></span></li>
+  </ul>
+
+  <h2>Infographic Pins (Link to blog posts)</h2>
+  <ul class="content-list">
+    <li><span class="list-num">P21</span><span class="list-text"><strong>"MagSafe vs Regular Case — Infographic"</strong> · Side-by-side comparison chart · Links to blog post B03</span><span class="list-badge"><span class="badge badge-blue">Info</span></span></li>
+    <li><span class="list-num">P22</span><span class="list-text"><strong>"How to Choose a Phone Case — 5-Step Guide"</strong> · Flowchart graphic · Links to buying guide</span><span class="list-badge"><span class="badge badge-blue">Info</span></span></li>
+    <li><span class="list-num">P23</span><span class="list-text"><strong>"iPhone 16 vs 15 vs 14 Case Sizes"</strong> · Comparison chart · Very searchable</span><span class="list-badge"><span class="badge badge-blue">Info</span></span></li>
+    <li><span class="list-num">P24</span><span class="list-text"><strong>"MagSafe Charging Speed by Case Type"</strong> · Data visualization</span><span class="list-badge"><span class="badge badge-blue">Info</span></span></li>
+    <li><span class="list-num">P25–30</span><span class="list-text">"Best MagSafe accessories 2026 ranked" · "Drop protection levels explained" · "Phone case materials guide" · "5 reasons to upgrade your case" · "MagSafe car mount vs suction cup" · "Samsung Galaxy case buying checklist"</span><span class="list-badge"><span class="badge badge-blue">Info</span></span></li>
+  </ul>
+</section>
+
+<!-- REDDIT -->
+<section class="section" id="s-reddit">
+  <div class="page-title">30 Reddit Post Ideas</div>
+  <div class="page-sub">Never spam Reddit. Be genuinely helpful. Mention TheCaseCraft only where natural and disclosed. Space posts 2–3 days apart across subreddits.</div>
+
+  <h2>r/iphone (10 posts)</h2>
+  <ul class="content-list">
+    <li><span class="list-num">R01</span><span class="list-text"><strong>"Why does MagSafe car mount feel loose? Found the answer after months of frustration"</strong> · Educational, natural brand mention at end</span><span class="list-badge"><span class="badge badge-red">High value</span></span></li>
+    <li><span class="list-num">R02</span><span class="list-text"><strong>"Tested 8 iPhone 16 cases over 6 weeks — here's what I actually found"</strong> · Long review post with TheCaseCraft featured</span><span class="list-badge"><span class="badge badge-red">High value</span></span></li>
+    <li><span class="list-num">R03</span><span class="list-text"><strong>"My phone charged at 5W for months until I figured this out"</strong> · MagSafe alignment education</span><span class="list-badge"><span class="badge badge-red">High value</span></span></li>
+    <li><span class="list-num">R04</span><span class="list-text"><strong>"Dropped my iPhone 16 Pro Max 50 times on purpose. Here are the results."</strong> · Drop test case comparison</span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+    <li><span class="list-num">R05</span><span class="list-text"><strong>"Is paying $59 for Apple's silicone case worth it? Honest comparison."</strong> · Price value discussion</span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+    <li><span class="list-num">R06</span><span class="list-text"><strong>"Frosted clear vs matte black — which actually hides fingerprints better?"</strong> · With real photo comparison</span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+    <li><span class="list-num">R07</span><span class="list-text"><strong>"Best budget iPhone cases 2026 — I ranked 12 options by value"</strong> · List format</span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+    <li><span class="list-num">R08</span><span class="list-text"><strong>"Kickstand cases: are they worth the extra $5-8?"</strong> · Honest recommendation</span><span class="list-badge"><span class="badge badge-blue">OK</span></span></li>
+    <li><span class="list-num">R09</span><span class="list-text"><strong>"Started a phone case brand 30 days ago. Here's what I've learned."</strong> · Founder story in r/Entrepreneur</span><span class="list-badge"><span class="badge badge-red">High value</span></span></li>
+    <li><span class="list-num">R10</span><span class="list-text"><strong>"MagSafe charging through cases: tested 10 cases for 15W speed"</strong> · Data-driven post</span><span class="list-badge"><span class="badge badge-red">High value</span></span></li>
+  </ul>
+
+  <h2>r/samsung · r/Android (8 posts)</h2>
+  <ul class="content-list">
+    <li><span class="list-num">R11</span><span class="list-text"><strong>"Samsung Galaxy doesn't have MagSafe — here's how to add it anyway"</strong> · High search intent</span><span class="list-badge"><span class="badge badge-red">High value</span></span></li>
+    <li><span class="list-num">R12</span><span class="list-text"><strong>"Tested 5 S25 Ultra cases — the $11 one won. Here's why."</strong> · Honest test</span><span class="list-badge"><span class="badge badge-red">High value</span></span></li>
+    <li><span class="list-num">R13</span><span class="list-text"><strong>"Slim vs rugged case for Galaxy S25 — which actually drops better?"</strong></span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+    <li><span class="list-num">R14</span><span class="list-text"><strong>"As someone who switched from iPhone to Galaxy — the case difference is real"</strong></span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+    <li><span class="list-num">R15–18</span><span class="list-text">Samsung MagSafe workarounds · Best Galaxy S25 budget cases · Galaxy vs iPhone protection needs · Android power bank recommendations</span><span class="list-badge"><span class="badge badge-blue">OK</span></span></li>
+  </ul>
+
+  <h2>r/battlestations · r/malelivingspace · r/minimalism (7 posts)</h2>
+  <ul class="content-list">
+    <li><span class="list-num">R19</span><span class="list-text"><strong>"My MagSafe desk setup — finally went fully wireless"</strong> · With actual photo of setup</span><span class="list-badge"><span class="badge badge-red">High value</span></span></li>
+    <li><span class="list-num">R20</span><span class="list-text"><strong>"Minimal desk tech setup — less cable chaos"</strong> · MagSafe ecosystem showcase</span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+    <li><span class="list-num">R21–25</span><span class="list-text">Bedside charging setup · Car setup with MagSafe · Minimalist travel tech · WFH phone setup · "Rate my desk" post with MagSafe visible</span><span class="list-badge"><span class="badge badge-blue">OK</span></span></li>
+  </ul>
+
+  <h2>r/frugalmalefashion · r/deals · r/shutupandtakemymoney (5 posts)</h2>
+  <ul class="content-list">
+    <li><span class="list-num">R26</span><span class="list-text"><strong>"Premium MagSafe case for $6.53 — not a joke, here's my honest review"</strong></span><span class="list-badge"><span class="badge badge-red">High value</span></span></li>
+    <li><span class="list-num">R27</span><span class="list-text"><strong>"I stopped buying expensive cases after trying budget ones. Here's why."</strong></span><span class="list-badge"><span class="badge badge-gold">Good</span></span></li>
+    <li><span class="list-num">R28–30</span><span class="list-text">Value phone accessories under $50 · Birthday gift idea for iPhone user · "Splurge vs save" phone accessories guide</span><span class="list-badge"><span class="badge badge-blue">OK</span></span></li>
+  </ul>
+</section>
+
+<!-- ACQUISITION -->
+<section class="section" id="s-acquisition">
+  <div class="page-title">Customer Acquisition Strategy</div>
+  <div class="page-sub">Zero paid ads. Every tactic here is 100% free and ranked by speed of results.</div>
+
+  <h2>Fastest to Results (Days 1–30)</h2>
+  <div class="info-card">
+    <h4>1. Micro-Influencer Outreach (Best ROI for zero budget)</h4>
+    <p>Target: TikTok/Instagram creators with 1K–30K followers in phone/tech/setup/lifestyle niches. Offer: 1 free product for honest review. Script: "Hey [Name], love your content. I run TheCaseCraft — premium MagSafe cases from $6.53. Want to try one free? No obligation to post, just want honest feedback." Send 10 DMs/day = 300/month = 30–60 collabs = significant reach.</p>
+  </div>
+  <div class="info-card">
+    <h4>2. Facebook Group Infiltration</h4>
+    <p>Join 15 relevant groups. Week 1–2: be helpful, answer questions. Week 3: soft mentions. Week 4: direct posts with product link. Groups to target: "iPhone Accessories USA", "Tech Deals &amp; Reviews", "Minimal Desk Setups", "Online Shopping USA", "Phone Photography Tips".</p>
+  </div>
+  <div class="info-card">
+    <h4>3. Email Capture + 10% Off</h4>
+    <p>Simple Klaviyo popup: "Get 10% off your first order" → email. Convert every visitor to subscriber. Email converts at 3–5x higher than social media. Priority: get 500 email subs in 90 days.</p>
+  </div>
+
+  <h2>Medium-Term (Days 30–60)</h2>
+  <div class="info-card">
+    <h4>4. Reddit + Quora Organic Presence</h4>
+    <p>3 comments/day across r/iphone, r/samsung, r/battlestations, Quora phone questions. Each comment reaching 100–5,000 people with high buying intent. Takes 2 weeks to build karma, then posts are visible to everyone.</p>
+  </div>
+  <div class="info-card">
+    <h4>5. Cross-Store Promotion</h4>
+    <p>Find 5 Shopify stores selling complementary products (phone skins, popsockets, screen protectors). Email owners proposing: "You mention us to your list, we mention you to ours." Win-win. Email: "Hi [Name], I run TheCaseCraft.com — we sell MagSafe cases. Our audiences overlap perfectly. Would you be interested in a mutual shoutout?"</p>
+  </div>
+  <div class="info-card">
+    <h4>6. YouTube Comment Harvesting</h4>
+    <p>Find "best iPhone case 2026", "MagSafe accessories" YouTube videos with 50K–500K views. Post genuinely helpful comments. With a good comment, you can get 50–200 profile clicks within 24 hours.</p>
+  </div>
+
+  <h2>Long-Term Compounders (Days 60–90+)</h2>
+  <div class="info-card">
+    <h4>7. SEO Blog Traffic</h4>
+    <p>Blog posts take 30–90 days to rank but then send free traffic forever. A single post ranking #1 for "best magsafe case iphone 16" = 2,400 visitors/month × 3% conversion = 72 sales per month from ONE article.</p>
+  </div>
+  <div class="info-card">
+    <h4>8. UGC Flywheel</h4>
+    <p>Every order includes a card: "Tag us @thecasecraft for 15% off next order." Each customer photo = free advertising to their followers. At 100 customers, even 10% posting = 10 pieces of UGC/month.</p>
+  </div>
+  <div class="info-card">
+    <h4>9. Pinterest Long Game</h4>
+    <p>Pinterest pins drive traffic for 2+ years. At 3 pins/day × 90 days = 270 pins live. In month 6, those 270 pins consistently drive 500–2,000 visitors/month with zero additional work.</p>
+  </div>
+  <div class="info-card">
+    <h4>10. Referral Program</h4>
+    <p>Week 4: Set up "Give $5, Get $5" referral program using ReferralCandy free trial or Shopify's built-in. Every happy customer becomes a salesperson. Best acquisition cost possible: $0 until sale is made.</p>
+  </div>
+</section>
+
+<!-- BRAND -->
+<section class="section" id="s-brand">
+  <div class="page-title">Brand Building Strategy</div>
+  <div class="page-sub">How to build TheCaseCraft into a recognizable, trusted brand in the USA phone accessories market — with zero ad spend.</div>
+
+  <h2>Brand Positioning</h2>
+  <div class="grid grid-3">
+    <div class="info-card"><h4>Who You're For</h4><p>People who care about their phone setup but refuse to overpay for a logo. Tech-conscious 18–35 year olds who want function AND style without brand tax.</p></div>
+    <div class="info-card"><h4>What You Stand For</h4><p>"Premium without the markup." No brand tax. Honest prices. Real quality. The case you'd buy if you knew what you were actually paying for.</p></div>
+    <div class="info-card"><h4>What You're Against</h4><p>Paying $59 for Apple's silicone. Cheap cases that crack in a month. Cases that misalign MagSafe. Overpackaged luxury that performs worse than budget options.</p></div>
+  </div>
+
+  <h2>Brand Voice Rules</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Say This</th><th>Never Say This</th></tr></thead>
+      <tbody>
+        <tr><td>"Built for daily use. No compromises."</td><td>"BEST CASE EVER!!!! 🔥🔥🔥"</td></tr>
+        <tr><td>"MagSafe-ready from $6.53."</td><td>"CHEAPEST PRICES GUARANTEED"</td></tr>
+        <tr><td>"Drop-tested. Precision-fit."</td><td>"Premium quality luxury fashion case"</td></tr>
+        <tr><td>"We actually answer emails."</td><td>"24/7 world-class customer support"</td></tr>
+        <tr><td>"Snap. Charge. Go."</td><td>"Order now before stocks run out!!!"</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Brand Building Milestones</h2>
+  <ul class="content-list">
+    <li><span class="list-num">M1</span><span class="list-text"><strong>Week 1:</strong> Consistent visual identity across all platforms (same logo, same color #c8a96e gold accent, same bio)</span><span class="list-badge"><span class="badge badge-red">Foundational</span></span></li>
+    <li><span class="list-num">M2</span><span class="list-text"><strong>Week 2:</strong> First founder story content — your face + why you built this. People buy from people.</span><span class="list-badge"><span class="badge badge-red">Critical</span></span></li>
+    <li><span class="list-num">M3</span><span class="list-text"><strong>Week 4:</strong> First customer testimonial featured prominently on homepage and social</span><span class="list-badge"><span class="badge badge-gold">Important</span></span></li>
+    <li><span class="list-num">M4</span><span class="list-text"><strong>Week 6:</strong> Own a phrase. "Snap. Charge. Go." in every bio. Repetition builds recognition.</span><span class="list-badge"><span class="badge badge-gold">Important</span></span></li>
+    <li><span class="list-num">M5</span><span class="list-text"><strong>Week 8:</strong> First press mention or influencer post. Screenshot and share everywhere — social proof compounds.</span><span class="list-badge"><span class="badge badge-blue">Valuable</span></span></li>
+    <li><span class="list-num">M6</span><span class="list-text"><strong>Week 12:</strong> People recognize your packaging. Branded tissue paper + card = unboxing experience = UGC.</span><span class="list-badge"><span class="badge badge-blue">Long-term</span></span></li>
+  </ul>
+</section>
+
+<!-- CALENDAR -->
+<section class="section" id="s-calendar">
+  <div class="page-title">Content Calendar</div>
+  <div class="page-sub">90-day content calendar. Use this as your publishing schedule. Adapt based on what's getting the most engagement each week.</div>
+
+  <h2>Month 1 Content Calendar</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Week</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Wk 1</strong></td>
+          <td>TikTok: MagSafe snap ASMR<br><span style="color:#666;font-size:11px;">Blog: Best MagSafe Cases</span></td>
+          <td>TikTok: Price comparison<br><span style="color:#666;font-size:11px;">IG: Story poll</span></td>
+          <td>TikTok: Unboxing POV<br><span style="color:#666;font-size:11px;">Pinterest: 3 product pins</span></td>
+          <td>TikTok: Drop test<br><span style="color:#666;font-size:11px;">Reddit: r/iphone comment</span></td>
+          <td>TikTok: Desk setup<br><span style="color:#666;font-size:11px;">FB groups: Join + engage</span></td>
+        </tr>
+        <tr>
+          <td><strong>Wk 2</strong></td>
+          <td>TikTok: Kickstand demo<br><span style="color:#666;font-size:11px;">Blog: Budget Cases</span></td>
+          <td>TikTok: Samsung showcase<br><span style="color:#666;font-size:11px;">Pinterest: Lifestyle pins</span></td>
+          <td>TikTok: Car mount snap<br><span style="color:#666;font-size:11px;">Reddit: r/samsung post</span></td>
+          <td>TikTok: Founder story<br><span style="color:#666;font-size:11px;">Email: First campaign</span></td>
+          <td>TikTok: Trending audio reveal<br><span style="color:#666;font-size:11px;">IG: First carousel</span></td>
+        </tr>
+        <tr>
+          <td><strong>Wk 3</strong></td>
+          <td>TikTok: "5W vs 15W" education<br><span style="color:#666;font-size:11px;">Blog: MagSafe vs Regular</span></td>
+          <td>TikTok: Order packing BTS<br><span style="color:#666;font-size:11px;">Pinterest: Info pin</span></td>
+          <td>TikTok: Customer review react<br><span style="color:#666;font-size:11px;">Reddit: r/battlestations</span></td>
+          <td>TikTok: Power bank demo<br><span style="color:#666;font-size:11px;">YT Shorts: Upload 3</span></td>
+          <td>TikTok: "How to check alignment"<br><span style="color:#666;font-size:11px;">FB: First group post</span></td>
+        </tr>
+        <tr>
+          <td><strong>Wk 4</strong></td>
+          <td>TikTok: 1-month update<br><span style="color:#666;font-size:11px;">Blog: Samsung Galaxy Guide</span></td>
+          <td>TikTok: Giveaway announce<br><span style="color:#666;font-size:11px;">Email: Giveaway blast</span></td>
+          <td>TikTok: Trendy collab style<br><span style="color:#666;font-size:11px;">Pinterest: Holiday pin batch</span></td>
+          <td>TikTok: "My setup tour"<br><span style="color:#666;font-size:11px;">Reddit: r/Entrepreneur</span></td>
+          <td>Analytics review + Plan Month 2</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Month 2 Content Calendar (Summary)</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Week</th><th>TikTok Theme</th><th>Blog Post</th><th>Email Campaign</th><th>Special Activity</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Wk 5</strong></td><td>Education week — how MagSafe works</td><td>Does case slow MagSafe charging?</td><td>Product spotlight: Car Mount</td><td>Product Hunt prep</td></tr>
+        <tr><td><strong>Wk 6</strong></td><td>Lifestyle/setup content</td><td>Best MagSafe Car Mounts</td><td>User review roundup</td><td>YouTube long-form film</td></tr>
+        <tr><td><strong>Wk 7</strong></td><td>UGC + customer features</td><td>Power bank buying guide</td><td>Mid-month sale (SAVE15)</td><td>Cross-store collab</td></tr>
+        <tr><td><strong>Wk 8</strong></td><td>Viral attempt week — dramatic/trending</td><td>Kickstand cases review</td><td>Month 2 recap + bestsellers</td><td>FB group own launch</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Month 3 Content Calendar (Summary)</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Week</th><th>TikTok Theme</th><th>Blog Post</th><th>Email Campaign</th><th>Special Activity</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Wk 9</strong></td><td>Drop test series</td><td>100-drop test article</td><td>VIP early access launch</td><td>Search Console keyword optimization</td></tr>
+        <tr><td><strong>Wk 10</strong></td><td>vs. Comparison videos</td><td>TheCaseCraft vs Spigen</td><td>Back-in-stock/new arrival</td><td>Quora authority push</td></tr>
+        <tr><td><strong>Wk 11</strong></td><td>Lifestyle + holiday content</td><td>Holiday gift guide</td><td>Holiday preview campaign</td><td>Pinterest holiday batch</td></tr>
+        <tr><td><strong>Wk 12</strong></td><td>90-day reflection + giveaway</td><td>Best cases of 2026 roundup</td><td>90-day thank you + offer</td><td>Plan next 90 days</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- KPIs -->
+<section class="section" id="s-kpis">
+  <div class="page-title">Monthly KPIs</div>
+  <div class="page-sub">Track these numbers every Sunday. If you're behind, double down on TikTok (fastest traffic) and email (highest conversion).</div>
+
+  <h2>Monthly Targets</h2>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-header"><div class="kpi-title">Month 1 KPIs</div><span class="badge badge-blue">Days 1–30</span></div>
+      <div class="kpi-row"><div class="kpi-metric">Website visitors</div><div class="kpi-target">500–1,000</div></div>
+      <div class="kpi-row"><div class="kpi-metric">Email subscribers</div><div class="kpi-target">50+</div></div>
+      <div class="kpi-row"><div class="kpi-metric">TikTok followers</div><div class="kpi-target">100–500</div></div>
+      <div class="kpi-row"><div class="kpi-metric">Instagram followers</div><div class="kpi-target">50–200</div></div>
+      <div class="kpi-row"><div class="kpi-metric">Total sales</div><div class="kpi-target">5–15</div></div>
+      <div class="kpi-row"><div class="kpi-metric">Revenue</div><div class="kpi-target">$50–$300</div></div>
+      <div class="kpi-row"><div class="kpi-metric">Blog posts live</div><div class="kpi-target">4</div></div>
+      <div class="kpi-row"><div class="kpi-metric">Videos posted</div><div class="kpi-target">28–30</div></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-header"><div class="kpi-title">Month 2 KPIs</div><span class="badge badge-gold">Days 31–60</span></div>
+      <div class="kpi-row"><div class="kpi-metric">Website visitors</div><div class="kpi-target">2,000–3,500</div></div>
+      <div class="kpi-row"><div class="kpi-metric">Email subscribers</div><div class="kpi-target">200–300</div></div>
+      <div class="kpi-row"><div class="kpi-metric">TikTok followers</div><div class="kpi-target">500–2,000</div></div>
+      <div class="kpi-row"><div class="kpi-metric">Instagram followers</div><div class="kpi-target">300–800</div></div>
+      <div class="kpi-row"><div class="kpi-metric">Monthly sales</div><div class="kpi-target">30–50</div></div>
+      <div class="kpi-row"><div class="kpi-metric">Monthly revenue</div><div class="kpi-target">$500–$1,500</div></div>
+      <div class="kpi-row"><div class="kpi-metric">Blog posts live</div><div class="kpi-target">10</div></div>
+      <div class="kpi-row"><div class="kpi-metric">Influencer collabs</div><div class="kpi-target">5–10</div></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-header"><div class="kpi-title">Month 3 KPIs</div><span class="badge badge-green">Days 61–90</span></div>
+      <div class="kpi-row"><div class="kpi-metric">Website visitors</div><div class="kpi-target">4,000–6,000</div></div>
+      <div class="kpi-row"><div class="kpi-metric">Email subscribers</div><div class="kpi-target">500+</div></div>
+      <div class="kpi-row"><div class="kpi-metric">TikTok followers</div><div class="kpi-target">2,000–10,000</div></div>
+      <div class="kpi-row"><div class="kpi-metric">Instagram followers</div><div class="kpi-target">800–2,000</div></div>
+      <div class="kpi-row"><div class="kpi-metric">Monthly sales</div><div class="kpi-target">75–120</div></div>
+      <div class="kpi-row"><div class="kpi-metric">Monthly revenue</div><div class="kpi-target">$2,000–$4,000</div></div>
+      <div class="kpi-row"><div class="kpi-metric">Blog posts live</div><div class="kpi-target">16–20</div></div>
+      <div class="kpi-row"><div class="kpi-metric">Google ranking keywords</div><div class="kpi-target">5–10 ranking</div></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-header"><div class="kpi-title">Day 90 Milestone</div><span class="badge badge-purple">Final Target</span></div>
+      <div class="kpi-row"><div class="kpi-metric">Total visitors (90 days)</div><div class="kpi-target">8,000+</div></div>
+      <div class="kpi-row"><div class="kpi-metric">Email list size</div><div class="kpi-target">500+</div></div>
+      <div class="kpi-row"><div class="kpi-metric">Total followers (all)</div><div class="kpi-target">5,000+</div></div>
+      <div class="kpi-row"><div class="kpi-metric">Total orders (90 days)</div><div class="kpi-target">150–200</div></div>
+      <div class="kpi-row"><div class="kpi-metric">Total revenue (90 days)</div><div class="kpi-target">$3,000–$6,000</div></div>
+      <div class="kpi-row"><div class="kpi-metric">Influencer partnerships</div><div class="kpi-target">15–25</div></div>
+      <div class="kpi-row"><div class="kpi-metric">Blog posts + ranking</div><div class="kpi-target">20 posts · 10 ranking</div></div>
+      <div class="kpi-row"><div class="kpi-metric">Organic system</div><div class="kpi-target">Self-sustaining</div></div>
+    </div>
+  </div>
+
+  <h2>Weekly Check-In Template</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Metric</th><th>This Week</th><th>Last Week</th><th>On Track?</th><th>Action if Behind</th></tr></thead>
+      <tbody>
+        <tr><td>GA4 sessions</td><td>Track</td><td>Track</td><td>vs target</td><td>Post 2x TikTok/day</td></tr>
+        <tr><td>New email subs</td><td>Track</td><td>Track</td><td>vs target</td><td>Increase popup offer to 15%</td></tr>
+        <tr><td>Orders placed</td><td>Track</td><td>Track</td><td>vs target</td><td>Email campaign to list</td></tr>
+        <tr><td>TikTok views</td><td>Track</td><td>Track</td><td>vs target</td><td>More hooks, less B-roll</td></tr>
+        <tr><td>Top traffic source</td><td>Track</td><td>Track</td><td>—</td><td>Double down on winner</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert alert-green">
+    <strong>The #1 Rule:</strong> Whatever is working, do MORE of it. Don't split attention evenly. If TikTok sends 80% of your traffic, spend 80% of your time on TikTok. Analytics tell you where to invest time — trust the data, not the plan.
+  </div>
+</section>
+
+  </div><!-- /content -->
+</main>
+</div><!-- /app -->
+
+<script>
+function show(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('s-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  document.querySelector('.main').scrollTop = 0;
+}
+
+function toggleWeek(header) {
+  const body = header.nextElementSibling;
+  const toggle = header.querySelector('.week-toggle');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open');
+  toggle.textContent = isOpen ? '▼' : '▲';
+}
+</script>
+</body>
+</html>

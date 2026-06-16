@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>theCaseCraft — Complete Website Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --surface2: #1c1c1c;
+    --border: #2a2a2a;
+    --text: #f0ede8;
+    --muted: #888;
+    --accent: #c8a96e;
+    --accent2: #e8d4a8;
+    --green: #4ade80;
+    --tag-bg: #1e1e1e;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* SIDEBAR */
+  .layout { display: flex; min-height: 100vh; }
+
+  .sidebar {
+    width: 260px;
+    min-width: 260px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 2rem 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+
+  .sidebar-logo {
+    padding: 0 1.5rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1rem;
+  }
+  .sidebar-logo h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+  }
+  .sidebar-logo p { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  .nav-section {
+    padding: 0.25rem 1.5rem;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin: 1rem 0 0.25rem;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.45rem 1.5rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s;
+    border-left: 2px solid transparent;
+  }
+  .nav-link:hover, .nav-link.active {
+    color: var(--accent2);
+    border-left-color: var(--accent);
+    background: rgba(200,169,110,0.05);
+  }
+  .nav-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--border); flex-shrink: 0; }
+  .nav-link.active .nav-dot { background: var(--accent); }
+
+  /* MAIN */
+  .main { flex: 1; padding: 0; overflow-x: hidden; }
+
+  /* TOP BAR */
+  .topbar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .topbar-title { font-size: 13px; color: var(--muted); }
+  .topbar-badge {
+    font-size: 11px;
+    background: rgba(200,169,110,0.15);
+    color: var(--accent);
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(200,169,110,0.3);
+  }
+
+  /* CONTENT */
+  .content { padding: 2.5rem; max-width: 860px; }
+
+  .section {
+    display: none;
+    animation: fadeIn 0.2s ease;
+  }
+  .section.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* TYPOGRAPHY */
+  .page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--accent2);
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.01em;
+  }
+  .page-desc { color: var(--muted); font-size: 14px; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: var(--accent2);
+    margin: 2rem 0 0.75rem;
+  }
+  h3 {
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 1.5rem 0 0.5rem;
+  }
+  p { color: #bbb; margin-bottom: 0.75rem; }
+  ul { padding-left: 1.2rem; color: #bbb; margin-bottom: 0.75rem; }
+  li { margin-bottom: 0.3rem; }
+
+  /* COPY BLOCK */
+  .copy-block {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin: 1rem 0;
+    overflow: hidden;
+  }
+  .copy-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .copy-label { font-size: 11px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+  .copy-btn {
+    font-size: 11px;
+    color: var(--accent);
+    background: rgba(200,169,110,0.1);
+    border: 1px solid rgba(200,169,110,0.25);
+    padding: 3px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .copy-btn:hover { background: rgba(200,169,110,0.2); }
+  .copy-btn.copied { color: var(--green); border-color: rgba(74,222,128,0.3); background: rgba(74,222,128,0.08); }
+  .copy-content {
+    padding: 1rem;
+    font-size: 13.5px;
+    color: #d0cdc8;
+    white-space: pre-wrap;
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.75;
+  }
+
+  /* PROMPT CARD */
+  .prompt-card {
+    background: linear-gradient(135deg, #1a1510 0%, #141414 100%);
+    border: 1px solid rgba(200,169,110,0.25);
+    border-radius: 10px;
+    padding: 1.25rem;
+    margin: 1rem 0;
+  }
+  .prompt-title {
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .prompt-body {
+    font-size: 13px;
+    color: #c8c0b0;
+    line-height: 1.7;
+    font-style: italic;
+    margin-bottom: 0.75rem;
+  }
+
+  /* POLICY BLOCK */
+  .policy-section {
+    background: var(--surface2);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+  }
+  .policy-section h4 { font-size: 13px; font-weight: 600; color: var(--accent2); margin-bottom: 0.4rem; }
+  .policy-section p, .policy-section li { font-size: 13px; color: #aaa; }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+  th { text-align: left; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); }
+  td { padding: 0.6rem 0.75rem; font-size: 13px; color: #bbb; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  /* TAG */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    margin: 2px;
+  }
+  .tag.gold { border-color: rgba(200,169,110,0.3); color: var(--accent); background: rgba(200,169,110,0.08); }
+  .tag.green { border-color: rgba(74,222,128,0.3); color: var(--green); background: rgba(74,222,128,0.08); }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+
+  .feature-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+  }
+  .feature-card .icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .feature-card h4 { font-size: 13px; font-weight: 600; color: var(--accent2); margin-bottom: 0.3rem; }
+  .feature-card p { font-size: 12px; color: var(--muted); margin: 0; }
+
+  /* HERO PREVIEW */
+  .hero-preview {
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1208 50%, #0f0f0f 100%);
+    border: 1px solid rgba(200,169,110,0.2);
+    border-radius: 12px;
+    padding: 3rem 2rem;
+    text-align: center;
+    margin: 1.5rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-preview::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(200,169,110,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-preview .eyebrow { font-size: 11px; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 1rem; }
+  .hero-preview h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #f5f0e8; line-height: 1.3; margin-bottom: 0.75rem; }
+  .hero-preview p { color: #888; font-size: 14px; max-width: 500px; margin: 0 auto 1.5rem; }
+  .hero-btns { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent);
+    color: #0a0a0a;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 0.6rem 1.4rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--accent);
+    font-size: 13px;
+    padding: 0.6rem 1.4rem;
+    border-radius: 6px;
+    border: 1px solid rgba(200,169,110,0.4);
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  /* TRUST PILLS */
+  .trust-pills { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0; }
+  .trust-pill {
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(200,169,110,0.3);
+    color: var(--accent);
+    background: rgba(200,169,110,0.06);
+  }
+
+  /* REVIEW CARD */
+  .review-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin: 0.75rem 0;
+  }
+  .review-stars { color: #f5c842; font-size: 13px; margin-bottom: 0.4rem; }
+  .review-text { font-size: 13px; color: #bbb; font-style: italic; margin-bottom: 0.5rem; }
+  .review-author { font-size: 12px; color: var(--muted); }
+
+  /* IMPORTANT NOTE */
+  .note {
+    background: rgba(200,169,110,0.06);
+    border: 1px solid rgba(200,169,110,0.2);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    font-size: 12.5px;
+    color: #b8a07a;
+    margin: 1rem 0;
+  }
+  .note strong { color: var(--accent); }
+
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .content { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <h1>theCaseCraft</h1>
+    <p>Website Content Guide v1.0</p>
+  </div>
+
+  <div class="nav-section">Content</div>
+  <div class="nav-link active" onclick="show('hero')"><div class="nav-dot"></div>Hero Images & Prompts</div>
+  <div class="nav-link" onclick="show('homepage')"><div class="nav-dot"></div>Homepage Copy</div>
+  <div class="nav-link" onclick="show('about')"><div class="nav-dot"></div>About Us Page</div>
+  <div class="nav-link" onclick="show('categories')"><div class="nav-dot"></div>Category Descriptions</div>
+
+  <div class="nav-section">Legal Pages</div>
+  <div class="nav-link" onclick="show('privacy')"><div class="nav-dot"></div>Privacy Policy</div>
+  <div class="nav-link" onclick="show('refund')"><div class="nav-dot"></div>Refund Policy</div>
+  <div class="nav-link" onclick="show('shipping')"><div class="nav-dot"></div>Shipping Policy</div>
+  <div class="nav-link" onclick="show('terms')"><div class="nav-dot"></div>Terms of Service</div>
+
+  <div class="nav-section">Marketing</div>
+  <div class="nav-link" onclick="show('seo')"><div class="nav-dot"></div>SEO Meta Tags</div>
+  <div class="nav-link" onclick="show('trust')"><div class="nav-dot"></div>Trust Badges & Microcopy</div>
+  <div class="nav-link" onclick="show('emails')"><div class="nav-dot"></div>Email Templates</div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <span class="topbar-title">theCaseCraft.com — Complete Content Package</span>
+    <span class="topbar-badge">CRO Focused</span>
+  </div>
+
+  <div class="content">
+
+    <!-- HERO IMAGES -->
+    <div class="section active" id="hero">
+      <div class="page-title">Hero Image Prompts</div>
+      <div class="page-desc">AI image generation prompts for Midjourney, DALL-E 3, or Adobe Firefly. Copy each prompt and use as-is.</div>
+
+      <div class="note"><strong>Platform Tip:</strong> Use Midjourney with <code>--ar 16:9 --style raw --v 6</code> appended for best results. For DALL-E 3, paste prompt directly into ChatGPT image mode.</div>
+
+      <h2>Main Hero Banner</h2>
+      <div class="prompt-card">
+        <div class="prompt-title">🖼️ Homepage Hero (16:9)</div>
+        <p class="prompt-body">Product photography, premium iPhone 16 Pro Max in a matte frosted transparent MagSafe case, placed on a clean matte black marble surface beside a minimalist magnetic car mount charger. Soft studio lighting from the left, subtle bokeh background, warm white ambient glow. Ultra-realistic, 8K, editorial style, no text, no watermark. Aspect ratio 16:9.</p>
+        <button class="copy-btn" onclick="copyText(this, 'Product photography, premium iPhone 16 Pro Max in a matte frosted transparent MagSafe case, placed on a clean matte black marble surface beside a minimalist magnetic car mount charger. Soft studio lighting from the left, subtle bokeh background, warm white ambient glow. Ultra-realistic, 8K, editorial style, no text, no watermark.')">Copy Prompt</button>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-title">🖼️ Lifestyle Hero (Alternative)</div>
+        <p class="prompt-body">Lifestyle photo, a man's hand holding an iPhone in a slim frosted MagSafe case inside a modern car interior. Dashboard visible in background, golden hour light streaming through window. Clean, premium, minimal aesthetic. No text. 8K editorial photography.</p>
+        <button class="copy-btn" onclick="copyText(this, `Lifestyle photo, a man's hand holding an iPhone in a slim frosted MagSafe case inside a modern car interior. Dashboard visible in background, golden hour light streaming through window. Clean, premium, minimal aesthetic. No text. 8K editorial photography.`)">Copy Prompt</button>
+      </div>
+
+      <h2>Category Banners</h2>
+      <div class="prompt-card">
+        <div class="prompt-title">🖼️ MagSafe Cases Banner</div>
+        <p class="prompt-body">Flat lay product photo of three premium MagSafe phone cases — frosted transparent, matte black, and deep navy — arranged diagonally on a white concrete surface. Studio lighting, no shadows, top-down view. Ultra clean editorial style. No text.</p>
+        <button class="copy-btn" onclick="copyText(this, 'Flat lay product photo of three premium MagSafe phone cases — frosted transparent, matte black, and deep navy — arranged diagonally on a white concrete surface. Studio lighting, no shadows, top-down view. Ultra clean editorial style. No text.')">Copy Prompt</button>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-title">🖼️ Samsung Cases Banner</div>
+        <p class="prompt-body">Product photography of a slim borderless transparent Samsung Galaxy S25 Ultra case on a dark charcoal background. Side-lit studio setup. Ultra minimal, premium look. No text. 8K.</p>
+        <button class="copy-btn" onclick="copyText(this, 'Product photography of a slim borderless transparent Samsung Galaxy S25 Ultra case on a dark charcoal background. Side-lit studio setup. Ultra minimal, premium look. No text. 8K.')">Copy Prompt</button>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-title">🖼️ Accessories Banner</div>
+        <p class="prompt-body">Flat lay of premium MagSafe accessories: a magnetic car mount, a 5000mAh power bank, and a 4-in-1 wireless charging dock, arranged on a light grey linen cloth surface. Warm studio lighting, editorial product photography. No text.</p>
+        <button class="copy-btn" onclick="copyText(this, 'Flat lay of premium MagSafe accessories: a magnetic car mount, a 5000mAh power bank, and a 4-in-1 wireless charging dock, arranged on a light grey linen cloth surface. Warm studio lighting, editorial product photography. No text.')">Copy Prompt</button>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-title">🖼️ About Us / Lifestyle Image</div>
+        <p class="prompt-body">Minimalist desk setup with an iPhone in a premium frosted case propped on a MagSafe magnetic stand, MacBook in background, small plant, coffee mug. Clean white desk, natural window light from left. Premium lifestyle editorial photography. No text.</p>
+        <button class="copy-btn" onclick="copyText(this, 'Minimalist desk setup with an iPhone in a premium frosted case propped on a MagSafe magnetic stand, MacBook in background, small plant, coffee mug. Clean white desk, natural window light from left. Premium lifestyle editorial photography. No text.')">Copy Prompt</button>
+      </div>
+    </div>
+
+    <!-- HOMEPAGE -->
+    <div class="section" id="homepage">
+      <div class="page-title">Homepage Copy</div>
+      <div class="page-desc">CRO-focused copy for every section of your homepage. Copy each block directly into Shopify.</div>
+
+      <h3>Announcement Bar</h3>
+      <div class="copy-block">
+        <div class="copy-header"><span class="copy-label">Top Bar</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+        <div class="copy-content">🚚 Free Shipping on Orders Over $35 · 30-Day Returns · Secure Checkout</div>
+      </div>
+
+      <h2>Hero Section</h2>
+      <div class="hero-preview">
+        <div class="eyebrow">Premium Phone Protection</div>
+        <h2>Your Phone Deserves Better Than a Cheap Case.</h2>
+        <p>Premium MagSafe cases, wireless chargers, and everyday accessories — built for people who actually care about their setup.</p>
+        <div class="hero-btns">
+          <button class="btn-primary">Shop Best Sellers →</button>
+          <button class="btn-secondary">Browse All Products</button>
+        </div>
+        <div class="trust-pills" style="justify-content:center; margin-top:1.5rem;">
+          <span class="trust-pill">✓ MagSafe-Ready</span>
+          <span class="trust-pill">✓ Shockproof Build</span>
+          <span class="trust-pill">✓ Free Shipping</span>
+          <span class="trust-pill">✓ 30-Day Returns</span>
+        </div>
+      </div>
+
+      <div class="copy-block">
+        <div class="copy-header"><span class="copy-label">Hero Headline</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+        <div class="copy-content">Your Phone Deserves Better Than a Cheap Case.</div>
+      </div>
+      <div class="copy-block">
+        <div class="copy-header"><span class="copy-label">Hero Subheadline</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+        <div class="copy-content">Premium MagSafe cases, wireless chargers, and everyday accessories — built for people who actually care about their setup.</div>
+      </div>
+
+      <h2>Why Choose theCaseCraft</h2>
+      <div class="grid-2">
+        <div class="feature-card"><div class="icon">🛡️</div><h4>Shockproof Daily Protection</h4><p>Raised edges. Drop-tested builds. Your phone stays safe.</p></div>
+        <div class="feature-card"><div class="icon">🔋</div><h4>MagSafe-Ready Options</h4><p>Wireless charging without removing your case.</p></div>
+        <div class="feature-card"><div class="icon">📐</div><h4>Perfect Device Fit</h4><p>Cut for every camera, button, and charging port.</p></div>
+        <div class="feature-card"><div class="icon">🔄</div><h4>30-Day Easy Returns</h4><p>Changed your mind? No problem whatsoever.</p></div>
+      </div>
+
+      <h2>Customer Reviews</h2>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"This case feels more premium than cases I've paid twice as much for. MagSafe works perfectly, the frosted finish is gorgeous, and the camera cutout is exact."</div>
+        <div class="review-author">— Sarah M., Verified Buyer · New York</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"The magnetic car mount is a game changer. It holds my phone perfectly even on bumpy roads. Charges at 15W too, which I didn't expect at this price point."</div>
+        <div class="review-author">— James K., Verified Buyer · Chicago</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Clean, minimal design. No logo plastered everywhere. Just a great case that fits perfectly and doesn't add any bulk. Exactly what I wanted."</div>
+        <div class="review-author">— Priya R., Verified Buyer · London</div>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="section" id="about">
+      <div class="page-title">About Us Page</div>
+      <div class="page-desc">Full About Us copy. Paste into your Shopify Pages section.</div>
+
+      <div class="copy-block">
+        <div class="copy-header"><span class="copy-label">Hero Line</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+        <div class="copy-content">We started because the best phone cases shouldn't cost $80.</div>
+      </div>
+
+      <div class="copy-block">
+        <div class="copy-header"><span class="copy-label">Our Story Section</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+        <div class="copy-content">Most phone accessories fall into two camps: cheap cases that crack after a month, or overpriced branded ones that charge you for a logo.
+
+We built theCaseCraft because we believe everyday people deserve protection that's actually well-made — without paying for someone else's marketing budget.
+
+Every case, charger, and accessory in our collection is hand-picked for fit, finish, and real daily durability. We test for MagSafe compatibility, drop protection, and camera cutout precision before anything makes it to the store.
+
+We're not the biggest brand. We're just the most honest about what you're actually getting.</div>
+      </div>
+
+      <div class="copy-block">
+        <div class="copy-header"><span class="copy-label">Values Section (01–04)</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+        <div class="copy-content">01 — Everyday Fit
+Our accessories are made for real daily use: slim in the hand, protective in the pocket, and clean enough to match any setup.
+
+02 — Smart Protection
+We obsess over the functional details — MagSafe alignment, raised camera edges, shockproof grip, secure button covers.
+
+03 — Premium Without the Noise
+Clean product choices, clear compatibility guides, secure checkout, and no hidden fees.
+
+04 — Real Support
+We actually answer our emails. Questions about fit, compatibility, or your order — we've got you.</div>
+      </div>
+    </div>
+
+    <!-- CATEGORIES -->
+    <div class="section" id="categories">
+      <div class="page-title">Category Descriptions</div>
+      <div class="page-desc">Copy for Shopify collection pages (iPhone Cases, Samsung Cases, Accessories).</div>
+
+      <h2>iPhone Cases Collection</h2>
+      <div class="copy-block">
+        <div class="copy-header"><span class="copy-label">Heading</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+        <div class="copy-content">Protect What You Carry Every Day.</div>
+      </div>
+      <div class="copy-block">
+        <div class="copy-header"><span class="copy-label">Description</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+        <div class="copy-content">Our iPhone cases are designed for people who care about their phone and their setup. Whether you want a slim frosted MagSafe case, a liquid silicone cover, or a frosted transparent back that shows off your phone's color — we've got every iPhone from the 11 to the 17 Pro Max covered. Every case is precision-cut for your exact model, with raised camera edges and MagSafe compatibility where it matters.</div>
+      </div>
+
+      <h2>Samsung Cases Collection</h2>
+      <div class="copy-block">
+        <div class="copy-header"><span class="copy-label">Heading</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+        <div class="copy-content">Samsung Protection Done Right.</div>
+      </div>
+      <div class="copy-block">
+        <div class="copy-header"><span class="copy-label">Description</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+        <div class="copy-content">Slim, shockproof, and built to fit — our Samsung cases cover the full Galaxy S lineup from S22 to S26 Ultra. Borderless designs, matte transparent finishes, and magnetic-ready options for the way you actually use your phone.</div>
+      </div>
+
+      <h2>Accessories Collection</h2>
+      <div class="copy-block">
+        <div class="copy-header"><span class="copy-label">Heading</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+        <div class="copy-content">The Rest of Your Setup. Done Right.</div>
+      </div>
+      <div class="copy-block">
+        <div class="copy-header"><span class="copy-label">Description</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+        <div class="copy-content">Your phone case is just the start. Complete your everyday carry with our MagSafe magnetic car mounts, 15W wireless chargers, 4-in-1 charging docks, and ultra-slim power banks. Everything chosen for real daily use — not just spec sheets.</div>
+      </div>
+    </div>
+
+    <!-- PRIVACY -->
+    <div class="section" id="privacy">
+      <div class="page-title">Privacy Policy</div>
+      <div class="page-desc">Complete privacy policy for theCaseCraft.com. Replace [Your Business Address] and support@thecasecraft.com with your actual details.</div>
+
+      <div class="note"><strong>Important:</strong> Replace all placeholder text in [brackets] before publishing. Your email address and business address are required.</div>
+
+      <div class="copy-block">
+        <div class="copy-header"><span class="copy-label">Full Privacy Policy — Copy to Shopify</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+        <div class="copy-content">Privacy Policy — theCaseCraft
+Last Updated: June 2026
+
+theCaseCraft.com ("we", "us", "our") is committed to protecting your personal information. This Privacy Policy explains how we collect, use, and protect your data when you visit or make a purchase on theCaseCraft.com.
+
+1. INFORMATION WE COLLECT
+
+We collect the following types of personal information:
+
+• Contact Details: Name, email address, phone number, billing and shipping address.
+• Payment Information: Credit/debit card details (processed securely — we do not store raw card numbers).
+• Order Information: Products purchased, order history, returns and exchanges.
+• Device & Usage Data: IP address, browser type, pages visited, time on site, referral source.
+• Communications: Any messages you send us via email or contact forms.
+
+2. HOW WE USE YOUR INFORMATION
+
+We use your information to:
+• Process and fulfill your orders.
+• Send order confirmations, shipping updates, and receipts.
+• Handle returns, refunds, and customer support inquiries.
+• Improve our website and product selection.
+• Send you promotional emails (only if you opt in — you can unsubscribe anytime).
+• Prevent fraud and ensure secure checkout.
+• Comply with applicable laws.
+
+3. SHARING YOUR INFORMATION
+
+We do not sell your personal data. We may share it with:
+• Shopify — our e-commerce platform.
+• Payment processors — to handle secure transactions.
+• Shipping carriers — to deliver your orders.
+• Marketing partners — for targeted advertising (you can opt out at any time).
+• Legal authorities — when required by law.
+
+4. COOKIES
+
+We use cookies to keep items in your cart, remember your preferences, analyze site traffic, and serve relevant ads. You can disable cookies in your browser settings.
+
+5. YOUR RIGHTS
+
+You may have the right to:
+• Access the personal information we hold about you.
+• Request correction of inaccurate data.
+• Request deletion of your data.
+• Opt out of marketing communications.
+• Opt out of targeted advertising.
+
+To exercise these rights, email us at: support@thecasecraft.com
+
+6. CHILDREN'S PRIVACY
+
+Our store is not intended for children under 13. We do not knowingly collect data from children.
+
+7. DATA SECURITY
+
+We use SSL encryption and industry-standard security measures. No online transmission is 100% secure.
+
+8. CHANGES TO THIS POLICY
+
+We may update this policy from time to time. Changes will be posted on this page with an updated date.
+
+9. CONTACT
+
+Email: support@thecasecraft.com
+Address: [Your Business Address]</div>
+      </div>
+    </div>
+
+    <!-- REFUND -->
+    <div class="section" id="refund">
+      <div class="page-title">Refund Policy</div>
+      <div class="page-desc">30-day customer-friendly refund policy. Paste directly into Shopify → Settings → Policies.</div>
+
+      <div class="copy-block">
+        <div class="copy-header"><span class="copy-label">Full Refund Policy</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+        <div class="copy-content">Refund Policy — theCaseCraft
+
+We want you to love your purchase. If something isn't right, here's exactly how we handle it.
+
+30-DAY RETURN WINDOW
+
+You have 30 days from the date you receive your order to request a return.
+
+To qualify for a return:
+• The item must be in original, unused condition with original packaging.
+• Tags must still be attached.
+• You must provide proof of purchase (order number or receipt).
+
+HOW TO START A RETURN
+
+Email us at support@thecasecraft.com with:
+• Your order number
+• The item(s) you want to return
+• The reason for return
+
+We'll respond within 1–2 business days with return instructions. Do not send items back without contacting us first — they will not be accepted.
+
+DAMAGED OR WRONG ITEMS
+
+If you receive a damaged, defective, or incorrect item, contact us within 7 days of delivery with a photo of the item and your order number. We'll replace or refund you — your choice.
+
+REFUND PROCESS
+
+Once we receive and inspect your return, we'll notify you by email. Approved refunds are processed within 2–3 business days to your original payment method. Bank processing may add 3–10 additional business days.
+
+NON-RETURNABLE ITEMS
+
+• Sale or clearance items
+• Gift cards
+• Items showing signs of use, damage, or missing original packaging
+
+EXCHANGES
+
+We don't process direct exchanges. Return the original item, then place a new order for the correct item.
+
+EU CUSTOMERS — 14-DAY COOLING OFF PERIOD
+
+If you're in the European Union, you have the right to cancel or return your order within 14 days of receipt, for any reason, as long as the item is unused and in original packaging.
+
+Questions? Email: support@thecasecraft.com
+We respond within 24 hours, Monday–Friday.</div>
+      </div>
+    </div>
+
+    <!-- SHIPPING -->
+    <div class="section" id="shipping">
+      <div class="page-title">Shipping Policy</div>
+      <div class="page-desc">Clear, honest shipping expectations that reduce support tickets and build trust.</div>
+
+      <div class="copy-block">
+        <div class="copy-header"><span class="copy-label">Full Shipping Policy</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+        <div class="copy-content">Shipping Policy — theCaseCraft
+
+PROCESSING TIME
+
+All orders are processed within 1–3 business days (Monday–Friday, excluding holidays). You'll receive a shipping confirmation email with tracking information once your order ships.
+
+SHIPPING TIMES
+
+United States: 7–15 business days
+United Kingdom: 10–18 business days
+Canada: 10–18 business days
+Australia: 12–20 business days
+Europe: 10–20 business days
+Rest of World: 14–25 business days
+
+Delivery times are estimates and may vary due to customs, carrier delays, or peak seasons.
+
+SHIPPING COSTS
+
+Orders under $35: Calculated at checkout
+Orders over $35: FREE
+
+ORDER TRACKING
+
+Once your order ships, you'll receive a tracking number by email. Track your package at your carrier's website or via 17TRACK.
+
+CUSTOMS & DUTIES
+
+International orders may be subject to customs fees or import duties charged by your country. These are the responsibility of the customer and are not included in the product price.
+
+LOST OR DELAYED ORDERS
+
+If your order hasn't arrived within the estimated window:
+1. Check your tracking link.
+2. Contact your local post office or customs office.
+3. Reach out to us at support@thecasecraft.com — we'll investigate and assist.
+
+WRONG ADDRESS
+
+Please double-check your shipping address at checkout. If you notice an error, contact us immediately at support@thecasecraft.com.</div>
+      </div>
+    </div>
+
+    <!-- TERMS -->
+    <div class="section" id="terms">
+      <div class="page-title">Terms of Service</div>
+      <div class="page-desc">Standard e-commerce terms. Update [Your State/Country] with your jurisdiction.</div>
+
+      <div class="copy-block">
+        <div class="copy-header"><span class="copy-label">Full Terms of Service</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+        <div class="copy-content">Terms of Service — theCaseCraft
+Last Updated: June 2026
+
+By accessing or purchasing from theCaseCraft.com, you agree to these terms.
+
+1. GENERAL
+
+These Terms apply to all visitors and customers of theCaseCraft.com. We reserve the right to update these terms at any time. Continued use of the site constitutes acceptance of updated terms.
+
+2. PRODUCTS
+
+We make every effort to display product colors, textures, and dimensions accurately. Slight variations may occur due to screen settings. We reserve the right to limit quantities or discontinue products at any time.
+
+3. PRICING
+
+All prices are in USD unless stated otherwise. We reserve the right to change prices without notice. Sale prices apply only during the stated promotional period.
+
+4. ORDERS & PAYMENT
+
+By placing an order, you represent that the payment information provided is accurate and you are authorized to use it. We reserve the right to cancel orders for any reason, including suspected fraud.
+
+5. INTELLECTUAL PROPERTY
+
+All content on theCaseCraft.com — including logos, images, copy, and design — is the property of theCaseCraft and may not be used without written permission.
+
+6. LIMITATION OF LIABILITY
+
+theCaseCraft shall not be liable for any indirect, incidental, or consequential damages arising from the use of our products or website beyond the value of the purchase in question.
+
+7. GOVERNING LAW
+
+These terms are governed by the laws of [Your State/Country].
+
+8. CONTACT
+
+Email: support@thecasecraft.com</div>
+      </div>
+    </div>
+
+    <!-- SEO -->
+    <div class="section" id="seo">
+      <div class="page-title">SEO Meta Tags</div>
+      <div class="page-desc">Meta titles and descriptions for all key pages. Enter these in Shopify's Search Engine Listing section for each page.</div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Page</th>
+            <th>Meta Title</th>
+            <th>Meta Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag gold">Homepage</span></td>
+            <td>theCaseCraft — Premium Phone Cases & MagSafe Accessories</td>
+            <td>Shop premium MagSafe cases, wireless chargers, and phone accessories. Free shipping on orders over $35. 30-day returns.</td>
+          </tr>
+          <tr>
+            <td><span class="tag">iPhone Cases</span></td>
+            <td>iPhone MagSafe Cases — theCaseCraft</td>
+            <td>Slim, shockproof MagSafe iPhone cases for iPhone 11–17 Pro Max. Frosted, leather, and clear options. Free shipping.</td>
+          </tr>
+          <tr>
+            <td><span class="tag">Samsung Cases</span></td>
+            <td>Samsung Galaxy Cases — theCaseCraft</td>
+            <td>Premium slim cases for Samsung Galaxy S22–S26 Ultra. Magnetic-ready, borderless design. Free shipping.</td>
+          </tr>
+          <tr>
+            <td><span class="tag">Accessories</span></td>
+            <td>MagSafe Accessories & Chargers — theCaseCraft</td>
+            <td>Magnetic car mounts, wireless charging docks, and MagSafe power banks. Shop the full accessories range.</td>
+          </tr>
+          <tr>
+            <td><span class="tag">About Us</span></td>
+            <td>About theCaseCraft</td>
+            <td>We build premium phone protection without premium pricing. Learn our story and what we stand for.</td>
+          </tr>
+          <tr>
+            <td><span class="tag">Refund Policy</span></td>
+            <td>Refund Policy — theCaseCraft</td>
+            <td>30-day hassle-free returns. Full details on our refund and exchange process.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TRUST -->
+    <div class="section" id="trust">
+      <div class="page-title">Trust Badges & Microcopy</div>
+      <div class="page-desc">Short copy for cart, product pages, and checkout. These small lines significantly increase conversion rate.</div>
+
+      <h2>Cart Page</h2>
+      <div class="copy-block">
+        <div class="copy-header"><span class="copy-label">Cart Trust Bar</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+        <div class="copy-content">🔒 Secure checkout — SSL encrypted · 💳 All major cards accepted · 🚚 Free shipping over $35</div>
+      </div>
+
+      <h2>Product Page (Below Add to Cart)</h2>
+      <div class="copy-block">
+        <div class="copy-header"><span class="copy-label">Product Trust Line</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+        <div class="copy-content">✓ Ships within 1–3 business days · ✓ 30-Day Easy Returns · ✓ Secure Checkout</div>
+      </div>
+
+      <h2>Checkout Page</h2>
+      <div class="copy-block">
+        <div class="copy-header"><span class="copy-label">Checkout Header</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+        <div class="copy-content">You're almost there. Your order is protected by 256-bit SSL encryption.</div>
+      </div>
+
+      <h2>FAQ (for Contact / Product Pages)</h2>
+      <div class="copy-block">
+        <div class="copy-header"><span class="copy-label">FAQ Block</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+        <div class="copy-content">Q: Where is my order?
+A: Once shipped, you'll receive a tracking email. Orders typically take 7–15 days for US delivery.
+
+Q: My item arrived damaged — what do I do?
+A: Email us within 7 days with your order number and a photo. We'll replace or refund you right away.
+
+Q: Is my case compatible with MagSafe?
+A: MagSafe-compatible cases are clearly marked in the product title. If unsure, email us with your iPhone model.
+
+Q: Can I change my order after placing it?
+A: Contact us immediately at support@thecasecraft.com. We process quickly but will do our best.</div>
+      </div>
+    </div>
+
+    <!-- EMAILS -->
+    <div class="section" id="emails">
+      <div class="page-title">Email Templates</div>
+      <div class="page-desc">Welcome email and abandoned cart email. Set these up in Shopify Email or Klaviyo.</div>
+
+      <h2>Welcome Email</h2>
+      <div class="copy-block">
+        <div class="copy-header"><span class="copy-label">Subject Line</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+        <div class="copy-content">Welcome to theCaseCraft — Here's 10% Off Your First Order</div>
+      </div>
+      <div class="copy-block">
+        <div class="copy-header"><span class="copy-label">Email Body</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+        <div class="copy-content">Hey {{first_name}},
+
+Thanks for joining theCaseCraft.
+
+We're a small team obsessed with one thing: making sure your phone has the protection it deserves — without the inflated brand markup.
+
+Use code CRAFT10 at checkout for 10% off your first order.
+
+→ [Shop Now Button]
+
+Got questions? Hit reply — we actually read these.
+
+— The theCaseCraft Team</div>
+      </div>
+
+      <h2>Abandoned Cart Email</h2>
+      <div class="copy-block">
+        <div class="copy-header"><span class="copy-label">Subject Line</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+        <div class="copy-content">You left something behind — and it's still here 👀</div>
+      </div>
+      <div class="copy-block">
+        <div class="copy-header"><span class="copy-label">Email Body</span><button class="copy-btn" onclick="copyBlock(this)">Copy</button></div>
+        <div class="copy-content">Hey {{first_name}},
+
+You were so close. Your {{product_name}} is still waiting in your cart.
+
+→ [Complete Your Order Button]
+
+Still not sure? Here's what other customers are saying:
+
+"Better than cases I've paid twice as much for." — Sarah M. ★★★★★
+
+Free shipping over $35. 30-day returns. Secure checkout.
+
+— theCaseCraft</div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+</div><!-- /layout -->
+
+<script>
+function show(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+function copyBlock(btn) {
+  const content = btn.closest('.copy-block').querySelector('.copy-content').innerText;
+  navigator.clipboard.writeText(content).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+function copyText(btn, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy Prompt'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>
